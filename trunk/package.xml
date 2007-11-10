@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.2" 
+         version="2.0" 
+         xmlns="http://pear.php.net/dtd/package-2.0" 
+         xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+                             http://pear.php.net/dtd/tasks-1.0.xsd
+                             http://pear.php.net/dtd/package-2.0
+                             http://pear.php.net/dtd/package-2.0.xsd">
+    <name>Services_Facebook</name>
+    <channel>pear.php.net</channel>
+    <summary>PHP interface to Facebook's API</summary>
+    <description>An interface for accessing Facebook's web services API at http://api.facebook.com.</description>
+    <lead>
+        <name>Joe Stump</name>
+        <user>jstump</user>
+        <email>joe@joestump.net</email>
+        <active>yes</active>
+    </lead>
+    <date>2007-11-06</date>
+    <time>15:53:42</time>
+    <version>
+        <release>0.0.2</release>
+        <api>0.0.2</api>
+    </version>
+    <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+    </stability>
+    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+    <notes><![CDATA[
+        * Completed all of the other endpoints.
+        * Added Services_Facebook_Share::parse() to parse out share partner meta information.
+    ]]></notes>
+    <contents>
+        <dir name="/">
+            <dir name="Services">
+                <file name="Facebook.php"
+                      role="php" />
+                <dir name="Facebook">
+                    <file name="Auth.php"
+                          role="php" />
+                    <file name="Common.php"
+                          role="php" />
+                    <file name="Exception.php"
+                          role="php" />
+                    <file name="Events.php"
+                          role="php" />
+                    <file name="FBML.php"
+                          role="php" />
+                    <file name="FQL.php"
+                          role="php" />
+                    <file name="Feed.php"
+                          role="php" />
+                    <file name="Friends.php"
+                          role="php" />
+                    <file name="Groups.php"
+                          role="php" />
+                    <file name="Notifications.php"
+                          role="php" />
+                    <file name="Photos.php"
+                          role="php" />
+                    <file name="Profile.php"
+                          role="php" />
+                    <file name="Share.php"
+                          role="php" />
+                    <file name="Users.php"
+                          role="php" />
+                </dir>
+            </dir>
+            <dir name="tests">
+                <file name="010-users-isAppAdded.phpt"
+                      role="test" />
+                <file name="012-users-getInfo.phpt"
+                      role="test" /> 
+                <file name="014-users-getLoggedInUser.phpt"
+                      role="test" /> 
+                <file name="020-profile-setFBML.phpt"
+                      role="test" /> 
+                <file name="022-profile-getFBML.phpt"
+                      role="test" /> 
+                <file name="030-friends-areFriends.phpt"
+                      role="test" /> 
+                <file name="032-friends-get.phpt"
+                      role="test" /> 
+                <file name="034-friends-getAppUsers.phpt"
+                      role="test" /> 
+                <file name="040-fql-query.phpt"
+                      role="test" /> 
+                <file name="050-feed-publishStoryToUser.phpt"
+                      role="test" /> 
+                <file name="052-feed-publishActionOfUser.phpt"
+                      role="test" /> 
+                <file name="060-photos-createAlbum.phpt"
+                      role="test" /> 
+                <file name="062-photos-upload.phpt"
+                      role="test" /> 
+                <file name="test-image.jpg"
+                      role="test" /> 
+                <file name="tests-config.php"
+                      role="test" /> 
+            </dir>
+        </dir>
+    </contents>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.1.0</min>
+            </php>
+            <pearinstaller>
+                <min>1.4.0b1</min>
+            </pearinstaller>
+            <extension>
+                <name>curl</name>
+            </extension>
+        </required>
+    </dependencies>
+    <phprelease />
+    <changelog>
+        <release>
+            <date>2007-08-24</date>
+            <time>15:53:42</time>
+            <version>
+                <release>0.0.1</release>
+                <api>0.0.1</api>
+            </version>
+            <stability>
+                <release>alpha</release>
+                <api>alpha</api>
+            </stability>
+            <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+            <notes><![CDATA[
+                * Initial release
+                * Added Services_Facebook_Exception
+            ]]></notes>
+            <contents>
+                <dir name="/">
+                    <dir name="Services">
+                        <file name="Facebook.php"
+                              role="php" />
+                        <dir name="Facebook">
+                            <file name="Auth.php"
+                                  role="php" />
+                            <file name="Common.php"
+                                  role="php" />
+                            <file name="Exception.php"
+                                  role="php" />
+                            <file name="Events.php"
+                                  role="php" />
+                            <file name="FBML.php"
+                                  role="php" />
+                            <file name="FQL.php"
+                                  role="php" />
+                            <file name="Feed.php"
+                                  role="php" />
+                            <file name="Friends.php"
+                                  role="php" />
+                            <file name="Groups.php"
+                                  role="php" />
+                            <file name="Notifications.php"
+                                  role="php" />
+                            <file name="Photos.php"
+                                  role="php" />
+                            <file name="Profile.php"
+                                  role="php" />
+                            <file name="Users.php"
+                                  role="php" />
+                        </dir>
+                    </dir>
+                    <dir name="tests">
+                        <file name="010-users-isAppAdded.phpt"
+                              role="test" />
+                        <file name="012-users-getInfo.phpt"
+                              role="test" /> 
+                        <file name="014-users-getLoggedInUser.phpt"
+                              role="test" /> 
+                        <file name="020-profile-setFBML.phpt"
+                              role="test" /> 
+                        <file name="022-profile-getFBML.phpt"
+                              role="test" /> 
+                        <file name="030-friends-areFriends.phpt"
+                              role="test" /> 
+                        <file name="032-friends-get.phpt"
+                              role="test" /> 
+                        <file name="034-friends-getAppUsers.phpt"
+                              role="test" /> 
+                        <file name="040-fql-query.phpt"
+                              role="test" /> 
+                        <file name="050-feed-publishStoryToUser.phpt"
+                              role="test" /> 
+                        <file name="052-feed-publishActionOfUser.phpt"
+                              role="test" /> 
+                        <file name="060-photos-createAlbum.phpt"
+                              role="test" /> 
+                        <file name="062-photos-upload.phpt"
+                              role="test" /> 
+                        <file name="test-image.jpg"
+                              role="test" /> 
+                        <file name="tests-config.php"
+                              role="test" /> 
+                    </dir>
+                </dir>
+            </contents>
+        </release>
+    </changelog>
+</package>
