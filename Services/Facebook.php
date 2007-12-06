@@ -31,7 +31,7 @@ require_once 'Services/Facebook/Exception.php';
  * @author      Joe Stump <joe@joestump.net>
  * @link        http://wiki.developers.facebook.com
  */
-abstract class Services_Facebook
+class Services_Facebook
 {
     /**
      * Facebok application API key 
@@ -55,6 +55,37 @@ abstract class Services_Facebook
     static public $secret = '';
 
     /**
+     * Currently logged in user
+     * 
+     * @var         string      $sessionKey
+     */
+    public $sessionKey = '';
+
+    /**
+     * Instances of various drivers
+     *
+     * @access      private
+     * @var         array       $instances
+     */
+    static private $instances = array();
+
+    static private $drivers = array(
+        'auth'          => 'Auth',
+        'events'        => 'Events',
+        'fbml'          => 'FBML',
+        'fql'           => 'FQL',
+        'feed'          => 'Feed',
+        'friends'       => 'Friends',
+        'groups'        => 'Friends',
+        'marketplace'   => 'MarketPlace',
+        'notifications' => 'Notifications',
+        'photos'        => 'Photos',
+        'profile'       => 'Profile',
+        'share'         => 'Share',
+        'users'         => 'Users'
+    );
+
+    /**
      * Create a facebook service 
      *
      * @param       string      $endPoint       Services to create
@@ -62,7 +93,7 @@ abstract class Services_Facebook
      * @throws      Services_Facebook_Exception
      * @static
      */
-    static public function factory($endPoint)
+    static private function factory($endPoint)
     {
         $file = 'Services/Facebook/' . $endPoint . '.php';
         require_once $file;
@@ -73,6 +104,32 @@ abstract class Services_Facebook
 
         $instance = new $class();
         return $instance;
+    }
+
+    /**
+     * Lazy loader for Facebook drivers
+     *
+     * @access      public
+     * @param       string      $driver
+     * @throws      Services_Facebook_Exception
+     * @return      object
+     */
+    public function __get($driver)
+    {
+        $driver = strtolower($driver);
+        if (!isset(self::$drivers[$driver])) {
+            throw new Services_Facebook_Exception('The driver requested, ' . $var . ', is not supported');
+        } else {
+            $driver = self::$drivers[$driver];
+        }
+
+        if (isset(self::$instances[$driver])) {
+            return self::$instances[$driver];
+        } 
+
+        self::$instances[$driver] = self::factory($driver);
+        self::$instances[$driver]->sessionKey = $this->sessionKey;
+        return self::$instances[$driver];
     }
 
     /**

@@ -6,9 +6,9 @@ Services_Facebook_Users::isAppAdded()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Users');
+    $api = new Services_Facebook(); // ::factory('Users');
     $api->sessionKey = $sessionKey;
-    if ($api->isAppAdded()) {
+    if ($api->users->isAppAdded()) {
         echo "true";
     } else {
         echo "false";
