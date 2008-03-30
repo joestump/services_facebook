@@ -85,7 +85,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      * @access      public
      * @param       array       Property / value assocative array of properties
      * @return      boolean     True on success
-     * @link                http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
+     * @link        http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
      */
     public function setAppProperties($properties = array())
     {

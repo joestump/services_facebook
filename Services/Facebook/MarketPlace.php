@@ -19,7 +19,7 @@
  * @version     CVS: $Id:$
  * @link        http://pear.php.net/package/Services_Facebook
  */
-
+require_once 'MarketPlace/Listing.php';
 /**
  * Facebook Marketplace Interface
  *
@@ -74,20 +74,62 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return      object
      * @throws      Services_Facebook_Exception
      */
-    public function getSubCategories()
+    public function getSubCategories($category)
     {
         return $this->sendRequest('marketplace.getSubCategories', array(
-            'session_key' => $this->sessionKey
+            'session_key' => $this->sessionKey,
+            'category' => $category
         ));
     }
 
-    public function getListings()
+    /**
+    * Get marketplace listings, filter by listing ids and user ids
+    *
+    * @param        mixed       Array or string of List id(s)
+    * @param        mixed       Array or string of User id(s)
+    * @return       mixed       SimpleXML object of the listings 
+    * @link         http://wiki.developers.facebook.com/index.php/Marketplace.getListings
+    */
+    public function getListings($listing_ids = null, $uids = null)
     {
+        if ((!$listing_ids) || (!$uids)) {
+            throw new Services_Facebook_Exception('Must specifiy at least 1 user or listing id');
+        }
+        
+        if (is_array($listing_ids)) {
+            $listing_ids = implode(',', $listing_ids);
+        }
+
+        if (is_array($uids)) {
+            $uids = implode(',', $listing_ids);
+        }
+
+        return $this->sendRequest('marketplace.getListings', array(
+            'session_key' => $this->sessionKey,
+            'listing_ids' => $listing_ids,
+            'uids' => $uids
+        ));
     }
 
-
-    public function removeListing()
+    /**
+     * Remove marketplace listing
+     *
+     * Remove a listing by id and setting the status to either 'SUCCESS', 
+     * 'DEFAULT', 'NOT_SUCCESS'
+     *
+     * @param       string      Listing id
+     * @param       string      Status
+     * @return      bool        Success or Failure 
+     * @link        http://wiki.developers.facebook.com/index.php/Marketplace.removeListing
+     */
+    public function removeListing($listing_id, $status = 'DEFAULT')
     {
+        $result = $this->sendRequest('marketplace.removeListing', array(
+            'session_key' => $this->sessionKey,
+            'listing_id' => $listing_id,
+            'status' => $status
+        ));
+        return ((string)$result == 1);
     }
 
     /**

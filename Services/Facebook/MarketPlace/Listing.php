@@ -93,7 +93,7 @@ class Services_Facebook_MarketPlace_Listing
     public function validate()
     {
         static $required = array(
-            'category', 'subCategory', 'title', 'description'
+            'category', 'subcategory', 'title', 'description'
         );
 
         foreach ($required as $field) {
