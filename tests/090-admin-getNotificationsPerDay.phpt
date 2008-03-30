@@ -1,22 +1,17 @@
 --TEST--
-Services_Facebook_Profile::setFBML()
+Services_Facebook_Admin::getNotificationsPerDay()
 --FILE--
 <?php
 
 require_once 'tests-config.php';
 
-$fbml = <<< EOT
-<fb:wide>
-The PEAR module Services_Facebook is coming along nicely.
-</fb:wide>
-EOT;
-
 try {
     $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
-    if ($api->profile->setFBML($fbml)) {
-        echo 'FBML was set successfully.';
-    }
+	$notifications = $api->admin->getNotificationsPerDay();
+	
+	if ($notifications) echo "Victory!";
+	
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();
@@ -24,4 +19,4 @@ try {
 
 ?>
 --EXPECT--
-FBML was set successfully.
+Victory!

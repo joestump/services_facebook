@@ -6,14 +6,14 @@ Services_Facebook_FQL::query()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('FQL');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
 
     $fql = 'SELECT uid, about_me 
             FROM user 
-            WHERE uid IN (' . $uid .', 669245952)';
+            WHERE uid IN (' . $uid .', ' . $friendUid .')';
 
-    $result = $api->query($fql);
+    $result = $api->fql->query($fql);
     foreach ($result->user as $user) {
         echo (string)$user->about_me . "\n";
     }

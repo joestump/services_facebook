@@ -70,6 +70,8 @@ class Services_Facebook
     static private $instances = array();
 
     static private $drivers = array(
+		'admin'			=> 'Admin',
+		'application'	=> 'Application',
         'auth'          => 'Auth',
         'events'        => 'Events',
         'fbml'          => 'FBML',
@@ -79,6 +81,7 @@ class Services_Facebook
         'groups'        => 'Friends',
         'marketplace'   => 'MarketPlace',
         'notifications' => 'Notifications',
+		'pages'			=> 'Pages',
         'photos'        => 'Photos',
         'profile'       => 'Profile',
         'share'         => 'Share',

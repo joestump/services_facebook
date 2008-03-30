@@ -6,9 +6,9 @@ Services_Facebook_Users::getInfo()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Users');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
-    $r = $api->getInfo($uid);
+    $r = $api->users->getInfo($uid);
     echo (string)$r->user->about_me . "\n";
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";

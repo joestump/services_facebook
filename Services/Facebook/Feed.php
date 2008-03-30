@@ -69,7 +69,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         }
 
         if (count($images)) {
-            // Facebook only allows for images so don't send more than that.
+            // Facebook only allows four images so don't send more than that.
             $cnt = count($images);
             if ($cnt > 4) {
                 $cnt = 4;
@@ -87,7 +87,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         } 
 
         $result = $this->sendRequest('feed.publishStoryToUser', $args);
-        $check = intval((string)$result->feed_publishStoryToUser_response);
+        $check = intval((string)$result->feed_publishStoryToUser_response_elt);
         return ($check == 1);
     }
 
@@ -133,7 +133,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         }
 
         if (count($images)) {
-            // Facebook only allows for images so don't send more than that.
+            // Facebook only allows four images so don't send more than that.
             $cnt = count($images);
             if ($cnt > 4) {
                 $cnt = 4;
@@ -154,6 +154,102 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         $check = intval((string)$result->feed_publishActionOfUser_response_elt);
         return ($check == 1);
     }
+	
+	/**
+     * Publish a templatized action to a user's feed
+     *
+     * An action differs from a story in that a user's action is sent to all
+     * of that user's friends as well.
+	 * 
+	 * An templatized story publishes News Feed stories to the friends of that user.
+	 * These stories or more likely to appear to the friends of that user depending
+	 * upon a variety of factors, such as the closeness of the relationship between
+	 * the users, the interaction data facebook has about that particular story type, and
+	 * the quality of the content in the story/on the linked page.
+	 * http://wiki.developers.facebook.com/index.php/FeedRankingFAQ
+     *
+	 * The $images array should be a numerically indexed array of arrays, where
+	 * each image has two keys: src and href. The src is the full URI of the
+	 * image and the href is the link of that image.
+     *
+	 * <code>
+     * <?php
+     * $images = array(
+     *     array('src'  => 'http://example.com/images1.jpg',
+     *           'href' => 'http://example.com/images.php?image=1'),
+     *     array('src'  => 'http://example.com/images2.jpg',
+     *           'href' => 'http://example.com/images.php?image=2'),
+     *     array('src'  => 'http://example.com/images3.jpg',
+     *           'href' => 'http://example.com/images.php?image=3')
+     * );
+     * ?>
+     * </code>
+     *
+     * @param       string      $title_template   FBML to post as the title, must contain {actor}
+     * @param       string      $title_data       JSON associative array of the values to 
+ 	 * 											  substituted into title_template
+     * @param       string      $body_template    The FBML template displayed in the Feed story's body section. 
+     * @param       string      $body_data        JSON associative array of the values to 
+ 	 * 											  substituted into body_template
+	 * @param		string		$body_general	  Additional FBML for the body.  If stories are being aggregated, a
+	 *											  body_general will be chosen randomly(If they are not identical)
+     * @param       array       $images     	  Images to post to story entry
+	 * @param		int			$page_actor_id	  If posting to a Facebook Page, the page ID
+     * @link        http://facebook-developer.net/2008/01/21/how-to-successfully-publish-widespread-news-feed-stories/
+     */
+	public function publishTemplatizedAction($title_template,
+											 $title_data = '',
+											 $body_template = '',
+											 $body_data = '',
+											 $body_general = '',
+											 $page_actor_id = '',
+											 $images = array())
+	{
+		$args = array(
+            'title_template' => $title_template,
+            'session_key' => $this->sessionKey
+        );
+
+		//Check for all the optional arguments and set them if present 
+		//(looks wierd but what is done in above functions)
+        if (strlen($title_data)) {
+            $args['title_data'] = $title_data;
+        }
+		if (strlen($body_template)) {
+            $args['body_template'] = $body_template;
+        }
+		if (strlen($body_data)) {
+            $args['body_data'] = $body_data;
+        }
+		if (strlen($body_general)) {
+            $args['body_general'] = $body_general;
+        }
+		if (strlen($page_actor_id)) {
+            $args['page_actor_id'] = $page_actor_id;
+        }
+
+		if (count($images)) {
+            // Facebook only allows four images so don't send more than that.
+            $cnt = count($images);
+            if ($cnt > 4) {
+                $cnt = 4;
+            }
+
+            for ($i = 0 ; $i < $cnt ; $i++) {
+                $n = ($i + 1);
+                $args['image_' . $n] = $images[$i]['src'];
+                if (isset($images[$i]['href'])) {
+                    $args['image_' . $n . '_link'] = $images[$i]['href'];
+                } else {
+                    $args['image_' . $n . '_link'] = $images[$i]['src'];
+                }
+            }
+        }
+
+		$result = $this->sendRequest('feed.publishTemplatizedAction', $args);
+		$check = intval((string)$result->feed_publishTemplatizedAction_response);
+		return ($check == 1);
+	}
 }
 
 ?>

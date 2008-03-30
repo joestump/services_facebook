@@ -6,7 +6,7 @@ Services_Facebook_Feed::publishActionOfUser()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Feed');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
 
     $title = 'went to to Vegas in July of 2007';
@@ -19,7 +19,7 @@ try {
               'href' => 'http://dnevins.com')
     );
 
-    if ($api->publishActionOfUser($title, $body, $img)) {
+    if ($api->feed->publishActionOfUser($title, $body, $img)) {
         echo 'Victory is mine!';
     } else {
         echo 'Failure!';

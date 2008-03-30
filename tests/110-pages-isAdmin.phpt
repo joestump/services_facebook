@@ -1,22 +1,18 @@
 --TEST--
-Services_Facebook_Profile::setFBML()
+Services_Facebook_Pages::isAdmin()
 --FILE--
 <?php
 
 require_once 'tests-config.php';
 
-$fbml = <<< EOT
-<fb:wide>
-The PEAR module Services_Facebook is coming along nicely.
-</fb:wide>
-EOT;
-
 try {
     $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
-    if ($api->profile->setFBML($fbml)) {
-        echo 'FBML was set successfully.';
-    }
+
+	$result = $api->pages->isAdmin('6111063431');
+	
+	var_dump($result);
+	
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();
@@ -24,4 +20,4 @@ try {
 
 ?>
 --EXPECT--
-FBML was set successfully.
+bool(false)

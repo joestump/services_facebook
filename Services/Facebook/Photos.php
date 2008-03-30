@@ -222,7 +222,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
     }
 
     /**
-     * Upload a phot
+     * Upload a photo
      *
      * @param       int         $aid        Album to upload photo into
      * @param       string      $caption    A short caption

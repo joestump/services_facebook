@@ -6,10 +6,10 @@ Services_Facebook_Photos::createAlbum()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Photos');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
 
-    $album = $api->createAlbum('A test album', 'San Francisco, CA', 'A test album Created by Services_Facebook');
+    $album = $api->photos->createAlbum('A test album', 'San Francisco, CA', 'A test album Created by Services_Facebook');
     var_dump(((int)$album->aid > 0));
     var_dump(((string)$album->location == 'San Francisco, CA'));
     var_dump(((string)$album->description == 'A test album Created by Services_Facebook'));

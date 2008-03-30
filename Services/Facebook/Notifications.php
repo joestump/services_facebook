@@ -90,12 +90,13 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
     /**
      * Send a notification request
      *
-     * @param       array       $to             An array of Facebok uids
+     * @param       array       $to             An array of Facebook uids
      * @param       string      $type           Type of even (e.g. 'event')
      * @param       string      $content        FBML of request / notification
      * @param       string      $image          URI of image to include
      * @param       boolean     $invite         True = invite, False = request
      * @link        http://wiki.developers.facebook.com/index.php/Notifications.sendRequest
+ 	 * @deprecated
      */
     public function sendRequest(array $to, $type, $content, $image, $invite)
     {
@@ -115,6 +116,34 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
 
         return true;
     }
+
+	/**
+	 * Send an email out to application users
+	 *
+	 * @access 	 	public
+	 * @param 		array 		$recipients		An array of Facebook uids to send too
+	 * @param 		string 		$subject 		Subject of the email
+	 * @param 		mixed 		$text 			Text or FBML and text for the body of the email
+	 * @return 		array 		An array of success uids the email went out too
+	 * @link 		http://wiki.developers.facebook.com/index.php/Notifications.sendEmail
+	 */		
+	public function sendEmail(array $recipients, $subject, $text = null)
+	{
+		$args = array(
+			'recipients' => implode(',', $recipients),
+			'subject' => $subject,
+			);
+			
+		if (preg_match('/<fbml/i', $text)) {
+			$args['fbml'] = $text;
+		}
+		else {
+			$args['text'] = $text;
+		}
+		
+		$result = $this->sendRequest('notifications.sendEmail', $args);
+		return explode(',', (string)$result);
+	}
 }
 
 ?>

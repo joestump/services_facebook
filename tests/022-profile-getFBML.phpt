@@ -6,9 +6,9 @@ Services_Facebook_Profile::getFBML()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Profile');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
-    $fbml = $api->getFBML();
+    $fbml = $api->profile->getFBML();
     echo (string)$fbml;
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
@@ -17,6 +17,6 @@ try {
 
 ?>
 --EXPECT--
-<fb:fbml version="1.0"><fb:wide>
+<fb:fbml version="1.1"><fb:wide>
 The PEAR module Services_Facebook is coming along nicely.
 </fb:wide></fb:fbml>

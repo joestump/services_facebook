@@ -6,12 +6,13 @@ Services_Facebook_Friends::get()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Friends');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
-    $friends = $api->get();
+    $friends = $api->friends->get();
     foreach ($friends as $uid) {
-        var_dump($uid);
+        if (!in_array($uid, $friends)) echo 'Failure!';
     }
+	echo 'We\'re doing okay.';
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();
@@ -19,4 +20,4 @@ try {
 
 ?>
 --EXPECT--
-int(669245952)
+We're doing okay.

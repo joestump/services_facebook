@@ -1,5 +1,5 @@
 --TEST--
-Services_Facebook_Users::getLoggedInUser()
+Services_Facebook_Application::getPublicInfoByCanvasName()
 --FILE--
 <?php
 
@@ -7,8 +7,11 @@ require_once 'tests-config.php';
 
 try {
     $api = new Services_Facebook();
-    $api->sessionKey = $sessionKey;
-    var_dump(($uid == $api->users->getLoggedInUser()));
+
+	$info = $api->application->getPublicInfoByCanvasName('services_facebook');
+	
+	var_dump((string)$info->app_id);
+	
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();
@@ -16,4 +19,4 @@ try {
 
 ?>
 --EXPECT--
-bool(true)
+string(10) "4799760546"

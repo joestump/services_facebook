@@ -6,7 +6,7 @@ Services_Facebook_Feed::publishStoryToUser()
 require_once 'tests-config.php';
 
 try {
-    $api = Services_Facebook::factory('Feed');
+    $api = new Services_Facebook();
     $api->sessionKey = $sessionKey;
 
     $title = '<a href="http://www.joestump.net">Joe Stump</a> went to to Vegas in July of 2007';
@@ -19,7 +19,7 @@ try {
               'href' => 'http://dnevins.com')
     );
 
-    if ($api->publishStoryToUser($title, $body, $img)) {
+    if ($api->feed->publishStoryToUser($title, $body, $img)) {
         echo 'Victory is mine!';
     } else {
         echo 'Failure!';
@@ -31,6 +31,4 @@ try {
 
 ?>
 --EXPECT--
-I'm a PEAR developer. This is my sandbox for working on my Facebook PEAR package.
-I commute to work via bike. I don't own a car and that makes me immeasurably happy. I'm a geek in more ways than one. I consume more information in a day than was humanly possible a mere ten years ago. I'm looking forward to adding the title "World Traveler" to this section of my profile.
-
+Victory is mine!

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Tests config file
+ *
+ * @author Jeff Hodsdon
+ * @package Services_Facebook
+ */
+set_include_path(realpath(dirname(__FILE__) . '/../') . ':' . get_include_path());
+require_once 'Services/Facebook.php';
+
+// You must uncomment these lines of code and set the values for the tests.
+// Tests will fail if this information is not complete
+// Services_Facebook::$apiKey = 'xxx';
+// Services_Facebook::$secret = 'xxx';
+
+/*
+To get the session key go to:
+http://www.facebook.com/code_gen.php?v=1.0&api_key=YOUR_API_KEY
+That generated code is like an auth token to pass into getSession
+
+$api = new Services_Facebook();
+$sessionKey = $api->auth->getSession('xxx');
+var_dump($sessionKey);
+
+*/
+
+// $sessionKey = 'xxx';
+// $uid = 111111111;
+
+// $notFriendUid = ;
+// $friendUid = ;
+
+// $friends = array();
+
+// $friendAppAddedUid = ;
+
+// $fanOfUid = ;
+
+
+
+
+?>
