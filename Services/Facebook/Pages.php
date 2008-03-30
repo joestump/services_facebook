@@ -32,55 +32,55 @@ require_once 'Services/Facebook/Common.php';
  */
 class Services_Facebook_Pages extends Services_Facebook_Common
 {
-	/**
-	 * Checks whether the logged-in user is the admin for a given page. 
-	 *
-	 * @param		int		Page ID, optional
-	 * @return 		boolean
-	 * @link		http://wiki.developers.facebook.com/index.php/Pages.isAdmin
-	 **/
-	public function isAdmin($page_id = null)
-	{
-		$result = $this->sendRequest('pages.isAdmin', array(
-									 'session_key' => $this->sessionKey,
-									 'page_id' => $page_id
-				  ));
-		return (intval((string)$result) == 1);
-	}
-	
-	/**
-	 * Checks whether the page has added the application. 
-	 *
-	 * @param		int		Page ID, optional
-	 * @return 		boolean
-	 * @link		http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
-	 **/
-	public function isAppAdded($page_id = null)
-	{
-		$result = $this->sendRequest('pages.isAppAdded', array(
-									 'session_key' => $this->sessionKey,
-									 'page_id' => $page_id
-				  ));
-		return (intval((string)$result) == 1);
-	}
+    /**
+     * Checks whether the logged-in user is the admin for a given page. 
+     *
+     * @param       int     Page ID, optional
+     * @return      boolean
+     * @link        http://wiki.developers.facebook.com/index.php/Pages.isAdmin
+     **/
+    public function isAdmin($page_id = null)
+    {
+        $result = $this->sendRequest('pages.isAdmin', array(
+                                     'session_key' => $this->sessionKey,
+                                     'page_id' => $page_id
+                  ));
+        return (intval((string)$result) == 1);
+    }
     
-	/**
-	 * Checks whether a user is a fan of a given Page. Doesn't work for Application about Pages.
-	 *
-	 * @param		int		Page ID, optional
-	 * @param		int		User ID of the person to test, defaults to logged-in user
-	 * @return 		boolean
-	 * @link		http://wiki.developers.facebook.com/index.php/Pages.isFan
-	 **/
-	public function isFan($page_id = null, $uid = null)
-	{
-		$result = $this->sendRequest('pages.isFan', array(
-									 'session_key' => $this->sessionKey,
-									 'page_id' 	=> $page_id,
-									 'uid'		=> $uid
-				  ));
-		return (intval((string)$result) == 1);
-	}
+    /**
+     * Checks whether the page has added the application. 
+     *
+     * @param       int     Page ID, optional
+     * @return      boolean
+     * @link        http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
+     **/
+    public function isAppAdded($page_id = null)
+    {
+        $result = $this->sendRequest('pages.isAppAdded', array(
+                                     'session_key' => $this->sessionKey,
+                                     'page_id' => $page_id
+                  ));
+        return (intval((string)$result) == 1);
+    }
+    
+    /**
+     * Checks whether a user is a fan of a given Page. Doesn't work for Application about Pages.
+     *
+     * @param       int     Page ID, optional
+     * @param       int     User ID of the person to test, defaults to logged-in user
+     * @return      boolean
+     * @link        http://wiki.developers.facebook.com/index.php/Pages.isFan
+     **/
+    public function isFan($page_id = null, $uid = null)
+    {
+        $result = $this->sendRequest('pages.isFan', array(
+                                     'session_key' => $this->sessionKey,
+                                     'page_id'  => $page_id,
+                                     'uid'      => $uid
+                  ));
+        return (intval((string)$result) == 1);
+    }
 }
 
 ?>

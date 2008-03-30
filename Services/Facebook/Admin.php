@@ -39,98 +39,98 @@
  */
 class Services_Facebook_Admin extends Services_Facebook_Common
 {
-	/**
-	 * Default application property fields
-	 * 
-	 * @access 		private
-	 * @link		http://wiki.developers.facebook.com/index.php/ApplicationProperties
-	 */
-	private $applicationFields = array(
-		'application_name', 'callback_url', 'post_install_url', 'edit_url', 
-		'dashboard_url', 'uninstall_url', 'ip_list', 'email', 'description', 
-		'use_iframe', 'desktop', 'is_mobile', 'default_fbml', 'default_column', 
-		'message_url', 'message_action', 'about_url', 'private_install', 'installable', 
-		'privacy_url', 'help_url', 'see_all_url', 'tos_url', 'dev_mode', 'preload_fql'
-	);
-	
-	/**
-	 * Gets property values previously set for an application.
-	 *
-	 * @access 		public
-	 * @param		array 		The properties to get, default is all
-	 * @return 		array 		Array with all requested properties
-	 * @link 				http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
-	 */
-	public function getAppProperties($properties = array())
-	{
-		if (!count($properties))
-		{
-			$properties = $this->applicationFields;
-		}
-		
-		//FB accepts the app properties as a json array
-		$json_properties = json_encode($properties);
-		
-		$result = $this->sendRequest('admin.getAppProperties', array(
-									 'properties' => $json_properties
-						));
-		
-		//The response from Facebook is in JSON
-		return json_decode((string)$result);
-	}
-	
-	/**
-	 * Sets multiple properties for an application.
-	 *
-	 * @access		public
-	 * @param 		array 		Property / value assocative array of properties
-	 * @return 		boolean 	True on success
-	 * @link 				http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
-	 */
-	public function setAppProperties($properties = array())
-	{
-		$jsonArray = array();
-		foreach ($properties as $property => $value)
-		{
-			if (in_array($property, $this->applicationFields))
-			{
-				$jsonArray[$property] = $value;
-			}
-		}
-		$json_properties = json_encode($jsonArray);
-		
-		return $this->sendRequest('admin.setAppProperties', array(
-								   'properties' => $json_properties
-					));
-	}
-	
-	
-	/**
-	 * Get the number of notifications your application can send on behalf of a user per day.
-	 *
-	 * @return		int		Number of notifications
-	 * @link 		http://wiki.developers.facebook.com/index.php/Admin.getAllocation
-	 */
-	public function getNotificationsPerDay()
-	{
-		return (int)$this->sendRequest('admin.getAllocation', array(
-								  'session_key' => $this->sessionKey,
-								  'integration_point_name' => 'notifications_per_day'
-				));
-	}
-	
-	/**
-	 * Get the number of requests your application can send on behalf of a user per day.
-	 *
-	 * @return		int 		Number of requests
-	 * @link 		http://wiki.developers.facebook.com/index.php/Admin.getAllocation
-	 **/
-	public function getRequestsPerDay()
-	{
-		return (int)$this->sendRequest('admin.getAllocation', array(
-								  'session_key' => $this->sessionKey,
-								  'integration_point_name' => 'requests_per_day'
-				));
-	}
-	
+    /**
+     * Default application property fields
+     * 
+     * @access      private
+     * @link        http://wiki.developers.facebook.com/index.php/ApplicationProperties
+     */
+    private $applicationFields = array(
+        'application_name', 'callback_url', 'post_install_url', 'edit_url', 
+        'dashboard_url', 'uninstall_url', 'ip_list', 'email', 'description', 
+        'use_iframe', 'desktop', 'is_mobile', 'default_fbml', 'default_column', 
+        'message_url', 'message_action', 'about_url', 'private_install', 'installable', 
+        'privacy_url', 'help_url', 'see_all_url', 'tos_url', 'dev_mode', 'preload_fql'
+    );
+    
+    /**
+     * Gets property values previously set for an application.
+     *
+     * @access      public
+     * @param       array       The properties to get, default is all
+     * @return      array       Array with all requested properties
+     * @link                http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
+     */
+    public function getAppProperties($properties = array())
+    {
+        if (!count($properties))
+        {
+            $properties = $this->applicationFields;
+        }
+        
+        //FB accepts the app properties as a json array
+        $json_properties = json_encode($properties);
+        
+        $result = $this->sendRequest('admin.getAppProperties', array(
+                                     'properties' => $json_properties
+                        ));
+        
+        //The response from Facebook is in JSON
+        return json_decode((string)$result);
+    }
+    
+    /**
+     * Sets multiple properties for an application.
+     *
+     * @access      public
+     * @param       array       Property / value assocative array of properties
+     * @return      boolean     True on success
+     * @link                http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
+     */
+    public function setAppProperties($properties = array())
+    {
+        $jsonArray = array();
+        foreach ($properties as $property => $value)
+        {
+            if (in_array($property, $this->applicationFields))
+            {
+                $jsonArray[$property] = $value;
+            }
+        }
+        $json_properties = json_encode($jsonArray);
+        
+        return $this->sendRequest('admin.setAppProperties', array(
+                                   'properties' => $json_properties
+                    ));
+    }
+    
+    
+    /**
+     * Get the number of notifications your application can send on behalf of a user per day.
+     *
+     * @return      int     Number of notifications
+     * @link        http://wiki.developers.facebook.com/index.php/Admin.getAllocation
+     */
+    public function getNotificationsPerDay()
+    {
+        return (int)$this->sendRequest('admin.getAllocation', array(
+                                  'session_key' => $this->sessionKey,
+                                  'integration_point_name' => 'notifications_per_day'
+                ));
+    }
+    
+    /**
+     * Get the number of requests your application can send on behalf of a user per day.
+     *
+     * @return      int         Number of requests
+     * @link        http://wiki.developers.facebook.com/index.php/Admin.getAllocation
+     **/
+    public function getRequestsPerDay()
+    {
+        return (int)$this->sendRequest('admin.getAllocation', array(
+                                  'session_key' => $this->sessionKey,
+                                  'integration_point_name' => 'requests_per_day'
+                ));
+    }
+    
 }

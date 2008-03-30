@@ -8,10 +8,10 @@ require_once 'tests-config.php';
 try {
     $api = new Services_Facebook();
 
-	$info = $api->application->getPublicInfoById('4799760546');
-	
-	var_dump((string)$info->api_key);
-	
+    $info = $api->application->getPublicInfoById('4799760546');
+    
+    var_dump((string)$info->api_key);
+    
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();

@@ -70,8 +70,8 @@ class Services_Facebook
     static private $instances = array();
 
     static private $drivers = array(
-		'admin'			=> 'Admin',
-		'application'	=> 'Application',
+        'admin'         => 'Admin',
+        'application'   => 'Application',
         'auth'          => 'Auth',
         'events'        => 'Events',
         'fbml'          => 'FBML',
@@ -81,7 +81,7 @@ class Services_Facebook
         'groups'        => 'Friends',
         'marketplace'   => 'MarketPlace',
         'notifications' => 'Notifications',
-		'pages'			=> 'Pages',
+        'pages'         => 'Pages',
         'photos'        => 'Photos',
         'profile'       => 'Profile',
         'share'         => 'Share',
@@ -143,7 +143,7 @@ class Services_Facebook
      * that request came from Facebook. This function returns true if the 
      * request came from Facebook.
      * 
-     * Both the signature of the request and the api_key is verified. If the
+     * Both the signature of the request andf the api_key is verified. If the
      * api_key given doesn't match up to the current Services_Facebook::$apiKey
      * then it will return false. 
      *

@@ -90,27 +90,27 @@ class Services_Facebook_Friends extends Services_Facebook_Common
         return $ret;
     }
 
-	/**
-	 * Get the current user's friends by list
-	 * 
-	 * @access		public
-	 * @return      array 		A list of uid's of a particular list from the current user
-	 * @link 		http://wiki.developers.facebook.com/index.php/Friends.get
-	 */
-	public function getByList($flid)
-	{
-		$result = $this->sendRequest('friends.get', array(
-			'session_key' => $this->sessionKey,
-			'flid' => $flid
-		));
-		
-		$ret = array();
-		foreach($result->uid as $uid) {
-			$ret[] = intval((string)$uid);
-		}
-		
-		return $ret;
-	}
+    /**
+     * Get the current user's friends by list
+     * 
+     * @access      public
+     * @return      array       A list of uid's of a particular list from the current user
+     * @link        http://wiki.developers.facebook.com/index.php/Friends.get
+     */
+    public function getByList($flid)
+    {
+        $result = $this->sendRequest('friends.get', array(
+            'session_key' => $this->sessionKey,
+            'flid' => $flid
+        ));
+        
+        $ret = array();
+        foreach($result->uid as $uid) {
+            $ret[] = intval((string)$uid);
+        }
+        
+        return $ret;
+    }
 
     /**
      * Get a user's friends who are using your application
@@ -133,22 +133,22 @@ class Services_Facebook_Friends extends Services_Facebook_Common
         return $ret;
     }
 
-	/**
-	 * Get the current user's friend lists
-	 *
-	 * @access 		public
-	 * @return 		object		SimpleXMLObject with a name and id for each list
-	 * @link 		http://wiki.developers.facebook.com/index.php/Friends.getLists
-	 *
-	 */
-	public function getLists()
-	{
-		$result = $this->sendRequest('friends.getLists', array(
-			'session_key' => $this->sessionKey
-		));
-		
-		return $result;
-	}
+    /**
+     * Get the current user's friend lists
+     *
+     * @access      public
+     * @return      object      SimpleXMLObject with a name and id for each list
+     * @link        http://wiki.developers.facebook.com/index.php/Friends.getLists
+     *
+     */
+    public function getLists()
+    {
+        $result = $this->sendRequest('friends.getLists', array(
+            'session_key' => $this->sessionKey
+        ));
+        
+        return $result;
+    }
 }
 
 ?>

@@ -12,7 +12,7 @@ try {
     foreach ($friends as $uid) {
         if (!in_array($uid, $friends)) echo 'Failure!';
     }
-	echo 'We\'re doing okay.';
+    echo 'We\'re doing okay.';
 } catch (Services_Facebook_Exception $e) {
     echo $e->getLastCall() . "\n";
     echo $e->getMessage();
