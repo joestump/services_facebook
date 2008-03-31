@@ -95,6 +95,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * 
      * @access      public
      * @return      array       A list of uid's of a particular list from the current user
+     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link        http://wiki.developers.facebook.com/index.php/Friends.get
      */
     public function getByList($flid)
@@ -138,6 +139,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      *
      * @access      public
      * @return      object      SimpleXMLObject with a name and id for each list
+     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link        http://wiki.developers.facebook.com/index.php/Friends.getLists
      *
      */

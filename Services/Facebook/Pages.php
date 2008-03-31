@@ -13,8 +13,8 @@
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   Joe Stump <joe@joestump.net>  
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license     http://www.opensource.org/licenses/bsd-license.php 
  * @version     CVS: $Id:$
  * @link        http://pear.php.net/package/Services_Facebook
@@ -27,7 +27,7 @@ require_once 'Services/Facebook/Common.php';
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net>
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @link        http://wiki.developers.facebook.com
  */
 class Services_Facebook_Pages extends Services_Facebook_Common
@@ -39,11 +39,11 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      * @return      boolean
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isAdmin
      **/
-    public function isAdmin($page_id = null)
+    public function isAdmin($pageId = null)
     {
         $result = $this->sendRequest('pages.isAdmin', array(
                                      'session_key' => $this->sessionKey,
-                                     'page_id' => $page_id
+                                     'page_id' => $pageId
                   ));
         return (intval((string)$result) == 1);
     }
@@ -55,11 +55,11 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      * @return      boolean
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
      **/
-    public function isAppAdded($page_id = null)
+    public function isAppAdded($pageId = null)
     {
         $result = $this->sendRequest('pages.isAppAdded', array(
                                      'session_key' => $this->sessionKey,
-                                     'page_id' => $page_id
+                                     'page_id' => $pageId
                   ));
         return (intval((string)$result) == 1);
     }
@@ -72,11 +72,11 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      * @return      boolean
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isFan
      **/
-    public function isFan($page_id = null, $uid = null)
+    public function isFan($pageId = null, $uid = null)
     {
         $result = $this->sendRequest('pages.isFan', array(
                                      'session_key' => $this->sessionKey,
-                                     'page_id'  => $page_id,
+                                     'page_id'  => $pageId,
                                      'uid'      => $uid
                   ));
         return (intval((string)$result) == 1);

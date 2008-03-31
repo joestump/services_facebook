@@ -13,8 +13,8 @@
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   Joe Stump <joe@joestump.net>  
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license     http://www.opensource.org/licenses/bsd-license.php 
  * @version     CVS: $Id:$
  * @link        http://pear.php.net/package/Services_Facebook
@@ -34,7 +34,7 @@
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net>
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @link        http://wiki.developers.facebook.com
  */
 class Services_Facebook_Application extends Services_Facebook_Common

@@ -185,47 +185,48 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param       string      $title_template   FBML to post as the title, must contain {actor}
-     * @param       string      $title_data       JSON associative array of the values to 
+     * @param       string      $titleTemplate   FBML to post as the title, must contain {actor}
+     * @param       string      $titleData       JSON associative array of the values to 
      *                                            substituted into title_template
-     * @param       string      $body_template    The FBML template displayed in the Feed story's body section. 
-     * @param       string      $body_data        JSON associative array of the values to 
+     * @param       string      $bodyTemplate    The FBML template displayed in the Feed story's body section. 
+     * @param       string      $bodyData        JSON associative array of the values to 
      *                                            substituted into body_template
-     * @param       string      $body_general     Additional FBML for the body.  If stories are being aggregated, a
+     * @param       string      $bodyGeneral     Additional FBML for the body.  If stories are being aggregated, a
      *                                            body_general will be chosen randomly(If they are not identical)
      * @param       array       $images           Images to post to story entry
-     * @param       int         $page_actor_id    If posting to a Facebook Page, the page ID
+     * @param       int         $pageActorId    If posting to a Facebook Page, the page ID
+     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link        http://facebook-developer.net/2008/01/21/how-to-successfully-publish-widespread-news-feed-stories/
      */
-    public function publishTemplatizedAction($title_template,
-                                             $title_data = '',
-                                             $body_template = '',
-                                             $body_data = '',
-                                             $body_general = '',
-                                             $page_actor_id = '',
+    public function publishTemplatizedAction($titleTemplate,
+                                             $titleData = '',
+                                             $bodyTemplate = '',
+                                             $bodyData = '',
+                                             $bodyGeneral = '',
+                                             $pageActorId = '',
                                              $images = array())
     {
         $args = array(
-            'title_template' => $title_template,
+            'title_template' => $titleTemplate,
             'session_key' => $this->sessionKey
         );
 
         //Check for all the optional arguments and set them if present 
         //(looks wierd but what is done in above functions)
-        if (strlen($title_data)) {
-            $args['title_data'] = $title_data;
+        if (strlen($titleData)) {
+            $args['title_data'] = $titleData;
         }
-        if (strlen($body_template)) {
-            $args['body_template'] = $body_template;
+        if (strlen($bodyTemplate)) {
+            $args['body_template'] = $bodyTemplate;
         }
-        if (strlen($body_data)) {
-            $args['body_data'] = $body_data;
+        if (strlen($bodyData)) {
+            $args['body_data'] = $bodyData;
         }
-        if (strlen($body_general)) {
-            $args['body_general'] = $body_general;
+        if (strlen($bodyGeneral)) {
+            $args['body_general'] = $bodyGeneral;
         }
-        if (strlen($page_actor_id)) {
-            $args['page_actor_id'] = $page_actor_id;
+        if (strlen($pageActorId)) {
+            $args['page_actor_id'] = $pageActorId;
         }
 
         if (count($images)) {

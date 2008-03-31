@@ -13,8 +13,8 @@
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   Joe Stump <joe@joestump.net>  
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>  
  * @license     http://www.opensource.org/licenses/bsd-license.php 
  * @version     CVS: $Id:$
  * @link        http://pear.php.net/package/Services_Facebook
@@ -34,7 +34,7 @@
  *
  * @category    Services
  * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net>
+ * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @link        http://wiki.developers.facebook.com
  */
 class Services_Facebook_Admin extends Services_Facebook_Common
@@ -42,10 +42,10 @@ class Services_Facebook_Admin extends Services_Facebook_Common
     /**
      * Default application property fields
      * 
-     * @access      private
+     * @access      protected
      * @link        http://wiki.developers.facebook.com/index.php/ApplicationProperties
      */
-    private $applicationFields = array(
+    protected $applicationFields = array(
         'application_name', 'callback_url', 'post_install_url', 'edit_url', 
         'dashboard_url', 'uninstall_url', 'ip_list', 'email', 'description', 
         'use_iframe', 'desktop', 'is_mobile', 'default_fbml', 'default_column', 
@@ -63,16 +63,15 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      */
     public function getAppProperties($properties = array())
     {
-        if (!count($properties))
-        {
+        if (!count($properties)) {
             $properties = $this->applicationFields;
         }
         
         //FB accepts the app properties as a json array
-        $json_properties = json_encode($properties);
+        $jsonProperties = json_encode($properties);
         
         $result = $this->sendRequest('admin.getAppProperties', array(
-                                     'properties' => $json_properties
+                                     'properties' => $jsonProperties
                         ));
         
         //The response from Facebook is in JSON
@@ -90,17 +89,15 @@ class Services_Facebook_Admin extends Services_Facebook_Common
     public function setAppProperties($properties = array())
     {
         $jsonArray = array();
-        foreach ($properties as $property => $value)
-        {
-            if (in_array($property, $this->applicationFields))
-            {
+        foreach ($properties as $property => $value) {
+            if (in_array($property, $this->applicationFields)) {
                 $jsonArray[$property] = $value;
             }
         }
-        $json_properties = json_encode($jsonArray);
+        $jsonProperties = json_encode($jsonArray);
         
         return $this->sendRequest('admin.setAppProperties', array(
-                                   'properties' => $json_properties
+                                   'properties' => $jsonProperties
                     ));
     }
     

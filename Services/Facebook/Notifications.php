@@ -125,6 +125,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @param       string      $subject        Subject of the email
      * @param       mixed       $text           Text or FBML and text for the body of the email
      * @return      array       An array of success uids the email went out too
+     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link        http://wiki.developers.facebook.com/index.php/Notifications.sendEmail
      */     
     public function sendEmail(array $recipients, $subject, $text = null)
