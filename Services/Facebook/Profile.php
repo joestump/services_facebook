@@ -33,42 +33,33 @@ class Services_Facebook_Profile extends Services_Facebook_Common
     /**
      * Set FBML in a user's profile
      *
-     * You are not required to use a session key that belongs
-     * to the user whose profile you are changing.
+     * You are not required to use a session key that belongs to the user whose
+     * profile you are changing.
      *
-     * @param       string      $profileMarkup      FBML for the profile box
-     * @param       string      $profileAction      FBML for the profile actions
-     * @param       string      $mobileProfile      FBML for Facebook mobile view
-     * @param       int         $uid                Facebook uid to set FBML for
-     * @param       string      $sessionKey         The sessionKey that may be 
-     *                                               specified
+     * @param       mixed       $markup     Profile markup or array of markup  
+     * @param       int         $uid        Facebook uid to set FBML for
      * @return      boolean     True on success, false on unknown error
      * @link        http://wiki.developers.facebook.com/index.php/Profile.setFBML
      */
-    public function setFBML($profileMarkup = '', 
-                            $profileAction = '', 
-                            $mobileProfile = '', 
-                            $uid = 0,
-                            $sessionKey = '')
+    public function setFBML($markup, $uid = 0)
     {
         $args = array();
 
-        if (strlen($profileMarkup)) {
-            $args['profile'] = $profileMarkup;
+        if (is_array($markup)) {
+            static $options = array('profile', 'profile_action', 'mobile_profile');
+            foreach ($options as $opt) {
+                if (isset($markup[$opt]) && strlen($markup[$opt])) {
+                    $args[$opt] = $markup[$opt];
+                }
+            }
+        } elseif (strlen($markup)) {
+            $args['profile'] = $markup;
+        } else {
+            throw new Services_Facebook_Exception('You must provide valid FBML markup');
         }
-        if (strlen($profileAction)) {
-            $args['profile_action'] = $profileAction;
-        }
-        if (strlen($mobileProfile)) {
-            $args['mobile_profile'] = $mobileProfile;
-        }
+
         if ($uid > 0) {
             $args['uid'] = $uid;
-        }
-        if (strlen($sessionKey)) {
-            $args['session_key'] = $sessionKey;
-        } else {
-            $args['session_key'] = $this->sessionKey;
         }
 
         $result = $this->sendRequest('profile.setFBML', $args);
