@@ -67,8 +67,7 @@ class Services_Facebook_Profile extends Services_Facebook_Common
         }
         if (strlen($sessionKey)) {
             $args['session_key'] = $sessionKey;
-        }
-        else {
+        } else {
             $args['session_key'] = $this->sessionKey;
         }
 
