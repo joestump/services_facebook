@@ -26,6 +26,7 @@
     </developer>
     <developer>
         <name>Jeff Hodsdon</name>
+        <user>noneyet</user>
         <email>jeffhodsdon@gmail.com</email>
         <active>yes</active>
     </developer>
@@ -127,8 +128,10 @@
                       role="test" />
                 <file name="082-application-getPublicInfoByCanvasName.phpt"
                       role="test" />
+<!--
                 <file name="090-admin-getNotifcationsPerDay.phpt"
                       role="test" />
+-->
                 <file name="091-admin-getRequestsPerDay.phpt"
                       role="test" />
                 <file name="092-admin-getAppProperties.phpt"
@@ -143,8 +146,10 @@
                       role="test" />
                 <file name="121-marketplace-getCategories.phpt"
                       role="test" />
+<!--
                 <file name="122-marketplace-getSubCategories.phpt"
                       role="test" />
+-->
                 <file name="123-marketplace-getListings.phpt"
                       role="test" />
                 <file name="124-marketplace-removeListing.phpt"
