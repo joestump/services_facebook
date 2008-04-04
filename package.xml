@@ -18,11 +18,21 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2007-11-06</date>
-    <time>15:53:42</time>
+    <developer>
+        <name>Travis Swicegood</name>
+        <user>tswicegood</user>
+        <email>development@domain51.com</email>
+        <active>yes</active>
+    </developer>
+    <developer>
+        <name>Jeff Hodsdon</name>
+        <email>jeffhodsdon@gmail.com</email>
+        <active>yes</active>
+    </developer>
+    <date>2008-04-03</date>
     <version>
-        <release>0.0.2</release>
-        <api>0.0.2</api>
+        <release>0.0.3</release>
+        <api>0.0.3</api>
     </version>
     <stability>
         <release>alpha</release>
@@ -30,8 +40,11 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes><![CDATA[
-        * Completed all of the other endpoints.
-        * Added Services_Facebook_Share::parse() to parse out share partner meta information.
+        * Updated Services_Facebook_Profile::setFBML() to accept new parameters
+        * Finished marketplace driver endpoints
+        * Added admin, application and pages drivers
+        * Switched to lazy loading of drivers
+        * Added Services_Facebook_Share to parse Facebook style share meta data from HTML source
     ]]></notes>
     <contents>
         <dir name="/">
@@ -160,6 +173,135 @@
     </dependencies>
     <phprelease />
     <changelog>
+        <release>
+            <date>2007-11-06</date>
+            <time>15:53:42</time>
+            <version>
+                <release>0.0.2</release>
+                <api>0.0.2</api>
+            </version>
+            <stability>
+                <release>alpha</release>
+                <api>alpha</api>
+            </stability>
+            <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+            <notes><![CDATA[
+                * Completed all of the other endpoints.
+                * Added Services_Facebook_Share::parse() to parse out share partner meta information.
+            ]]></notes>
+            <contents>
+                <dir name="/">
+                    <dir name="Services">
+                        <file name="Facebook.php"
+                              role="php" />
+                        <dir name="Facebook">
+                            <file name="Admin.php"
+                                  role="php" />
+                            <file name="Application.php"
+                                  role="php" />
+                            <file name="Auth.php"
+                                  role="php" />
+                            <file name="Common.php"
+                                  role="php" />
+                            <file name="Exception.php"
+                                  role="php" />
+                            <file name="Events.php"
+                                  role="php" />
+                            <file name="FBML.php"
+                                  role="php" />
+                            <file name="FQL.php"
+                                  role="php" />
+                            <file name="Feed.php"
+                                  role="php" />
+                            <file name="Friends.php"
+                                  role="php" />
+                            <file name="Groups.php"
+                                  role="php" />
+                            <file name="MarketPlace.php"
+                                  role="php" />
+                            <file name="Notifications.php"
+                                  role="php" />
+                            <file name="Pages.php"
+                                  role="php" />
+                            <file name="Photos.php"
+                                  role="php" />
+                            <file name="Profile.php"
+                                  role="php" />
+                            <file name="Share.php"
+                                  role="php" />
+                            <file name="Users.php"
+                                  role="php" />
+                            <dir name="MarketPlace">
+                                <file name="Listing.php"
+                                      role="php" />
+                            </dir>
+                        </dir>
+                    </dir>
+                    <dir name="tests">
+                        <file name="010-users-isAppAdded.phpt"
+                              role="test" />
+                        <file name="012-users-getInfo.phpt"
+                              role="test" /> 
+                        <file name="014-users-getLoggedInUser.phpt"
+                              role="test" /> 
+                        <file name="020-profile-setFBML.phpt"
+                              role="test" /> 
+                        <file name="022-profile-getFBML.phpt"
+                              role="test" /> 
+                        <file name="030-friends-areFriends.phpt"
+                              role="test" /> 
+                        <file name="032-friends-get.phpt"
+                              role="test" /> 
+                        <file name="034-friends-getAppUsers.phpt"
+                              role="test" /> 
+                        <file name="040-fql-query.phpt"
+                              role="test" /> 
+                        <file name="050-feed-publishStoryToUser.phpt"
+                              role="test" /> 
+                        <file name="052-feed-publishActionOfUser.phpt"
+                              role="test" /> 
+                        <file name="060-photos-createAlbum.phpt"
+                              role="test" /> 
+                        <file name="062-photos-upload.phpt"
+                              role="test" /> 
+                        <file name="080-application-getPublicInfoById.phpt"
+                              role="test" />
+                        <file name="081-application-getPublicInfoByApiKey.phpt"
+                              role="test" />
+                        <file name="082-application-getPublicInfoByCanvasName.phpt"
+                              role="test" />
+                        <file name="090-admin-getNotifcationsPerDay.phpt"
+                              role="test" />
+                        <file name="091-admin-getRequestsPerDay.phpt"
+                              role="test" />
+                        <file name="092-admin-getAppProperties.phpt"
+                              role="test" />
+                        <file name="110-pages-isAdmin.phpt"
+                              role="test" />
+                        <file name="111-pages-isFan.phpt"
+                              role="test" />
+                        <file name="112-pages-isAppAdded.phpt"
+                              role="test" />
+                        <file name="120-marketplace-createListing.phpt"
+                              role="test" />
+                        <file name="121-marketplace-getCategories.phpt"
+                              role="test" />
+                        <file name="122-marketplace-getSubCategories.phpt"
+                              role="test" />
+                        <file name="123-marketplace-getListings.phpt"
+                              role="test" />
+                        <file name="124-marketplace-removeListing.phpt"
+                              role="test" />
+                        <file name="125-marketplace-search.phpt"
+                              role="test" />
+                        <file name="test-image.jpg"
+                              role="test" /> 
+                        <file name="tests-config.php.example"
+                              role="test" /> 
+                    </dir>
+                </dir>
+            </contents>
+        </release>
         <release>
             <date>2007-08-24</date>
             <time>15:53:42</time>
