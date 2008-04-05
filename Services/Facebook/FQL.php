@@ -55,8 +55,9 @@ class Services_Facebook_FQL extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param       string      $query      FQL query string
-     * @return      object      Instance of SimpleXMLElement
+     * @param string $query FQL query string
+     *
+     * @return object Instance of SimpleXMLElement
      */
     public function query($query)
     {
