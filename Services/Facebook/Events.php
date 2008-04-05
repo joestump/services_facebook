@@ -34,9 +34,9 @@ class Services_Facebook_Events extends Services_Facebook_Common
     /**
      * Get events based on multiple query terms
      *
-     * @access      public
-     * @param       array       $params     Various terms to query by
-     * @return      object      SimpleXmlElement
+     * @param array $params Various terms to query by
+     * 
+     * @return object SimpleXmlElement
      */
     public function get(array $params)
     {
@@ -86,9 +86,9 @@ class Services_Facebook_Events extends Services_Facebook_Common
     /**
      * Get events by event ID
      *
-     * @access      public
-     * @param       mixed       $eid        Array of eid's or single eid
-     * @return      object      SimpleXmlElement
+     * @param mixed $eid Array of eid's or single eid
+     * 
+     * @return object SimpleXmlElement
      */
     public function getEvents($eid)
     {
@@ -105,9 +105,9 @@ class Services_Facebook_Events extends Services_Facebook_Common
     /**
      * Get events for a given user
      *
-     * @access      public
-     * @param       int         $uid        User ID to fetch events for
-     * @return      SimpleXmlElement
+     * @param int $uid User ID to fetch events for
+     * 
+     * @return SimpleXmlElement
      */
     public function getEventsByUser($uid)
     {
@@ -123,10 +123,10 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * Use UNIX timestamps to fetch events within a given date/time range. A
      * value of 0 indicates no upper or lower boundary. 
      *
-     * @access      public
-     * @param       int         $start      UNIX timestamp of start time
-     * @param       int         $end        UNIX timestamp of end time
-     * @return      object      SimpleXmlElement
+     * @param int $start UNIX timestamp of start time
+     * @param int $end   UNIX timestamp of end time
+     * 
+     * @return object SimpleXmlElement
      */
     public function getEventsByDate($start, $end)
     {
@@ -140,10 +140,10 @@ class Services_Facebook_Events extends Services_Facebook_Common
     /**
      * Get members of event
      *
-     * @access      public
-     * @param       int         $eid        Event ID to fetch members of
-     * @return      object      SimpleXmlElement of users attending, etc.
-     * @link        http://wiki.developers.facebook.com/index.php/Events.getMembers
+     * @param int $eid Event ID to fetch members of
+     * 
+     * @return object SimpleXmlElement of users attending, etc.
+     * @link http://wiki.developers.facebook.com/index.php/Events.getMembers
      */
     public function getMembers($eid)
     {
