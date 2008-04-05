@@ -48,9 +48,9 @@ class Services_Facebook_Exception extends Exception
     /**
      * Constructor
      *
-     * @param       string      $message
-     * @param       int         $code
-     * @param       string      $lastCall       URI of last API call
+     * @param string $message  The exception's message/info
+     * @param int    $code     The error code for the exception
+     * @param string $lastCall URI of last API call
      */
     public function __construct($message, $code = 0, $lastCall = '')
     {
