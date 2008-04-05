@@ -11,15 +11,17 @@
  * a copy of the New BSD License and are unable to obtain it through the web, 
  * please send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   Joe Stump <joe@joestump.net>  
- * @license     http://www.opensource.org/licenses/bsd-license.php 
- * @version     CVS: $Id:$
- * @link        http://pear.php.net/package/Services_Facebook
+ * @category  Services
+ * @package   Services_Facebook
+ * @author    Joe Stump <joe@joestump.net> 
+ * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
+ * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Services_Facebook
  */
+
 require_once 'MarketPlace/Listing.php';
+
 /**
  * Facebook Marketplace Interface
  *

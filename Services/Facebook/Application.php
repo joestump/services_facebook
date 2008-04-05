@@ -14,7 +14,7 @@
  * @category    Services
  * @package     Services_Facebook
  * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>  
  * @license     http://www.opensource.org/licenses/bsd-license.php 
  * @version     CVS: $Id:$
  * @link        http://pear.php.net/package/Services_Facebook
