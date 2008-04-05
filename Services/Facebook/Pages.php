@@ -11,13 +11,13 @@
  * a copy of the New BSD License and are unable to obtain it through the web, 
  * please send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @license     http://www.opensource.org/licenses/bsd-license.php 
- * @version     CVS: $Id:$
- * @link        http://pear.php.net/package/Services_Facebook
+ * @category  Services
+ * @package   Services_Facebook
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright 2007-2008 Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License 
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Services_Facebook
  */
 
 require_once 'Services/Facebook/Common.php';
@@ -25,18 +25,21 @@ require_once 'Services/Facebook/Common.php';
 /**
  * Facebook Pages Interface
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @link        http://wiki.developers.facebook.com
+ * @category Services
+ * @package  Services_Facebook
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License 
+ * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook_Pages extends Services_Facebook_Common
 {
     /**
      * Checks whether the logged-in user is the admin for a given page. 
      *
-     * @param       int     Page ID, optional
-     * @return      boolean
+     * @param int $pageId Page ID
+     *
+     * @return boolean
+     *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isAdmin
      **/
     public function isAdmin($pageId = null)
@@ -51,9 +54,11 @@ class Services_Facebook_Pages extends Services_Facebook_Common
     /**
      * Checks whether the page has added the application. 
      *
-     * @param       int     Page ID, optional
-     * @return      boolean
-     * @link        http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
+     * @param int $pageId Page ID, optional
+     *
+     * @return boolean
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
      **/
     public function isAppAdded($pageId = null)
     {
@@ -65,11 +70,15 @@ class Services_Facebook_Pages extends Services_Facebook_Common
     }
     
     /**
-     * Checks whether a user is a fan of a given Page. Doesn't work for Application about Pages.
+     * Checks whether a user is a fan of a given Page. Doesn't work for
+     * Application about Pages.
      *
-     * @param       int     Page ID, optional
-     * @param       int     User ID of the person to test, defaults to logged-in user
+     * @param int $pageId Page ID
+     * @param int $uid    User ID of the person to test, defaults to 
+     *                    logged-in user
+     *
      * @return      boolean
+     *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isFan
      **/
     public function isFan($pageId = null, $uid = null)
