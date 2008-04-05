@@ -66,20 +66,20 @@ abstract class Services_Facebook_Common
      * 
      * Any formal error encountered is thrown as an exception.
      *
-     * @access      protected
-     * @param       string      $method     The API method to call
-     * @param       array       $args       API arguments passed as GET args
-     * @return      object      Response as an instance of SimleXmlElement
-     * @throws      Services_Facebook_Exception
+     * @param string $method The API method to call
+     * @param array  $args   API arguments passed as GET args
+     *
+     * @return object Response as an instance of SimleXmlElement
+     * @throws Services_Facebook_Exception
      */
     protected function sendRequest($method, array $args = array()) 
     {
         $args['api_key'] = Services_Facebook::$apiKey;
-        $args['v'] = $this->version;
-        $args['format'] = 'XML';
-        $args['method'] = $method;
+        $args['v']       = $this->version;
+        $args['format']  = 'XML';
+        $args['method']  = $method;
         $args['call_id'] = microtime(true);
-        $args = $this->signRequest($args);
+        $args            = $this->signRequest($args);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api);
@@ -90,14 +90,18 @@ abstract class Services_Facebook_Common
         $result = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new Services_Facebook_Exception(curl_error($ch), curl_errno($ch), $url, $this->api);
+            throw new Services_Facebook_Exception(
+                curl_error($ch), curl_errno($ch), $url, $this->api
+            );
         }
 
         curl_close($ch);
 
         $xml = @simplexml_load_string($result);
         if (!$xml instanceof SimpleXmlElement) {
-            throw new Services_Facebook_Exception('Could not parse XML response', 0, $this->api);
+            throw new Services_Facebook_Exception(
+                'Could not parse XML response', 0, $this->api
+            );
         }
 
         $error = $this->checkRequest($xml);
@@ -112,9 +116,10 @@ abstract class Services_Facebook_Common
     /**
      * Sign the request
      *
-     * @param       array       $args
-     * @return      array       Arguments with the appropriate sig added
-     * @see         Services_Facebook::$secret
+     * @param array $args Arguments for the request to be signed
+     * 
+     * @return array Arguments with the appropriate sig added
+     * @see Services_Facebook::$secret
      */
     protected function signRequest(array $args) 
     {
@@ -129,7 +134,7 @@ abstract class Services_Facebook_Common
             $sig .= $k .'=' . $v;
         }
 
-        $sig .= Services_Facebook::$secret;
+        $sig        .= Services_Facebook::$secret;
         $args['sig'] = md5($sig);
         return $args;
     }
@@ -137,13 +142,14 @@ abstract class Services_Facebook_Common
     /**
      * Check if request resulted in an error
      *
-     * @param       object      $xml        Instance of SimpleXmlElement
-     * @return      Array with code/message or false if no error is present
+     * @param object $xml Instance of SimpleXmlElement
+     * 
+     * @return Array with code/message or false if no error is present
      */
-    private function checkRequest($xml)
+    protected function checkRequest($xml)
     {
         $message = null;
-        $code = 0;
+        $code    = 0;
         switch ($this->version) {
         case '1.0':
             if (isset($xml->error_code)) {
