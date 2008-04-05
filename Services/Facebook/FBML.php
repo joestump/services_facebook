@@ -38,9 +38,9 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * refresh your image's cache use this URL to tell Facebook to re-request
      * and re-cache your image.
      *
-     * @access      public
-     * @param       string      $url        URL of image to refresh
-     * @return      boolean
+     * @param string $url URL of image to refresh
+     * 
+     * @return boolean
      */
     public function refreshImgSrc($url)
     {
@@ -54,10 +54,10 @@ class Services_Facebook_FBML extends Services_Facebook_Common
     }
 
     /**
-     * TODO: Put something here
+     * Fetches and re-caches the content stored at the given URL
      * 
-     * @access      public
-     * @param       string      $url
+     * @param string $url The absolute URL from which to fetch content.
+     * 
      * @return      boolean
      */
     public function refreshRefUrl($url)
@@ -72,16 +72,17 @@ class Services_Facebook_FBML extends Services_Facebook_Common
     }
 
     /**
-     * TODO: Put something here
+     * Associates a given "handle" with FBML markup
      * 
-     * @access      public
-     * @param       string      $handle
-     * @param       string      $fbml
-     * @return      boolean
+     * @param string $handle The handle to associate with the given FBML
+     * @param string $fbml   The FBML to associate with the given handle
+     * 
+     * @return boolean
+     * @link http://wiki.developers.facebook.com/index.php/Fbml.setRefHandle
      */
     public function setRefHandle($handle, $fbml)
     {
-        $result = $this->sendRequest('fbml.refreshRefUrl', array(
+        $result = $this->sendRequest('fbml.setRefHandle', array(
             'session_key' => $this->sessionKey,
             'handle' => $handle,
             'fbml' => $fbml
