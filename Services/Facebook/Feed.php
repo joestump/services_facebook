@@ -61,8 +61,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
     public function publishStoryToUser($title,
-                                        $body = '',
-                                        array $images = array())
+                                       $body = '',
+                                       array $images = array())
     {
         $args = array(
             'title' => $title,
@@ -203,10 +203,12 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link   http://wiki.developers.facebook.com/index.php/Feed.publishTemplatizedAction
      */
-    public function publishTemplatizedAction($titleTemplate, array $feedData = array(), array $images = array())
+    public function publishTemplatizedAction($titleTemplate,
+                                             array $feedData = array(),
+                                             array $images = array())
     {
         $args = array(
-            'title_template' => $title,
+            'title_template' => $titleTemplate,
             'session_key' => $this->sessionKey
         );
 
