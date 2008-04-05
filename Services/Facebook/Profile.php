@@ -37,10 +37,11 @@ class Services_Facebook_Profile extends Services_Facebook_Common
      * You are not required to use a session key that belongs to the user whose
      * profile you are changing.
      *
-     * @param       mixed       $markup     Profile markup or array of markup  
-     * @param       int         $uid        Facebook uid to set FBML for
-     * @return      boolean     True on success, false on unknown error
-     * @link        http://wiki.developers.facebook.com/index.php/Profile.setFBML
+     * @param mixed   $markup Profile markup or array of markup  
+     * @param integer $uid    Facebook uid to set FBML for
+     * 
+     * @return boolean True on success, false on unknown error
+     * @link http://wiki.developers.facebook.com/index.php/Profile.setFBML
      */
     public function setFBML($markup, $uid = 0)
     {
@@ -56,7 +57,9 @@ class Services_Facebook_Profile extends Services_Facebook_Common
         } elseif (strlen($markup)) {
             $args['profile'] = $markup;
         } else {
-            throw new Services_Facebook_Exception('You must provide valid FBML markup');
+            throw new Services_Facebook_Exception(
+                'You must provide valid FBML markup'
+            );
         }
 
         if ($uid > 0) {
@@ -64,16 +67,17 @@ class Services_Facebook_Profile extends Services_Facebook_Common
         }
 
         $result = $this->sendRequest('profile.setFBML', $args);
-        $check = intval((string)$result);
+        $check  = intval((string)$result);
         return ($check == 1);
     }
 
     /**
      * Get the current profile FBML
      *
-     * @param       int         $uid        Facebook uid to fetch FBML for
-     * @return      object      Instance of SimpleXmlElement
-     * @link        http://wiki.developers.facebook.com/index.php/Profile.getFBML
+     * @param integer $uid Facebook uid to fetch FBML for
+     * 
+     * @return object Instance of SimpleXmlElement
+     * @link http://wiki.developers.facebook.com/index.php/Profile.getFBML
      */
     public function getFBML($uid = 0)
     {
