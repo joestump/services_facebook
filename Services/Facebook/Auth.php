@@ -46,8 +46,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
     /**
      * Create a token for login
      *
-     * @access      public
-     * @return      string
+     * @return string
      */
     public function createToken()
     {
@@ -58,9 +57,9 @@ class Services_Facebook_Auth extends Services_Facebook_Common
     /**
      * Convert auth_token into a session_key
      *
-     * @access      public
-     * @param       string      $authToken      auth_token from callback
-     * @return      object      SimpleXmlElement of response 
+     * @param string $authToken auth_token from callback
+     *
+     * @return object SimpleXmlElement of response 
      */
     public function getSession($authToken)
     {
