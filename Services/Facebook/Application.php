@@ -11,13 +11,13 @@
  * a copy of the New BSD License and are unable to obtain it through the web, 
  * please send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @copyright   Jeff Hodsdon <jeffhodsdon@gmail.com>  
- * @license     http://www.opensource.org/licenses/bsd-license.php 
- * @version     CVS: $Id:$
- * @link        http://pear.php.net/package/Services_Facebook
+ * @category  Services
+ * @package   Services_Facebook
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @copyright 2007-2008 Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Services_Facebook
  */
 
 /**
@@ -32,19 +32,22 @@
  * ?>
  * </code>
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @link        http://wiki.developers.facebook.com
+ * @category Services
+ * @package  Services_Facebook
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook_Application extends Services_Facebook_Common
 {
     /**
      * Get the public information of an application by it's ID
      *
-     * @param       string      Application ID to get info of
-     * @return      object      SimpleXMLObject of the public info
-     * @link        http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
+     * @param string $id Application ID to get info of
+     * 
+     * @return object SimpleXMLObject of the public info
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
     public function getPublicInfoById($id)
     {
@@ -57,9 +60,11 @@ class Services_Facebook_Application extends Services_Facebook_Common
     /**
      * Get the public information of an application by it's API key
      *
-     * @param       string      Application API key to get the info of
-     * @return      object      SimpleXMLObject of the public info
-     * @link        http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
+     * @param string $api_key Application API key to get the info of
+     * 
+     * @return object SimpleXMLObject of the public info
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
     public function getPublicInfoByAPIKey($api_key)
     {
@@ -71,9 +76,11 @@ class Services_Facebook_Application extends Services_Facebook_Common
     /**
      * Get the public information of an application by it's canvas name
      *
-     * @param       string      Application's canvas name
-     * @return      object      SimpleXMLObject of the public info
-     * @link        http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
+     * @param string $canvas_name Application's canvas name
+     * 
+     * @return object SimpleXMLObject of the public info
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
     public function getPublicInfoByCanvasName($canvas_name)
     {
