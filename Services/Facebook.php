@@ -11,13 +11,13 @@
  * a copy of the New BSD License and are unable to obtain it through the web, 
  * please send a note to license@php.net so we can mail you a copy immediately.
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net> 
- * @copyright   Joe Stump <joe@joestump.net>  
- * @license     http://www.opensource.org/licenses/bsd-license.php 
- * @version     CVS: $Id:$
- * @link        http://pear.php.net/package/Services_Facebook
+ * @category  Services
+ * @package   Services_Facebook
+ * @author    Joe Stump <joe@joestump.net> 
+ * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   CVS: $Id$
+ * @link      http://pear.php.net/package/Services_Facebook
  */
 
 require_once 'Services/Facebook/Common.php';
@@ -26,18 +26,18 @@ require_once 'Services/Facebook/Exception.php';
 /**
  * Services_Facebook
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net>
- * @link        http://wiki.developers.facebook.com
+ * @category Services
+ * @package  Services_Facebook
+ * @author   Joe Stump <joe@joestump.net>
+ * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook
 {
     /**
      * Facebok application API key 
      *
-     * @access      public
-     * @var         string      $apiKey     32 character api_key from Facebook
+     * @var string $apiKey 32 character api_key from Facebook
      * @static
      */
     static public $apiKey = '';
@@ -48,8 +48,7 @@ class Services_Facebook
      * The Facebook secret token is used to both sign requests sent to 
      * Facebook and to verify requests sent from Facebook to your application.
      *
-     * @access      public
-     * @var         string      $secret     32 character secret from Facebook
+     * @var string $secret 32 character secret from Facebook
      * @static
      */
     static public $secret = '';
@@ -57,19 +56,23 @@ class Services_Facebook
     /**
      * Currently logged in user
      * 
-     * @var         string      $sessionKey
+     * @var string $sessionKey
      */
     public $sessionKey = '';
 
     /**
      * Instances of various drivers
      *
-     * @access      private
-     * @var         array       $instances
+     * @var array $instances
      */
-    static private $instances = array();
+    static protected $instances = array();
 
-    static private $drivers = array(
+    /**
+     * Available drivers
+     *
+     * @var array $drivers
+     **/
+    static protected $drivers = array(
         'admin'         => 'Admin',
         'application'   => 'Application',
         'auth'          => 'Auth',
@@ -91,15 +94,17 @@ class Services_Facebook
     /**
      * Create a facebook service 
      *
-     * @param       string      $endPoint       Services to create
-     * @return      object      Instance of Facebook endpoint
-     * @throws      Services_Facebook_Exception
+     * @param string $endPoint Services to create
+     * 
+     * @return object Instance of Facebook endpoint
+     * @throws Services_Facebook_Exception
+     *
      * @static
      */
-    static private function factory($endPoint)
+    static protected function factory($endPoint)
     {
         $file = 'Services/Facebook/' . $endPoint . '.php';
-        require_once $file;
+        include_once $file;
         $class = 'Services_Facebook_' . $endPoint;
         if (!class_exists($class)) {
             throw new Services_Facebook_Exception('Class not found ' . $class);
@@ -112,16 +117,17 @@ class Services_Facebook
     /**
      * Lazy loader for Facebook drivers
      *
-     * @access      public
-     * @param       string      $driver
-     * @throws      Services_Facebook_Exception
+     * @param string $driver Driver to load
+     * 
      * @return      object
+     * @throws      Services_Facebook_Exception
      */
     public function __get($driver)
     {
         $driver = strtolower($driver);
         if (!isset(self::$drivers[$driver])) {
-            throw new Services_Facebook_Exception('The driver requested, ' . $var . ', is not supported');
+            throw new Services_Facebook_Exception('The driver requested, ' . $var . 
+                                                  ', is not supported');
         } else {
             $driver = self::$drivers[$driver];
         }
@@ -147,9 +153,9 @@ class Services_Facebook
      * api_key given doesn't match up to the current Services_Facebook::$apiKey
      * then it will return false. 
      *
-     * @access      public
-     * @param       array       $args       Normally the $_POST array
-     * @return      boolean     True if the request signature is valid
+     * @param array $args Normally the $_POST array
+     * 
+     * @return boolean True if the request signature is valid
      */
     static public function isValidRequest($args)
     {
