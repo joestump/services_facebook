@@ -71,7 +71,7 @@ class Services_Facebook
      * Available drivers
      *
      * @var array $drivers
-     **/
+     */
     static protected $drivers = array(
         'admin'         => 'Admin',
         'application'   => 'Application',
@@ -98,8 +98,6 @@ class Services_Facebook
      * 
      * @return object Instance of Facebook endpoint
      * @throws Services_Facebook_Exception
-     *
-     * @static
      */
     static protected function factory($endPoint)
     {
@@ -117,17 +115,18 @@ class Services_Facebook
     /**
      * Lazy loader for Facebook drivers
      *
-     * @param string $driver Driver to load
+     * @param string $driver The Facebook driver/endpoint to load
      * 
-     * @return      object
-     * @throws      Services_Facebook_Exception
+     * @throws Services_Facebook_Exception
+     * @return object
      */
     public function __get($driver)
     {
         $driver = strtolower($driver);
         if (!isset(self::$drivers[$driver])) {
-            throw new Services_Facebook_Exception('The driver requested, ' . $var . 
-                                                  ', is not supported');
+            throw new Services_Facebook_Exception(
+                'The driver requested, ' . $var . ', is not supported'
+            );
         } else {
             $driver = self::$drivers[$driver];
         }
@@ -154,7 +153,7 @@ class Services_Facebook
      * then it will return false. 
      *
      * @param array $args Normally the $_POST array
-     * 
+     *
      * @return boolean True if the request signature is valid
      */
     static public function isValidRequest($args)
