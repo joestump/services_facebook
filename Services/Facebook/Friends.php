@@ -38,10 +38,11 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * is passed back. If it's a single pairing of friends then a boolean is
      * passed back.
      *
-     * @param       array       $uid1
-     * @param       array       $uid2
-     * @return      mixed       Instance of SimpleXML response or boolean
-     * @link        http://wiki.developers.facebook.com/index.php/Friends.areFriends
+     * @param array $uid1 First uid to check 
+     * @param array $uid2 Second one to see if friends with $uid1
+     * 
+     * @return mixed Instance of SimpleXML response or boolean
+     * @link http://wiki.developers.facebook.com/index.php/Friends.areFriends
      */
     public function areFriends($uid1, $uid2)
     {
@@ -73,9 +74,8 @@ class Services_Facebook_Friends extends Services_Facebook_Common
     /**
      * Get the current user's friends
      *
-     * @access      public
-     * @return      array       A list of uid's of current user's friends
-     * @link        http://wiki.developers.facebook.com/index.php/Friends.get
+     * @return array A list of uid's of current user's friends
+     * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
     public function get()
     {
@@ -94,10 +94,11 @@ class Services_Facebook_Friends extends Services_Facebook_Common
     /**
      * Get the current user's friends by list
      * 
-     * @access      public
-     * @return      array       A list of uid's of a particular list from the current user
-     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
-     * @link        http://wiki.developers.facebook.com/index.php/Friends.get
+     * @param integer $flid The friends list id to fetch
+     * 
+     * @return array A list of uid's of a particular list from the current user
+     * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
+     * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
     public function getByList($flid)
     {
@@ -107,7 +108,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
         ));
         
         $ret = array();
-        foreach($result->uid as $uid) {
+        foreach ($result->uid as $uid) {
             $ret[] = intval((string)$uid);
         }
         
@@ -117,9 +118,8 @@ class Services_Facebook_Friends extends Services_Facebook_Common
     /**
      * Get a user's friends who are using your application
      *
-     * @access      public
-     * @return      array       A list of Facebook uid's
-     * @link        http://wiki.developers.facebook.com/index.php/Friends.getAppUsers
+     * @return array A list of Facebook uid's
+     * @link http://wiki.developers.facebook.com/index.php/Friends.getAppUsers
      */
     public function getAppUsers()
     {
@@ -138,11 +138,9 @@ class Services_Facebook_Friends extends Services_Facebook_Common
     /**
      * Get the current user's friend lists
      *
-     * @access      public
-     * @return      object      SimpleXMLObject with a name and id for each list
-     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
-     * @link        http://wiki.developers.facebook.com/index.php/Friends.getLists
-     *
+     * @return object SimpleXMLObject with a name and id for each list
+     * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
+     * @link http://wiki.developers.facebook.com/index.php/Friends.getLists
      */
     public function getLists()
     {
