@@ -15,7 +15,7 @@
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
- * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Services_Facebook
  */
@@ -28,39 +28,43 @@
  * <?php
  * require_once 'Services/Facebook.php';
  * $api = new Services_Facebook();
- * echo 'Notifications that we can send per day, behalf of a user: ' . $api->admin->getNotificationsPerDay() . '<br />';
- * echo 'Requests that we can send per day, behalf of a user: ' . $api->admin->getRequestsPerDay(). '<br />';
+ * echo 'Notifications that we can send per day, behalf 
+ *       of a user: ' . $api->admin->getNotificationsPerDay() . '<br />';
+ * echo 'Requests that we can send per day, behalf of a user: ' . 
+ *       $api->admin->getRequestsPerDay(). '<br />';
  * ?>
  * </code>
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
- * @link        http://wiki.developers.facebook.com
+ * @category Services
+ * @package  Services_Facebook
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
+ * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook_Admin extends Services_Facebook_Common
 {
     /**
      * Default application property fields
      * 
-     * @access      protected
-     * @link        http://wiki.developers.facebook.com/index.php/ApplicationProperties
+     * @link http://wiki.developers.facebook.com/index.php/ApplicationProperties
      */
     protected $applicationFields = array(
         'application_name', 'callback_url', 'post_install_url', 'edit_url', 
         'dashboard_url', 'uninstall_url', 'ip_list', 'email', 'description', 
         'use_iframe', 'desktop', 'is_mobile', 'default_fbml', 'default_column', 
-        'message_url', 'message_action', 'about_url', 'private_install', 'installable', 
-        'privacy_url', 'help_url', 'see_all_url', 'tos_url', 'dev_mode', 'preload_fql'
+        'message_url', 'message_action', 'about_url', 'private_install',
+        'installable', 'privacy_url', 'help_url', 'see_all_url', 'tos_url',
+        'dev_mode', 'preload_fql'
     );
     
     /**
      * Gets property values previously set for an application.
      *
-     * @access      public
-     * @param       array       The properties to get, default is all
-     * @return      array       Array with all requested properties
-     * @link                http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
+     * @param array $properties The properties to get, default is all
+     *
+     * @return array Array with all requested properties
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
      */
     public function getAppProperties($properties = array())
     {
@@ -82,10 +86,11 @@ class Services_Facebook_Admin extends Services_Facebook_Common
     /**
      * Sets multiple properties for an application.
      *
-     * @access      public
-     * @param       array       Property / value assocative array of properties
-     * @return      boolean     True on success
-     * @link        http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
+     * @param array $properties Property / value assocative array of properties
+     *
+     * @return boolean True on success
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
      */
     public function setAppProperties($properties = array())
     {
@@ -104,10 +109,12 @@ class Services_Facebook_Admin extends Services_Facebook_Common
     
     
     /**
-     * Get the number of notifications your application can send on behalf of a user per day.
+     * Get the number of notifications your application can send on
+     * behalf of a user per day.
      *
-     * @return      int     Number of notifications
-     * @link        http://wiki.developers.facebook.com/index.php/Admin.getAllocation
+     * @return int Number of notifications
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      */
     public function getNotificationsPerDay()
     {
@@ -118,10 +125,12 @@ class Services_Facebook_Admin extends Services_Facebook_Common
     }
     
     /**
-     * Get the number of requests your application can send on behalf of a user per day.
+     * Get the number of requests your application can send on behalf 
+     * of a user per day.
      *
-     * @return      int         Number of requests
-     * @link        http://wiki.developers.facebook.com/index.php/Admin.getAllocation
+     * @return int Number of requests
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      **/
     public function getRequestsPerDay()
     {
