@@ -51,10 +51,13 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param       string      $title      FBML to post as story title
-     * @param       string      $body       FBML to post as story body
-     * @param       array       $images     Images to post to story entry
-     * @link        http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
+     * @param string $title  FBML to post as story title
+     * @param string $body   FBML to post as story body
+     * @param array  $images Images to post to story entry
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Feed.publishStoryToUser
+     * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
+     * @return boolean
      */
     public function publishStoryToUser($title, 
                                        $body = '', 
@@ -115,10 +118,12 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param       string      $title      FBML to post as story title
-     * @param       string      $body       FBML to post as story body
-     * @param       array       $images     Images to post to story entry
-     * @link        http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
+     * @param string $title  FBML to post as story title
+     * @param string $body   FBML to post as story body
+     * @param array  $images Images to post to story entry
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Feed.publishActionOfUser
+     * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
     public function publishActionOfUser($title, 
                                         $body = '', 
@@ -186,16 +191,16 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param       string      $titleTemplate   FBML to post as the title, must contain {actor}
-     * @param       string      $titleData       JSON associative array of the values to 
+     * @param string      $titleTemplate   FBML to post as the title, must contain {actor}
+     * @param string      $titleData       JSON associative array of the values to 
      *                                            substituted into title_template
-     * @param       string      $bodyTemplate    The FBML template displayed in the Feed story's body section. 
-     * @param       string      $bodyData        JSON associative array of the values to 
+     * @param string      $bodyTemplate    The FBML template displayed in the Feed story's body section. 
+     * @param string      $bodyData        JSON associative array of the values to 
      *                                            substituted into body_template
-     * @param       string      $bodyGeneral     Additional FBML for the body.  If stories are being aggregated, a
+     * @param string      $bodyGeneral     Additional FBML for the body.  If stories are being aggregated, a
      *                                            body_general will be chosen randomly(If they are not identical)
-     * @param       array       $images           Images to post to story entry
-     * @param       int         $pageActorId    If posting to a Facebook Page, the page ID
+     * @param array       $images           Images to post to story entry
+     * @param int         $pageActorId    If posting to a Facebook Page, the page ID
      * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link        http://facebook-developer.net/2008/01/21/how-to-successfully-publish-widespread-news-feed-stories/
      */
