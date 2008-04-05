@@ -34,9 +34,9 @@ class Services_Facebook_Groups extends Services_Facebook_Common
     /**
      * Get a list of groups
      *
-     * @access      public
-     * @param       mixed       An array of groups or uid's
-     * @return      object      A SimpleXmlElement with group information
+     * @param mixed $uid_or_gids An array of groups or uid's
+     * 
+     * @return object A SimpleXmlElement with group information
      */
     public function get($uid_or_gids = null)
     {
@@ -55,9 +55,9 @@ class Services_Facebook_Groups extends Services_Facebook_Common
     /**
      * Get members of a group
      *
-     * @access      public
-     * @param       int         The group id which you want members of
-     * @return      object      An instance of SimleXmlElement
+     * @param integer $gid The group id which you want members of
+     * 
+     * @return object An instance of SimleXmlElement
      */
     public function getMembers($gid)
     {
