@@ -36,10 +36,9 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Default user fields
      *
-     * @access      private
-     * @var         array       $userFields     List of allowed getInfo fields
+     * @var array $userFields List of allowed getInfo fields
      */
-    private $userFields = array(
+    public $userFields = array(
         'about_me', 'activities', 'affiliations', 'birthday', 'books',
         'current_location', 'education_history', 'first_name', 'has_added_app',
         'hometown_location', 'hs_info', 'interests', 'is_app_user', 
@@ -53,8 +52,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Has the current user added this application?
      *
-     * @access      public
-     * @return      boolean
+     * @return boolean
      */
     public function isAppAdded()
     {
@@ -71,11 +69,11 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * Set $status to true to clear the status or a string to change the 
      * actual status message.
      *
-     * @access      public
-     * @param       mixed       $status     Set to true to clear status
-     * @return      boolean     True on success, false on failure
-     * @link        http://wiki.developers.facebook.com/index.php/Users.setStatus
-     * @link        http://wiki.developers.facebook.com/index.php/Extended_permission
+     * @param mixed $status Set to true to clear status
+     * 
+     * @return boolean True on success, false on failure
+     * @link http://wiki.developers.facebook.com/index.php/Users.setStatus
+     * @link http://wiki.developers.facebook.com/index.php/Extended_permission
      */
     public function setStatus($status)
     {
@@ -96,10 +94,11 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Get user info
      *
-     * @param       mixed       $uids       A single uid or array of uids
-     * @param       array       $fields     List of fields to retrieve
-     * @return      object      SimpleXmlElement of result
-     * @link        http://wiki.developers.facebook.com/index.php/Users.getInfo
+     * @param mixed $uids   A single uid or array of uids
+     * @param array $fields List of fields to retrieve
+     * 
+     * @return object SimpleXmlElement of result
+     * @link http://wiki.developers.facebook.com/index.php/Users.getInfo
      */
     public function getInfo($uids, array $fields = array())
     {
@@ -140,15 +139,17 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Has given extended permission
      *
-     * @access      public
-     * @param       string      $perm           Either status_update or photo_upload
-     * @return      boolean     True if user has enabled extended permission
-     * @link        http://wiki.developers.facebook.com/index.php/Users.hasAppPermission
+     * @param string $perm Either status_update or photo_upload
+     * 
+     * @return boolean True if user has enabled extended permission
+     * @link http://wiki.developers.facebook.com/index.php/Users.hasAppPermission
      */
     public function hasAppPermission($perm)
     {
         if (!in_array($perm, array('status_update', 'photo_upload'))) {
-            throw new Services_Facebook_Exception('Invalid extended permission type supplied: ' . $perm);
+            throw new Services_Facebook_Exception(
+                'Invalid extended permission type supplied: ' . $perm
+            );
         }
 
         $result = $this->sendRequest('users.hasAppPermission', array(

@@ -34,8 +34,9 @@ class Services_Facebook_Share
     /**
      * Parse the share meta data from body
      *
-     * @param       string      $body       HTML code to parse info from
-     * @return      array       Meta information on videos, etc.
+     * @param string $body HTML code to parse info from
+     * 
+     * @return array Meta information on videos, etc.
      */
     public function parse($body)
     {
@@ -71,7 +72,7 @@ class Services_Facebook_Share
                 } 
             } elseif (preg_match('/name="(video|image)_(height|width)"/i', $meta, $m)) {
                 $type = $m[1];
-                $val = $m[2];
+                $val  = $m[2];
                 if (preg_match('/content="([0-9]+)"/i', $meta, $m)) {
                     $ret[$type][$val] = $m[1];
                 }
