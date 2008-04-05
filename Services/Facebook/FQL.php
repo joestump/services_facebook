@@ -15,7 +15,7 @@
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
- * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   CVS: $Id$
  * @link      http://pear.php.net/package/Services_Facebook
  */
@@ -27,10 +27,11 @@
  * interface that they call FQL. This class allows you to send a raw query to
  * the API and get a raw XML response back in the form of a SimpleXmlElement.
  *
- * @category    Services
- * @package     Services_Facebook
- * @author      Joe Stump <joe@joestump.net>
- * @link        http://wiki.developers.facebook.com
+ * @category Services
+ * @package  Services_Facebook
+ * @author   Joe Stump <joe@joestump.net>
+ * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook_FQL extends Services_Facebook_Common
 {
