@@ -54,14 +54,15 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @param string $title  FBML to post as story title
      * @param string $body   FBML to post as story body
      * @param array  $images Images to post to story entry
-     * 
+     *
+     * @return boolean
+     *
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishStoryToUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
-     * @return boolean
      */
-    public function publishStoryToUser($title, 
-                                       $body = '', 
-                                       array $images = array())
+    public function publishStoryToUser($title,
+                                        $body = '',
+                                        array $images = array())
     {
         $args = array(
             'title' => $title,
@@ -91,7 +92,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         } 
 
         $result = $this->sendRequest('feed.publishStoryToUser', $args);
-        $check = intval((string)$result->feed_publishStoryToUser_response_elt);
+        $check  = intval((string)$result->feed_publishStoryToUser_response_elt);
         return ($check == 1);
     }
 
@@ -122,6 +123,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @param string $body   FBML to post as story body
      * @param array  $images Images to post to story entry
      * 
+     * @return boolean
+     *
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishActionOfUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
@@ -140,7 +143,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
 
         if (count($images)) {
             // Facebook only allows four images so don't send more than that.
-            $cnt = count($images);
+            $cnt = count($images)
             if ($cnt > 4) {
                 $cnt = 4;
             }
@@ -157,7 +160,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         } 
 
         $result = $this->sendRequest('feed.publishActionOfUser', $args);
-        $check = intval((string)$result->feed_publishActionOfUser_response_elt);
+        $check  = intval((string)$result->feed_publishActionOfUser_response_elt);
         return ($check == 1);
     }
     
@@ -170,8 +173,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * An templatized story publishes News Feed stories to the friends of that user.
      * These stories or more likely to appear to the friends of that user depending
      * upon a variety of factors, such as the closeness of the relationship between
-     * the users, the interaction data facebook has about that particular story type, and
-     * the quality of the content in the story/on the linked page.
+     * the users, the interaction data facebook has about that particular story type,
+     * and the quality of the content in the story/on the linked page.
      * http://wiki.developers.facebook.com/index.php/FeedRankingFAQ
      *
      * The $images array should be a numerically indexed array of arrays, where
@@ -191,48 +194,29 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * ?>
      * </code>
      *
-     * @param string      $titleTemplate   FBML to post as the title, must contain {actor}
-     * @param string      $titleData       JSON associative array of the values to 
-     *                                            substituted into title_template
-     * @param string      $bodyTemplate    The FBML template displayed in the Feed story's body section. 
-     * @param string      $bodyData        JSON associative array of the values to 
-     *                                            substituted into body_template
-     * @param string      $bodyGeneral     Additional FBML for the body.  If stories are being aggregated, a
-     *                                            body_general will be chosen randomly(If they are not identical)
-     * @param array       $images           Images to post to story entry
-     * @param int         $pageActorId    If posting to a Facebook Page, the page ID
-     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
-     * @link        http://facebook-developer.net/2008/01/21/how-to-successfully-publish-widespread-news-feed-stories/
+     * @param string $titleTemplate FBML to post as the title, must contain {actor}
+     * @param array  $feedData      Array containing optional Feed template, data, and/or actor id
+     * @param array  $images        Images to post to story entry
+     *
+     * @return boolean
+     *
+     * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
+     * @link   http://wiki.developers.facebook.com/index.php/Feed.publishTemplatizedAction
      */
-    public function publishTemplatizedAction($titleTemplate,
-                                             $titleData = '',
-                                             $bodyTemplate = '',
-                                             $bodyData = '',
-                                             $bodyGeneral = '',
-                                             $pageActorId = '',
-                                             $images = array())
+    public function publishTemplatizedAction($titleTemplate, array $feedData = array(), array $images = array())
     {
         $args = array(
-            'title_template' => $titleTemplate,
+            'title_template' => $title,
             'session_key' => $this->sessionKey
         );
 
-        //Check for all the optional arguments and set them if present 
-        //(looks wierd but what is done in above functions)
-        if (strlen($titleData)) {
-            $args['title_data'] = $titleData;
-        }
-        if (strlen($bodyTemplate)) {
-            $args['body_template'] = $bodyTemplate;
-        }
-        if (strlen($bodyData)) {
-            $args['body_data'] = $bodyData;
-        }
-        if (strlen($bodyGeneral)) {
-            $args['body_general'] = $bodyGeneral;
-        }
-        if (strlen($pageActorId)) {
-            $args['page_actor_id'] = $pageActorId;
+        static $options = array('title_data', 'body_template', 'body_data',
+                                'body_general', 'page_actor_id');
+    
+        foreach ($options as $opt) {
+            if (isset($feedData[$opt]) && strlen($feedData[$opt])) {
+                $args[$opt] = $feedData[$opt];
+            }
         }
 
         if (count($images)) {
@@ -254,7 +238,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         }
 
         $result = $this->sendRequest('feed.publishTemplatizedAction', $args);
-        $check = intval((string)$result->feed_publishTemplatizedAction_response);
+        $check  = intval((string)$result->feed_publishTemplatizedAction_response);
         return ($check == 1);
     }
 }
