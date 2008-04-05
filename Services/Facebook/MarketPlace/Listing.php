@@ -29,12 +29,11 @@
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @link     http://wiki.developers.facebook.com
  */
-class Services_Facebook_MarketPlace_Listing 
+class Services_Facebook_MarketPlace_Listing
 {
     /**
      * Listing ID (listing_id)
      *
-     * @access      public
      * @var         integer     $id
      */
     public $id = 0;
@@ -42,7 +41,6 @@ class Services_Facebook_MarketPlace_Listing
     /**
      * Show listing in profile?
      *
-     * @access      public
      * @var         boolean     $showInProfile
      */
     public $showInProfile = true;
@@ -50,18 +48,19 @@ class Services_Facebook_MarketPlace_Listing
     /**
      * Listing parameters
      *
-     * @access      public
-     * @param       array       $data
-     * @link        http://wiki.developers.facebook.com/index.php/Marketplace_Listing_Attributes
+     * @param array $data
+     * 
+     * @link http://wiki.developers.facebook.com/index.php/Marketplace_Listing_Attributes
      */
     public $data = array();
 
     /**
      * Set listing data
      *
-     * @access      public
-     * @param       string      $var        (e.g. price, condition, etc.)
-     * @param       string      $val        Value of attribute
+     * @param string $var (e.g. price, condition, etc.)
+     * @param string $val Value of attribute
+     * 
+     * @return void
      */
     public function __set($var, $val)
     {
@@ -71,9 +70,9 @@ class Services_Facebook_MarketPlace_Listing
     /**
      * Get listing data
      *
-     * @access      public
-     * @param       string      $var        (e.g. price, condition, etc.)
-     * @return      mixed       Null if value is not set
+     * @param string $var (e.g. price, condition, etc.)
+     * 
+     * @return mixed Null if value is not set
      */
     public function __get($var)
     {
@@ -87,7 +86,6 @@ class Services_Facebook_MarketPlace_Listing
     /**
      * Validate listing before posting it
      *
-     * @access      public
      * @return      void
      * @throws      Services_Facebook_Exception
      */
@@ -99,7 +97,9 @@ class Services_Facebook_MarketPlace_Listing
 
         foreach ($required as $field) {
             if (!isset($this->data[$field]) || !strlen($this->data[$field])) {
-                throw new Services_Facebook_Exception('Marketplace listing requires ' . $field . ' be set');
+                throw new Services_Facebook_Exception(
+                    'Marketplace listing requires ' . $field . ' be set'
+                );
             }
         }
 
@@ -114,15 +114,17 @@ class Services_Facebook_MarketPlace_Listing
     /**
      * Validate condition value
      *
-     * @access      public
-     * @param       string      $val
-     * @return      void
-     * @throws      Services_Facebook_Exception
+     * @param string $val The condition to validate against
+     * 
+     * @return void
+     * @throws Services_Facebook_Exception
      */
     public function validateCondition($val)
     {
         if (!in_array($val, array('ANY', 'NEW', 'USED'))) {
-            throw new Services_Facebook_Exception('Condition must be ANY, NEW or USED');
+            throw new Services_Facebook_Exception(
+                'Condition must be ANY, NEW or USED'
+            );
         }
     }
 }

@@ -36,10 +36,10 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     /**
      * Create (or Update) a marketplace listing
      *
-     * @access      public
-     * @param       object      $l          Instance of listing object
-     * @return      object      Instance of listing object (with ID)
-     * @throws      Services_Facebook_Exception
+     * @param object $l Instance of listing object
+     * 
+     * @return object Instance of listing object (with ID)
+     * @throws Services_Facebook_Exception
      */
     public function createListing(Services_Facebook_MarketPlace_Listing $l)
     {
@@ -51,7 +51,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
             'listing_attrs' => json_encode($l->data)
         ));
 
-        $id = intval((string)$result);
+        $id    = intval((string)$result);
         $l->id = $id;
         return $l;
     }
@@ -59,7 +59,6 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     /**
      * Get marketplace categories
      *
-     * @access      public
      * @return      object
      * @throws      Services_Facebook_Exception
      */
@@ -73,9 +72,10 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     /**
      * Get marketplace subcategories
      *
-     * @access      public
-     * @return      object
-     * @throws      Services_Facebook_Exception
+     * @param string $category Category to fetch subcategories for
+     * 
+     * @return object
+     * @throws Services_Facebook_Exception
      */
     public function getSubCategories($category)
     {
@@ -86,17 +86,20 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     }
 
     /**
-    * Get marketplace listings, filter by listing ids and user ids
-    *
-    * @param        mixed       Array or string of List id(s)
-    * @param        mixed       Array or string of User id(s)
-    * @return       mixed       SimpleXML object of the listings 
-    * @link         http://wiki.developers.facebook.com/index.php/Marketplace.getListings
-    */
+     * Get marketplace listings, filter by listing ids and user ids
+     *
+     * @param mixed $listingIds Array or string of List id(s)
+     * @param mixed $uids       Array or string of User id(s)
+     * 
+     * @return mixed SimpleXML object of the listings 
+     * @link http://wiki.developers.facebook.com/index.php/Marketplace.getListings
+     */
     public function getListings($listingIds = null, $uids = null)
     {
         if ((!$listingIds) || (!$uids)) {
-            throw new Services_Facebook_Exception('Must specifiy at least 1 user or listing id');
+            throw new Services_Facebook_Exception(
+                'Must specifiy at least 1 user or listing id'
+            );
         }
         
         if (is_array($listingIds)) {
@@ -120,11 +123,12 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * Remove a listing by id and setting the status to either 'SUCCESS', 
      * 'DEFAULT', 'NOT_SUCCESS'
      *
-     * @param       string      Listing id
-     * @param       string      Status
-     * @return      bool        Success or Failure 
-     * @author      Jeff Hodsdon <jeffhodsdon@gmail.com>
-     * @link        http://wiki.developers.facebook.com/index.php/Marketplace.removeListing
+     * @param string $listingId Listing id
+     * @param string $status    Status
+     * 
+     * @return bool Success or Failure 
+     * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
+     * @link http://wiki.developers.facebook.com/index.php/Marketplace.removeListing
      */
     public function removeListing($listingId, $status = 'DEFAULT')
     {
@@ -139,17 +143,19 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     /**
      * Search marketplace listings
      *
-     * @access      public
-     * @param       string      $query
-     * @param       string      $category
-     * @param       string      $subCategory
-     * @return      object
-     * @throws      Services_Facebook_Exception
+     * @param string $query       The query term to search for
+     * @param string $category    Category to search within
+     * @param string $subCategory Subcategory to search within
+     * 
+     * @return object
+     * @throws Services_Facebook_Exception
      */
     public function search($query, $category = '', $subCategory = '')
     {
         if (strlen($subCategory) && !strlen($category)) {
-            throw new Services_Facebook_Exception('You must specify a category when searching by subCategory');
+            throw new Services_Facebook_Exception(
+                'You must specify a category when searching by subCategory'
+            );
         }
 
         $args = array('session_key' => $this->sessionKey);
