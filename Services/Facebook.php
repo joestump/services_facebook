@@ -76,6 +76,7 @@ class Services_Facebook
         'admin'         => 'Admin',
         'application'   => 'Application',
         'auth'          => 'Auth',
+        'data'          => 'Data',
         'events'        => 'Events',
         'fbml'          => 'FBML',
         'fql'           => 'FQL',
@@ -148,7 +149,7 @@ class Services_Facebook
      * that request came from Facebook. This function returns true if the 
      * request came from Facebook.
      * 
-     * Both the signature of the request andf the api_key is verified. If the
+     * Both the signature of the request and the api_key is verified. If the
      * api_key given doesn't match up to the current Services_Facebook::$apiKey
      * then it will return false. 
      *
