@@ -16,7 +16,7 @@
  * @author    Joe Stump <joe@joestump.net> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version   CVS: $Id$
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/Services_Facebook
  */
 
@@ -26,10 +26,10 @@
  * <code>
  * <?php
  * require_once 'Services/Facebook.php';
- * $api = Services_Facebook::factory('Auth');
+ * $api = Services_Facebook();
  * // An instance of SimpleXmlElement with the response loaded into it
  * // is returned.
- * $session = $api->getSession($_GET['auth_token']);
+ * $session = $api->auth->getSession($_GET['auth_token']);
  * echo 'uid: ' . (string)$session->uid . '<br />';
  * echo 'session_key: ' . (string)$session->session_key . '<br />';
  * ?>
@@ -39,6 +39,7 @@
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook_Auth extends Services_Facebook_Common

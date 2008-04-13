@@ -16,7 +16,7 @@
  * @author    Joe Stump <joe@joestump.net> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
- * @version   CVS: $Id$
+ * @version   Release: @package_version@
  * @link      http://pear.php.net/package/Services_Facebook
  */
 
@@ -30,6 +30,7 @@ require_once 'Services/Facebook/Exception.php';
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
  */
 class Services_Facebook

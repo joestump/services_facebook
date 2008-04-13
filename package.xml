@@ -46,48 +46,68 @@
     <contents>
         <dir name="/">
             <dir name="Services">
-                <file name="Facebook.php"
-                      role="php" />
+                <file name="Facebook.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
                 <dir name="Facebook">
-                    <file name="Admin.php"
-                          role="php" />
-                    <file name="Application.php"
-                          role="php" />
-                    <file name="Auth.php"
-                          role="php" />
-                    <file name="Common.php"
-                          role="php" />
-                    <file name="Exception.php"
-                          role="php" />
-                    <file name="Events.php"
-                          role="php" />
-                    <file name="FBML.php"
-                          role="php" />
-                    <file name="FQL.php"
-                          role="php" />
-                    <file name="Feed.php"
-                          role="php" />
-                    <file name="Friends.php"
-                          role="php" />
-                    <file name="Groups.php"
-                          role="php" />
-                    <file name="MarketPlace.php"
-                          role="php" />
-                    <file name="Notifications.php"
-                          role="php" />
-                    <file name="Pages.php"
-                          role="php" />
-                    <file name="Photos.php"
-                          role="php" />
-                    <file name="Profile.php"
-                          role="php" />
-                    <file name="Share.php"
-                          role="php" />
-                    <file name="Users.php"
-                          role="php" />
+                    <file name="Admin.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Application.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Auth.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Common.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Exception.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Events.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="FBML.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="FQL.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Feed.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Friends.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Groups.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="MarketPlace.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Notifications.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Pages.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Photos.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Profile.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Share.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
+                    <file name="Users.php" role="php">
+                        <tasks:replace from="@package_version@" to="version" type="package-info" />
+                    </file>
                     <dir name="MarketPlace">
-                        <file name="Listing.php"
-                              role="php" />
+                        <file name="Listing.php" role="php">
+                            <tasks:replace from="@package_version@" to="version" type="package-info" />
+                        </file>
                     </dir>
                 </dir>
             </dir>
