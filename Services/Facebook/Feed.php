@@ -144,7 +144,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
 
         if (count($images)) {
             // Facebook only allows four images so don't send more than that.
-            $cnt = count($images)
+            $cnt = count($images);
             if ($cnt > 4) {
                 $cnt = 4;
             }
