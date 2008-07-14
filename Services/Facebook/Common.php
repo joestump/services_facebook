@@ -92,7 +92,7 @@ abstract class Services_Facebook_Common
 
         if (curl_errno($ch)) {
             throw new Services_Facebook_Exception(
-                curl_error($ch), curl_errno($ch), $url, $this->api
+                curl_error($ch), curl_errno($ch), $method, $this->api
             );
         }
 
