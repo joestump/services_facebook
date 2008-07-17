@@ -127,7 +127,7 @@ class Services_Facebook
         $driver = strtolower($driver);
         if (!isset(self::$drivers[$driver])) {
             throw new Services_Facebook_Exception(
-                'The driver requested, ' . $var . ', is not supported'
+                'The driver requested, ' . $driver . ', is not supported'
             );
         } else {
             $driver = self::$drivers[$driver];
