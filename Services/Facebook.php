@@ -77,6 +77,7 @@ class Services_Facebook
         'admin'         => 'Admin',
         'application'   => 'Application',
         'auth'          => 'Auth',
+        'connect'       => 'Connect',
         'data'          => 'Data',
         'events'        => 'Events',
         'fbml'          => 'FBML',
