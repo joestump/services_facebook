@@ -178,6 +178,29 @@ abstract class Services_Facebook_Common
 
         return false;
     }
+
+    /**
+     * getApi 
+     * 
+     * @access public
+     * @return void
+     */
+    public function getApi()
+    {
+        return $this->api;
+    }
+
+    /**
+     * setApi 
+     * 
+     * @param  mixed  $api 
+     * @access public
+     * @return void
+     */
+    public function setApi($api)
+    {
+        $this->api = $api;
+    }
 }
 
 ?>
