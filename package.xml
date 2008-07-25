@@ -30,7 +30,7 @@
         <email>jeffhodsdon@gmail.com</email>
         <active>yes</active>
     </developer>
-    <date>2008-06-22</date>
+    <date>2008-07-25</date>
     <version>
         <release>0.1.2</release>
         <api>0.1.0</api>
@@ -41,6 +41,12 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes><![CDATA[
+        * Added new auth endpoints.
+        * Added new modifications to notification.send().
+        * Added new feed endpoints.
+        * Added get and set for api url to allow use of beta and connect api urls
+        * Additions to fix Bug #14351
+        * Thanks to Matt Fonda for the patches!
         * Applied patch for fix regarding PEAR Bug #14361.  Undefined variable in __get.
         * Fixed bug for undefined varible $url in Services_Facebook_Common::sendRequest(). Fixes #14349. 
 ]]></notes>
