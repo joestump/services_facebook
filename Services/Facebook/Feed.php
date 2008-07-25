@@ -244,6 +244,202 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         $check  = intval((string)$result->feed_publishTemplatizedAction_response);
         return ($check == 1);
     }
+
+    /**
+     * Builds a template bundle around the specified templates, registers them
+     * on Facebook, and responds with a template bundle ID that can be used
+     * to identify your template bundle to other Feed-related API calls.
+     * 
+     * A template bundle consists of:
+     *  - an array of one line story templates
+     *  - an array of short story templates
+     *  - a single full story template
+     * 
+     * Each array consists of one or more templates, and each template consists
+     * of one or more tokens (for the story actor, friends, items, and so
+     * forth), some static text, and some FBML. Tokens must be wrapped in curly
+     * braces and asterisks, as in {*actor*}. The {*actor*} token must appear
+     * at the beginning of all one line templates and at the beginning of short
+     * and full template story titles.
+     * 
+     * The order of templates in an array is very important. In general, the
+     * most flexible template should be first in the array. The most flexible
+     * template has the most tokens in it. The first template will always be used
+     * for feed stories. The last one-line template in the array must be the
+     * least flexible of all the template in the bundle. Thus, it should include
+     * only tokens that are a strict subset of all other tokens.
+     * 
+     * When considering these templates, the first template makes for the best
+     * story, but the last template has the highest aggregation potential. When
+     * you publish a story using feed.publishUserAction, you're posting the
+     * first version of the story to a user's Mini-Feed, and you're posting one
+     * of three different stories to that users friends' News Feeds.
+     * 
+     * Short story each consist of two parts, a template title and a template
+     * body. Short stories should be passed as an array of short stories,
+     * with each element being an array containing the keys 'template_title'
+     * and 'template_body'
+     * 
+     * Full story templates should be passed as an array containing keys
+     * 'template_title' and 'template_body'
+     * 
+     * @access  public
+     * @param   array   $oneLineStoryTpls   array of one-line story templates
+     * @param   array   $shortStoryTpls     optional array of short story templates
+     * @param   array   $fullStoryTemplate  optional full story template
+     * @return  string  template bundle ID of newly registered bundle
+     * @link    http://wiki.developers.facebook.com/index.php/Feed.registerTemplateBundle
+     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     */
+    public function registerTemplateBundle(array $oneLineStoryTpls,
+                                           array $shortStoryTpls = array(),
+                                           array $fullStoryTpl = array())
+    {
+        $args = array();
+        if (count($oneLineStoryTpls)) {
+            $args['one_line_story_templates'] = json_encode($oneLineStoryTpls);
+        } else {
+            throw new Services_Facebook_Exception(
+                    'Feed.registerTemplateBundle requires at least one one-line story template'
+                );
+        }
+        
+        if (count($shortStoryTpls)) {
+            $args['short_story_templates'] = json_encode($shortStoryTpls);
+        }
+
+        if (isset($fullStoryTpl['template_title'], $fullStoryTpl['template_body'])) {
+            $args['full_story_template'] = json_encode($fullStoryTpl);
+        }
+        
+        $result = $this->sendRequest('feed.registerTemplateBundle', $args);
+        return (string)$result;
+    }
+
+    /**
+     * Retrieves the full list of all template bundles registered by the
+     * requesting application. This does not include any template bundles
+     * previously deactivated via calls to feed.deactivateTemplateBundle
+     * 
+     * @access  public
+     * @return  SimpleXMLElement    SimpleXMLElement containing templates
+     * @link    http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundles
+     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     */
+    public function getRegisteredTemplateBundles()
+    {
+        return $this->sendRequest('feed.getRegisteredTemplateBundles');
+    }
+
+    /**
+     * Returns information about a specified template bundle previously
+     * registered by the requesting application. The result is returned
+     * as a SimpleXMLElement.
+     * 
+     * @access  public
+     * @param   int                 $id     ID of template bundle
+     * @return  SimpleXMLElement    SimpleXMLElement representing the bundle
+     * @link    http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundleByID
+     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     */
+    public function getRegisteredTemplateBundleByID($id)
+    {
+        $args = array('template_bundle_id' => $id);
+        return $this->sendRequest('feed.getRegisteredTemplateBundleByID', $args);
+    }
+
+    /**
+     * Deactivates a previously registered template bundle. Once a template
+     * bundle has been deactivated, it can no longer be used to publish stories
+     * via feed.publishUserAction. Stories published agaisnt the template
+     * bundle prior to its deactivation are still valid and will show up in the
+     * Mini-Feed and News Feed. The response is true if and only if the template
+     * bundle, identified by $id, is an active template bundle owned by the
+     * requesting application, and is false otherwise.
+     * 
+     * @access  public
+     * @param   int     $id     ID of template bundle to deactivate
+     * @return  boolean
+     * @link    http://wiki.developers.facebook.com/index.php/Feed.deactivateTemplateBundleByID
+     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     */
+    public function deactivateTemplateBundleByID($id)
+    {
+        $args = array('template_bundle_id' => $id);
+        $result = $this->sendRequest('feed.deactivateTemplateBundleByID', $args);
+        return (intval($result) == 1);
+    }
+
+    /**
+     * Publishes a story on behald of the user owning the session, using the
+     * specified template bundle. This method requires an active session key
+     * in order to be called. This method returns true if all succeeds, and
+     * false of the user never authorized the application to publish to his or
+     * her Mini-Feed.
+     * 
+     * This method should be passed a template bundle ID to use, and an array
+     * of template data whose keys are the tokens to replace, and values are
+     * the desired replacement. 'actor' and 'target' are special tokens and
+     * should not be included in this array. If one or more of the templates
+     * include tokens other than 'actor' and 'targets', then this array is
+     * required. This array can also include exactly one of the following keys:
+     * 'images', 'flash', 'mp3', or 'video'.
+     * 
+     * If 'images' is passed, it should map to an array of up to four images,
+     * and each array should contain a key 'src', and optionally 'href'
+     * 
+     * If 'flash' is passed, it should map to an array containing two required
+     * keys: 'swfsrc', which is the URL of the flash object to be rendered, and
+     * 'imgsrc', which is the URL of an image to be displayed until the users
+     * clicks the flash object. Optionally, the 'flash' array can contain 'width'
+     * and 'height'. The height must be an integer between 30 and 100 (inclusive),
+     * and the width must be either 100, 110, or 130.
+     * 
+     * If 'mp3' is passed, it must contain a single required field, 'src', and
+     * can optionally contain 'title', 'artist', and 'album'
+     * 
+     * If 'video' is passed, it must contain two required fields: 'video_src'
+     * and 'preview_img'. The video array can also contain the following
+     * optional fields: 'video_title', 'video_link', and 'video_type'.
+     * 
+     * If the template in questions contains a 'target' token, the userIDs
+     * of the target should be passed as an array, $targetIDs.
+     * 
+     * @access  public
+     * @param   int     $templateBundleID   ID of template bundle to use
+     * @param   array   $templateData       array of template data
+     * @param   array   $targetIDs          array of target IDs
+     * @param   string  $bodyGeneral        additional markup that extends the
+     *                                      body of a short story
+     * @return  boolean
+     * @link    http://wiki.developers.facebook.com/index.php/Feed.publishUserAction
+     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     */
+    public function publishUserAction($templateBundleID, 
+                                      array $templateData = array(),
+                                      array $targetIDs = array(),
+                                      $bodyGeneral = ''
+                                     )
+    {
+        $args = array('session_key'        => $this->sessionKey,
+                      'template_bundle_id' => $templateBundleID
+                     );
+        if (count($templateData)) {
+            $args['template_data'] = json_encode($templateData);
+        }
+        
+        if (count($targetIDs)) {
+            $args['target_ids'] = implode(',', $targetIDs);
+        }
+         
+        if (strlen($bodyGeneral)) {
+            $args['body_general'] = $bodyGeneral;
+        }
+        
+        $result = $this->sendRequest('feed.publishUserAction', $args);
+        return (intval($result->feed_publishUserAction_response_elt) == 1);
+    }
+
 }
 
 ?>

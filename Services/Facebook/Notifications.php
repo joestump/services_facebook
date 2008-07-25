@@ -35,6 +35,16 @@ require_once 'Validate.php';
 class Services_Facebook_Notifications extends Services_Facebook_Common
 {
     /**
+     *  
+     */
+    const TYPE_GENERAL = 'general';
+
+    /**
+     *  
+     */
+    const TYPE_ANNOUNCEMENT = 'announcement';
+
+    /**
      * Get notifications for current user
      *
      * Returns all of the outstanding notifications for the given user, which
@@ -58,27 +68,37 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      *
      * When you send a notification you can send it to an array of Facebook
      * uids. The notification should be valid FBML. Optionally, you can pass
-     * FBML for an email that will go out to each user. 
+     *
+     * Optionally, you can pass a type parameter. 'general' (default)
+     * notifications require an active user session, while 'announcement'
+     * does not.
      *
      * The result value can either be true or a string. The string is a valid
      * URI that you should redirect the user to for confirmation.
      *
      * @param array  $to           Facebook uids to send note to
      * @param string $notification FBML of notification
-     * @param string $email        FBML for email sent to user
+     * @param string $type         Type of notification
      * 
      * @return mixed Confirmation URI or true 
+     * @see self::TYPE_GENERAL, self::TYPE_ANNOUNCEMENT
      * @link http://wiki.developers.facebook.com/index.php/Notifications.send
      */
-    public function send(array $to, $notification, $email = '')
+    public function send(array $to, $notification, $type = self::TYPE_GENERAL)
     {
         $args = array(
             'to_ids' => implode(',', $to),
             'notification' => $notification
         ); 
 
-        if (strlen($email)) {
-            $args['email'] = $email;
+        if ($type == self::TYPE_GENERAL) {
+            $args['session_key'] = $this->sessionKey;
+            $args['type']        = $type;
+        } elseif ($type == self::TYPE_ANNOUCEMENT) {
+            $args['type'] = $type;
+        } else {
+            // Backwards compatiblity
+            $args['email'] = $type;
         }
 
         $result = $this->sendRequest('notifications.send', $args);

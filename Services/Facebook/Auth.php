@@ -38,6 +38,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeff@digg.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -67,6 +68,55 @@ class Services_Facebook_Auth extends Services_Facebook_Common
         return $this->sendRequest('auth.getSession', array(
             'auth_token' => $authToken
         ));
+    }
+
+    /**
+     * Promote session 
+     * 
+     * Creates a temporary session secret for the current (non-infinite)
+     * session of a Web application. This session secret will not be used in
+     * the signature for the server-side component of an application, it is
+     * only meant for use by the application which additionally want to use
+     * a client side component. (e.g. Javascript Client Library)
+     *
+     * @access public
+     * @return void
+     */
+    public function promoteSession()
+    {
+        return $this->sendRequest('auth.promoteSession');
+    }
+
+    /**
+     * Expire session 
+     * 
+     * Invalidates the current session being used, regardless of whether it
+     * is temporary or infinite. After successfully calling this function, no
+     * further API calls requiring a session will succeed using this session.
+     * If the invalidation is successful, this will return true.
+     *
+     * @access public
+     * @return void
+     */
+    public function expireSession()
+    {
+        return $this->sendRequest('auth.expireSession');
+    }
+
+    /**
+     * Revoke authorization 
+     * 
+     * If this method is called for the logged in user, then no further API
+     * calls can be made on that user's behalf until the user decides to
+     * authorize the application again.
+     *
+     * @access public
+     * @return void
+     */
+    public function revokeAuthorization()
+    {
+        $result = $this->sendRequest('auth.revokeAuthorization');
+        return (intval($result) == 1);
     }
 }
 
