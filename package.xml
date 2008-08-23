@@ -202,6 +202,11 @@
             <extension>
                 <name>curl</name>
             </extension>
+            <package>
+                <name>Validate</name>
+                <channel>pear.php.net</channel>
+                <min>0.8.1</min>
+            </package>
         </required>
     </dependencies>
     <phprelease />
