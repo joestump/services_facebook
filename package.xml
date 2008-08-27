@@ -193,14 +193,14 @@
             <pearinstaller>
                 <min>1.4.0b1</min>
             </pearinstaller>
-            <extension>
-                <name>curl</name>
-            </extension>
             <package>
                 <name>Validate</name>
                 <channel>pear.php.net</channel>
                 <min>0.8.1</min>
             </package>
+            <extension>
+                <name>curl</name>
+            </extension>
         </required>
     </dependencies>
     <phprelease />
