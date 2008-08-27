@@ -94,7 +94,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
         if ($type == self::TYPE_GENERAL) {
             $args['session_key'] = $this->sessionKey;
             $args['type']        = $type;
-        } elseif ($type == self::TYPE_ANNOUNCEMENT) {
+        } elseif ($type == self::TYPE_ANNOUCEMENT) {
             $args['type'] = $type;
         } else {
             // Backwards compatiblity
