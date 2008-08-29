@@ -51,6 +51,14 @@ class Services_Facebook_Users extends Services_Facebook_Common
     );
 
     /**
+     * photoSizes 
+     * 
+     * @var array $photoSizes Supported photo sizes
+     * @see self::getPhoto
+     */
+    protected $photoSizes = array('big', 'small', 'square');
+
+    /**
      * Has the current user added this application?
      *
      * @return boolean
@@ -159,6 +167,49 @@ class Services_Facebook_Users extends Services_Facebook_Common
         ));
 
         return (intval((string)$result) == 1);
+    }
+
+    /**
+     * Get photo 
+     *
+     * Get a photo given an user id. Allow different sizes.
+     * 
+     * @param int    $uid  Id of the user you want to get a photo of
+     * @param string $size Size of the photo {@link self::photoSizes}
+     *
+     * @return mixed Photo data
+     */
+    public function getPhoto($uid, $size = '')
+    {
+        $field = 'pic';
+        if ($size !== '') {
+            if (!in_array($size, $this->photoSizes)) {
+                throw new Services_Facebook_Exception('Photo size "' .
+                    $size . '" is not supported.');
+            }
+
+            $field .= '_' . $size;
+        }
+
+        $url = (string) $this->getInfo($uid, array($field))->user->$field;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, Services_Facebook::$timeout);
+        $photo = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            throw new Services_Facebook_Exception(
+                curl_error($ch),
+                curl_errno($ch)
+            );
+        }
+        curl_close($ch);
+
+        return $photo;
     }
 }
 
