@@ -55,6 +55,16 @@ class Services_Facebook
     static public $secret = '';
 
     /**
+     * Timeout  
+     * 
+     * The amount in seconds for the curl http request timeout
+     *
+     * @var string $timeout Time in seconds for a request to timeout
+     * @static
+     */
+    static public $timeout = 30;
+
+    /**
      * Currently logged in user
      * 
      * @var string $sessionKey

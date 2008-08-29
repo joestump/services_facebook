@@ -88,6 +88,7 @@ abstract class Services_Facebook_Common
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, Services_Facebook::$timeout);
         $result = curl_exec($ch);
 
         if (curl_errno($ch)) {
