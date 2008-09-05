@@ -35,14 +35,18 @@ require_once 'Validate.php';
 class Services_Facebook_Notifications extends Services_Facebook_Common
 {
     /**
-     *  
+     * App to user notification type
+     *
+     * @see self::send()
      */
-    const TYPE_GENERAL = 'general';
+    const TYPE_APP_TO_USER = 'app_to_user';
 
     /**
-     *  
+     * User to user notification type 
+     *
+     * @see self::send()
      */
-    const TYPE_ANNOUNCEMENT = 'announcement';
+    const TYPE_USER_TO_USER = 'user_to_user';
 
     /**
      * Get notifications for current user
@@ -84,17 +88,23 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @see self::TYPE_GENERAL, self::TYPE_ANNOUNCEMENT
      * @link http://wiki.developers.facebook.com/index.php/Notifications.send
      */
-    public function send(array $to, $notification, $type = self::TYPE_GENERAL)
+    public function send(array $to, $notification, $type = self::TYPE_USER_TO_USER)
     {
         $args = array(
             'to_ids' => implode(',', $to),
             'notification' => $notification
         ); 
 
-        if ($type == self::TYPE_GENERAL) {
+        if ($type == self::TYPE_USER_TO_USER) {
             $args['session_key'] = $this->sessionKey;
             $args['type']        = $type;
-        } elseif ($type == self::TYPE_ANNOUNCEMENT) {
+        } elseif ($type == self::TYPE_APP_TO_USER) {
+            $args['type'] = $type;
+        } elseif ($type == 'announcement' || $type == 'general') {
+            // Backwards compatiblity
+            if ($type == 'general') {
+                $args['session_key'] = $this->sessionKey;
+            }
             $args['type'] = $type;
         } else {
             // Backwards compatiblity

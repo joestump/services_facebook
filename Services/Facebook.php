@@ -79,6 +79,14 @@ class Services_Facebook
     static protected $instances = array();
 
     /**
+     * Instance of Services_Facebook
+     *
+     * @var Services_Facebook $instance
+     * @see Services_Facebook::singleton();
+     */
+    static protected $instance;
+
+    /**
      * Available drivers
      *
      * @var array $drivers
@@ -122,6 +130,23 @@ class Services_Facebook
         } 
 
         $instance = new $class();
+        return $instance;
+    }
+
+    /**
+     * Singleton 
+     * 
+     * @return Services_Facebook
+     */
+    static public function singleton()
+    {
+        if (self::$instance !== null) {
+            return self::$instance;
+        }
+
+        $instance = new Services_Facebook();
+        self::$instance = $instance;
+
         return $instance;
     }
 
