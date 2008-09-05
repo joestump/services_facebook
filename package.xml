@@ -18,16 +18,16 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
+    <lead>
+        <name>Jeff Hodsdon</name>
+        <user>jeffhodsdon</user>
+        <email>jeffhodsdon@gmail.com</email>
+        <active>yes</active>
+    </lead>
     <developer>
         <name>Travis Swicegood</name>
         <user>tswicegood</user>
         <email>development@domain51.com</email>
-        <active>yes</active>
-    </developer>
-    <developer>
-        <name>Jeff Hodsdon</name>
-        <user>jeffhodsdon</user>
-        <email>jeffhodsdon@gmail.com</email>
         <active>yes</active>
     </developer>
     <date>2008-09-05</date>
