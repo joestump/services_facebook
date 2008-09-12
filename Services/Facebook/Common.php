@@ -39,7 +39,7 @@ abstract class Services_Facebook_Common
      *
      * @var         string      $api
      */
-    protected $api = 'http://api.facebook.com/restserver.php';
+    protected $api = 'http://api.new.facebook.com/restserver.php';
 
     /**
      * Version of the API to use
