@@ -20,6 +20,8 @@
  * @link      http://pear.php.net/package/Services_Facebook
  */
 
+require_once 'Validate.php';
+
 /**
  * Common class for all Facebook interfaces
  *
@@ -37,7 +39,7 @@ abstract class Services_Facebook_Common
      *
      * @var         string      $api
      */
-    protected $api = 'http://api.facebook.com/restserver.php';
+    protected $api = 'http://api.new.facebook.com/restserver.php';
 
     /**
      * Version of the API to use
@@ -181,25 +183,29 @@ abstract class Services_Facebook_Common
     }
 
     /**
-     * getApi 
+     * getAPI
      * 
      * @access public
      * @return void
      */
-    public function getApi()
+    public function getAPI()
     {
         return $this->api;
     }
 
     /**
-     * setApi 
+     * setAPI
      * 
      * @param  mixed  $api 
      * @access public
      * @return void
      */
-    public function setApi($api)
+    public function setAPI($api)
     {
+        if (!Validate::uri($api)) {
+            throw new Services_Facebook('Invalid API: ' . $api);
+        }
+
         $this->api = $api;
     }
 }

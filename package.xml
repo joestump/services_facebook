@@ -30,9 +30,9 @@
         <email>development@domain51.com</email>
         <active>yes</active>
     </developer>
-    <date>2008-09-05</date>
+    <date>2008-09-12</date>
     <version>
-        <release>0.1.4</release>
+        <release>0.1.5</release>
         <api>0.1.0</api>
     </version>
     <stability>
@@ -41,9 +41,8 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes><![CDATA[
-        * 1. Added singleton method for Services_Facebook. 2. Updated Notifications.send() to use new names for types. (user_to_user and app_to_user) 
-        * Added CURL timeout for requests.
-        * Added method getPhoto for users.
+        * Changed names of setApi() and getApi() to setAPI() and getAPI().
+        * Switched the default $api to be the new REST API.
 ]]></notes>
     <contents>
         <dir name="/">
@@ -206,6 +205,164 @@
     </dependencies>
     <phprelease />
     <changelog>
+        <release>
+            <date>2008-09-05</date>
+            <version>
+                <release>0.1.4</release>
+                <api>0.1.0</api>
+            </version>
+            <stability>
+                <release>alpha</release>
+                <api>alpha</api>
+            </stability>
+            <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+            <notes><![CDATA[
+                * 1. Added singleton method for Services_Facebook. 2. Updated Notifications.send() to use new names for types. (user_to_user and app_to_user) 
+                * Added CURL timeout for requests.
+                * Added method getPhoto for users.
+        ]]></notes>
+            <contents>
+                <dir name="/">
+                    <dir name="Services">
+                        <file name="Facebook.php" role="php">
+                            <tasks:replace from="@package_version@" to="version" type="package-info" />
+                        </file>
+                        <dir name="Facebook">
+                            <file name="Admin.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Application.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Auth.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Common.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Connect.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Exception.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Events.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="FBML.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="FQL.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Feed.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Friends.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Groups.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="MarketPlace.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Notifications.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Pages.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Photos.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Profile.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Share.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <file name="Users.php" role="php">
+                                <tasks:replace from="@package_version@" to="version" type="package-info" />
+                            </file>
+                            <dir name="MarketPlace">
+                                <file name="Listing.php" role="php">
+                                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                                </file>
+                            </dir>
+                        </dir>
+                    </dir>
+                    <dir name="tests">
+                        <file name="010-users-isAppAdded.phpt"
+                              role="test" />
+                        <file name="012-users-getInfo.phpt"
+                              role="test" /> 
+                        <file name="014-users-getLoggedInUser.phpt"
+                              role="test" /> 
+                        <file name="020-profile-setFBML.phpt"
+                              role="test" /> 
+                        <file name="022-profile-getFBML.phpt"
+                              role="test" /> 
+                        <file name="030-friends-areFriends.phpt"
+                              role="test" /> 
+                        <file name="032-friends-get.phpt"
+                              role="test" /> 
+                        <file name="034-friends-getAppUsers.phpt"
+                              role="test" /> 
+                        <file name="040-fql-query.phpt"
+                              role="test" /> 
+                        <file name="050-feed-publishStoryToUser.phpt"
+                              role="test" /> 
+                        <file name="052-feed-publishActionOfUser.phpt"
+                              role="test" /> 
+                        <file name="060-photos-createAlbum.phpt"
+                              role="test" /> 
+                        <file name="062-photos-upload.phpt"
+                              role="test" /> 
+                        <file name="080-application-getPublicInfoById.phpt"
+                              role="test" />
+                        <file name="081-application-getPublicInfoByApiKey.phpt"
+                              role="test" />
+                        <file name="082-application-getPublicInfoByCanvasName.phpt"
+                              role="test" />
+                        <file name="090-admin-getNotificationsPerDay.phpt"
+                              role="test" />
+                        <file name="091-admin-getRequestsPerDay.phpt"
+                              role="test" />
+                        <file name="092-admin-getAppProperties.phpt"
+                              role="test" />
+                        <file name="110-pages-isAdmin.phpt"
+                              role="test" />
+                        <file name="111-pages-isFan.phpt"
+                              role="test" />
+                        <file name="112-pages-isAppAdded.phpt"
+                              role="test" />
+                        <file name="120-marketplace-createListing.phpt"
+                              role="test" />
+                        <file name="121-marketplace-getCategories.phpt"
+                              role="test" />
+                        <file name="122-marketplace-getSubCategory.phpt"
+                              role="test" />
+                        <file name="123-marketplace-getListings.phpt"
+                              role="test" />
+                        <file name="124-marketplace-removeListing.phpt"
+                              role="test" />
+                        <file name="125-marketplace-search.phpt"
+                              role="test" />
+                        <file name="130-connect-hashEmail.phpt"
+                              role="test" />
+                        <file name="131-connect-unregisterUsers.phpt"
+                              role="test" />
+                        <file name="132-connect-registerUsers.phpt"
+                              role="test" />
+                        <file name="test-image.jpg"
+                              role="test" /> 
+                        <file name="tests-config.php.example"
+                              role="test" /> 
+                    </dir>
+                </dir>
+            </contents>
+        </release>
         <release>
             <date>2008-09-05</date>
             <version>
