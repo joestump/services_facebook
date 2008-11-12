@@ -62,6 +62,25 @@ class Services_Facebook_Connect extends Services_Facebook_Common
     }
 
     /**
+     * Unconnected Friends Count 
+     * 
+     * Get the amount of users friends that have not connected their account
+     * to your site.  NOTE: These are users that you have sent connect.registerUser
+     * information.
+     *
+     * @access public
+     * @return int Amount of users
+     */
+    public function getUnconnectedFriendsCount()
+    {
+        $result = $this->sendRequest('connect.getUnconnectedFriendsCount', array(
+            'session_key' => $this->sessionKey
+        ));
+
+        return (int) $result;
+    }
+
+    /**
      * Register Users 
      * 
      * The accounts array may hold up to 1,000 accounts. Each account should hold

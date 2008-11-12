@@ -115,7 +115,8 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      */
     public function revokeAuthorization()
     {
-        $result = $this->sendRequest('auth.revokeAuthorization');
+        $result = $this->sendRequest('auth.revokeAuthorization', array(
+            'session_key' => $this->sessionKey));
         return (intval($result) == 1);
     }
 }

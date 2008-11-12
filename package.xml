@@ -30,9 +30,9 @@
         <email>development@domain51.com</email>
         <active>yes</active>
     </developer>
-    <date>2008-09-12</date>
+    <date>2008-11-12</date>
     <version>
-        <release>0.1.5</release>
+        <release>0.1.6</release>
         <api>0.1.0</api>
     </version>
     <stability>
@@ -41,8 +41,9 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes><![CDATA[
-        * Changed names of setApi() and getApi() to setAPI() and getAPI().
-        * Switched the default $api to be the new REST API.
+        * Added connect.getUnconnectedFriendsCount
+        * Updated users.hadAppPermission to support more permisions and a uid
+        * Corrected auth.revokeAuthorization, session key required
 ]]></notes>
     <contents>
         <dir name="/">

@@ -148,23 +148,39 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Has given extended permission
      *
-     * @param string $perm Either status_update or photo_upload
+     * @param string  $perm Permission to check
+     * @param integer $uid  User's ID, optional if session key present
      * 
      * @return boolean True if user has enabled extended permission
      * @link http://wiki.developers.facebook.com/index.php/Users.hasAppPermission
      */
-    public function hasAppPermission($perm)
+    public function hasAppPermission($perm, $uid = null)
     {
-        if (!in_array($perm, array('status_update', 'photo_upload'))) {
+        $valid = array(
+            'email', 'offline_access', 'status_update', 'photo_upload',
+            'create_listing', 'create_event', 'rsvp_event', 'sms'
+        );
+
+        if (!in_array($perm, $valid)) {
             throw new Services_Facebook_Exception(
                 'Invalid extended permission type supplied: ' . $perm
             );
         }
 
-        $result = $this->sendRequest('users.hasAppPermission', array(
-            'session_key' => $this->sessionKey,
+        $params = array(
             'ext_perm' => $perm
-        ));
+        );
+
+        if ($uid !== null) {
+            $params['uid'] = (int) $uid;
+        } elseif (!empty($this->sessionKey)) {
+            $params['session_key'] = $this->sessionKey;
+        } else {
+            throw new Services_Facebook_Exception('A UID or session key must be ' .
+                'given for hadAppPermission.');
+        }
+
+        $result = $this->sendRequest('users.hasAppPermission', $params);
 
         return (intval((string)$result) == 1);
     }
