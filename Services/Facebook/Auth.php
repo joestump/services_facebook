@@ -113,10 +113,18 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      * @access public
      * @return void
      */
-    public function revokeAuthorization()
+    public function revokeAuthorization($uid = null)
     {
-        $result = $this->sendRequest('auth.revokeAuthorization', array(
-            'session_key' => $this->sessionKey));
+        $args = array();
+        if (isset($this->sessionKey)) {
+            $args['session_key'] = $this->sessionKey;
+        }
+
+        if ($uid !== null) {
+            $args['uid'] = $uid;
+        }
+
+        $result = $this->sendRequest('auth.revokeAuthorization', $args);
         return (intval($result) == 1);
     }
 }
