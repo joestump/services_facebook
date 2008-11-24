@@ -30,9 +30,9 @@
         <email>development@domain51.com</email>
         <active>yes</active>
     </developer>
-    <date>2008-11-12</date>
+    <date>2008-11-24</date>
     <version>
-        <release>0.1.6</release>
+        <release>0.1.7</release>
         <api>0.1.0</api>
     </version>
     <stability>
@@ -41,9 +41,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes><![CDATA[
-        * Added connect.getUnconnectedFriendsCount
-        * Updated users.hadAppPermission to support more permisions and a uid
-        * Corrected auth.revokeAuthorization, session key required
+        * Updated auth.revokeAuthorization, session key not required and able to pass in uid
 ]]></notes>
     <contents>
         <dir name="/">
