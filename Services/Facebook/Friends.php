@@ -75,14 +75,21 @@ class Services_Facebook_Friends extends Services_Facebook_Common
     /**
      * Get the current user's friends
      *
+     * @param int $uid FB uid to get a friend list of
+     *
      * @return array A list of uid's of current user's friends
      * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
-    public function get()
+    public function get($uid = null)
     {
-        $result = $this->sendRequest('friends.get', array(
-            'session_key' => $this->sessionKey
-        ));
+        $args = array();
+        if ($uid !== null) {
+            $args['uid'] = (int) $uid;
+        } elseif (!empty($this->sessionKey)) {
+            $args['session_key'] = $this->sessionKey;
+        }
+
+        $result = $this->sendRequest('friends.get', $args);
 
         $ret = array();
         foreach ($result->uid as $uid) {
