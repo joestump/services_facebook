@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -26,6 +27,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -39,7 +41,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function get(array $params)
+    public function & get(array $params)
     {
         static $rsvp = array(
             'attending', 'unsure', 'declined', 'not_replied'
@@ -56,13 +58,13 @@ class Services_Facebook_Events extends Services_Facebook_Common
                 if (count($params['eids'])) {
                     $eids = array();
                     foreach ($params['eids'] as $eid) {
-                        $eids[] = intval($eid);
+                        $eids[] = (float) $eid;
                     }
 
                     $params['eids'] = implode(',', $eids);
                 }
             } else {
-                $args['eids'] = intval($params['eids']);
+                $args['eids'] = (float) $params['eids'];
             }
         }
 
@@ -79,9 +81,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
             $args['rsvp_status'] = $params['rsvp_status'];
         }
 
-        return $this->sendRequest('events.get', array(
-            'eid' => $eid
-        ));
+        return $this->callMethod('events.get', $args);
     }
 
     /**
@@ -91,16 +91,18 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function getEvents($eid)
+    public function & getEvents($eid)
     {
         if (is_array($eid)) {
             $eid = implode(',', $eid);
         } 
 
-        return $this->sendRequest('events.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'eid' => $eid
-        ));
+            'eid'         => $eid
+        );
+
+        return $this->callMethod('events.get', $args);
     }
 
     /**
@@ -110,12 +112,14 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return SimpleXmlElement
      */
-    public function getEventsByUser($uid)
+    public function & getEventsByUser($uid)
     {
-        return $this->sendRequest('events.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'uid' => $uid
-        ));
+            'uid'         => $uid
+        );
+
+        return $this->callMethod('events.get', $args);
     }
 
     /**
@@ -129,13 +133,15 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function getEventsByDate($start, $end)
+    public function & getEventsByDate($start, $end)
     {
-        return $this->sendRequest('events.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'start' => $start,
-            'end' => $end
-        ));
+            'start'       => $start,
+            'end'         => $end
+        );
+
+        return $this->callMethod('events.get', $args);
     }
 
     /**
@@ -146,12 +152,14 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * @return object SimpleXmlElement of users attending, etc.
      * @link http://wiki.developers.facebook.com/index.php/Events.getMembers
      */
-    public function getMembers($eid)
+    public function & getMembers($eid)
     {
-        return $this->sendRequest('events.getMembers', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'eid' => $eid
-        ));
+        );
+
+        return $this->callMethod('events.getMembers', $args);
     }
 }
 

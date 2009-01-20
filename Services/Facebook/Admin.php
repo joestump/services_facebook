@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -67,21 +68,18 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
      */
-    public function getAppProperties($properties = array())
+    public function & getAppProperties($properties = array())
     {
         if (!count($properties)) {
             $properties = $this->applicationFields;
         }
         
         //FB accepts the app properties as a json array
-        $jsonProperties = json_encode($properties);
+        $args = array(
+            'properties' => json_encode($properties)
+        );
         
-        $result = $this->sendRequest('admin.getAppProperties', array(
-                                     'properties' => $jsonProperties
-                        ));
-        
-        //The response from Facebook is in JSON
-        return json_decode((string)$result);
+        return $this->callMethod('admin.getAppProperties', $args, 'JSON');
     }
     
     /**
@@ -93,7 +91,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
      */
-    public function setAppProperties($properties = array())
+    public function & setAppProperties($properties = array())
     {
         $jsonArray = array();
         foreach ($properties as $property => $value) {
@@ -101,11 +99,12 @@ class Services_Facebook_Admin extends Services_Facebook_Common
                 $jsonArray[$property] = $value;
             }
         }
-        $jsonProperties = json_encode($jsonArray);
-        
-        return $this->sendRequest('admin.setAppProperties', array(
-                                   'properties' => $jsonProperties
-                    ));
+
+        $args = array(
+            'properties' => json_encode($jsonArray)
+        );
+
+        return $this->callMethod('admin.setAppProperties', $args, 'Bool');
     }
     
     
@@ -117,12 +116,13 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      */
-    public function getNotificationsPerDay()
+    public function & getNotificationsPerDay()
     {
-        return (int)$this->sendRequest('admin.getAllocation', array(
-                                  'session_key' => $this->sessionKey,
-                                  'integration_point_name' => 'notifications_per_day'
-                ));
+        $args = array(
+            'integration_point_name' => 'notifications_per_day'
+        );
+
+        return $this->callMethod('admin.getAllocation', $args, 'Int');
     }
     
     /**
@@ -133,12 +133,26 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      **/
-    public function getRequestsPerDay()
+    public function & getRequestsPerDay()
     {
-        return (int)$this->sendRequest('admin.getAllocation', array(
-                                  'session_key' => $this->sessionKey,
-                                  'integration_point_name' => 'requests_per_day'
-                ));
+        $args = array(
+            'integration_point_name' => 'requests_per_day'
+        );
+
+        return $this->callMethod('admin.getAllocation', $args, 'Int');
+    }
+
+    /**
+     * Get the demographic restrictions for the application. Restrictions
+     * by age are supported by Facebook.
+     *
+     * @return string Demographic restrictions
+     *
+     * @link http://wiki.developers.facebook.com/index.php/Admin.getRestrictionInfo
+     */
+    public function & getRestrictionInfo()
+    {
+        return $this->callMethod('admin.getRestrictionInfo', array(), 'String');
     }
     
 }

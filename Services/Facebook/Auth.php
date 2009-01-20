@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -50,10 +51,9 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return string
      */
-    public function createToken()
+    public function & createToken()
     {
-        $result = $this->sendRequest('auth.createToken');
-        return (string)$result;
+        return $this->callMethod('auth.createToken', array(), 'String');
     }
 
     /**
@@ -63,11 +63,13 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return object SimpleXmlElement of response 
      */
-    public function getSession($authToken)
+    public function & getSession($authToken)
     {
-        return $this->sendRequest('auth.getSession', array(
+        $args = array(
             'auth_token' => $authToken
-        ));
+        );
+
+        return $this->callMethod('auth.getSession', $args);
     }
 
     /**
@@ -79,12 +81,11 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      * only meant for use by the application which additionally want to use
      * a client side component. (e.g. Javascript Client Library)
      *
-     * @access public
      * @return void
      */
-    public function promoteSession()
+    public function & promoteSession()
     {
-        return $this->sendRequest('auth.promoteSession');
+        return $this->callMethod('auth.promoteSession', array(), 'String');
     }
 
     /**
@@ -95,12 +96,11 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      * further API calls requiring a session will succeed using this session.
      * If the invalidation is successful, this will return true.
      *
-     * @access public
      * @return void
      */
-    public function expireSession()
+    public function & expireSession()
     {
-        return $this->sendRequest('auth.expireSession');
+        return $this->callMethod('auth.expireSession', array(), 'Bool');
     }
 
     /**
@@ -110,10 +110,11 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      * calls can be made on that user's behalf until the user decides to
      * authorize the application again.
      *
-     * @access public
+     * @param float $uid User id
+     *
      * @return void
      */
-    public function revokeAuthorization($uid = null)
+    public function & revokeAuthorization($uid = null)
     {
         $args = array();
         if (isset($this->sessionKey)) {
@@ -124,8 +125,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
             $args['uid'] = $uid;
         }
 
-        $result = $this->sendRequest('auth.revokeAuthorization', $args);
-        return (intval($result) == 1);
+        return $this->callMethod('auth.revokeAuthorization', $args, 'Bool');
     }
 }
 

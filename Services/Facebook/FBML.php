@@ -14,11 +14,14 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/Services_Facebook
  */
+
+require_once 'Services/Facebook/Common.php';
 
 /**
  * Facebook FBML Interface
@@ -26,6 +29,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -43,15 +47,14 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * 
      * @return boolean
      */
-    public function refreshImgSrc($url)
+    public function & refreshImgSrc($url)
     {
-        $result = $this->sendRequest('fbml.refreshImgSrc', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'url' => $url
-        ));
+            'url'         => $url
+        );
 
-        $check = intval((string)$result);
-        return ($check == 1);
+        return $this->callMethod('fbml.refreshImgSrc', $args, 'Bool');
     }
 
     /**
@@ -61,15 +64,14 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * 
      * @return      boolean
      */
-    public function refreshRefUrl($url)
+    public function & refreshRefUrl($url)
     {
-        $result = $this->sendRequest('fbml.refreshRefUrl', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'url' => $url
-        ));
+            'url'         => $url
+        );
 
-        $check = intval((string)$result);
-        return ($check == 1);
+        return $this->callMethod('fbml.refreshRefUrl', $args, 'Bool');
     }
 
     /**
@@ -81,16 +83,15 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * @return boolean
      * @link http://wiki.developers.facebook.com/index.php/Fbml.setRefHandle
      */
-    public function setRefHandle($handle, $fbml)
+    public function & setRefHandle($handle, $fbml)
     {
-        $result = $this->sendRequest('fbml.setRefHandle', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'handle' => $handle,
-            'fbml' => $fbml
-        ));
+            'handle'      => $handle,
+            'fbml'        => $fbml
+        );
 
-        $check = intval((string)$result);
-        return ($check == 1);
+        return $this->callMethod('fbml.setRefHandle', $args, 'Bool');
     }
 }
 

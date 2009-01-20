@@ -21,6 +21,7 @@
  */
 
 require_once 'Validate.php';
+require_once 'Services/Facebook/Format.php';
 
 /**
  * Common class for all Facebook interfaces
@@ -39,7 +40,7 @@ abstract class Services_Facebook_Common
      *
      * @var         string      $api
      */
-    protected $api = 'http://api.new.facebook.com/restserver.php';
+    protected $api = 'http://api.facebook.com/restserver.php';
 
     /**
      * Version of the API to use
@@ -56,8 +57,8 @@ abstract class Services_Facebook_Common
     public $sessionKey = '';
 
     /**
-     * Send a request to the API
-     *
+     * Call method 
+     * 
      * Used by all of the interface classes to send a request to the Facebook
      * API. It builds the standard argument list, munges that with the 
      * arguments passed to it, signs the request and sends it along to the
@@ -68,22 +69,46 @@ abstract class Services_Facebook_Common
      * SimpleXml and then checked for Facebook errors. 
      * 
      * Any formal error encountered is thrown as an exception.
+     * 
+     * @param mixed $method Method to call
+     * @param array $args   Arguments to send
+     * @param mixed $format Which format to use
      *
-     * @param string $method The API method to call
-     * @param array  $args   API arguments passed as GET args
+     * @return mixed Result
+     */
+    public function & callMethod($method, array $args = array(), $format = 'Generic')
+    {
+        $this->updateArgs($args, $method);
+
+        $format = Services_Facebook_Format::factory($format);
+        if (is_array(Services_Facebook::$batches)) {
+            $result = null;
+            Services_Facebook::$batches[] = array(
+                'method'   => $method,
+                'args'     => $args,
+                'format'   => $format,
+                'result'   => &$result
+            );
+
+            return $result;
+        }
+
+        $response = $this->sendRequest($args);
+        $result   = $this->parseResponse($response, $format);
+
+        return $result;
+    }
+
+    /**
+     * Send a request to the API
+     *
+     * @param array $args API arguments passed as GET args
      *
      * @return object Response as an instance of SimleXmlElement
      * @throws Services_Facebook_Exception
      */
-    protected function sendRequest($method, array $args = array()) 
+    protected function sendRequest(array $args)
     {
-        $args['api_key'] = Services_Facebook::$apiKey;
-        $args['v']       = $this->version;
-        $args['format']  = 'XML';
-        $args['method']  = $method;
-        $args['call_id'] = microtime(true);
-        $args            = $this->signRequest($args);
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -91,17 +116,34 @@ abstract class Services_Facebook_Common
         curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, Services_Facebook::$timeout);
-        $result = curl_exec($ch);
+        $response = curl_exec($ch);
 
         if (curl_errno($ch)) {
             throw new Services_Facebook_Exception(
-                curl_error($ch), curl_errno($ch), $method, $this->api
+                curl_error($ch), curl_errno($ch), $args['method'], $this->api
             );
         }
 
         curl_close($ch);
 
-        $xml = @simplexml_load_string($result);
+        return $response;
+    }
+
+    /**
+     * parseResponse 
+     * 
+     * Parses the raw response from Facebook, then formats it if
+     * it needs to be.
+     *
+     * @param mixed $response Response xml
+     * @param mixed $format   Which format the response should be
+     *
+     * @return string Parsed response
+     */
+    protected function parseResponse($response,
+        Services_Facebook_Format_Interface $format = null)
+    {
+        $xml = simplexml_load_string($response);
         if (!$xml instanceof SimpleXmlElement) {
             throw new Services_Facebook_Exception(
                 'Could not parse XML response', 0, $this->api
@@ -112,9 +154,34 @@ abstract class Services_Facebook_Common
         if (is_array($error) && count($error)) {
             throw new Services_Facebook_Exception($error['message'],
                                                   $error['code'], $this->api);
-        } 
+        }
+
+        if ($format !== null) {
+            $xml = $format->format($xml);
+        }
 
         return $xml;
+    }
+
+    /**
+     * Update arguments
+     * 
+     * Updates the arguments with api_key, version, etc. Then
+     * signs it.
+     *
+     * @param array &$args  Arguments being sent
+     * @param mixed $method Method being called
+     *
+     * @return void
+     */
+    protected function updateArgs(array &$args, $method)
+    {
+        $args['api_key'] = Services_Facebook::$apiKey;
+        $args['v']       = $this->version;
+        $args['format']  = 'XML';
+        $args['method']  = $method;
+        $args['call_id'] = microtime(true);
+        $args            = $this->signRequest($args);
     }
 
     /**
@@ -183,10 +250,9 @@ abstract class Services_Facebook_Common
     }
 
     /**
-     * getAPI
-     * 
-     * @access public
-     * @return void
+     * Get API
+     *
+     * @return string API url
      */
     public function getAPI()
     {
@@ -194,10 +260,10 @@ abstract class Services_Facebook_Common
     }
 
     /**
-     * setAPI
+     * Set API
      * 
-     * @param  mixed  $api 
-     * @access public
+     * @param mixed $api Api url to set
+     *
      * @return void
      */
     public function setAPI($api)

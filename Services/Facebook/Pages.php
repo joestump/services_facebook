@@ -43,13 +43,14 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isAdmin
      **/
-    public function isAdmin($pageId = null)
+    public function & isAdmin($pageId = null)
     {
-        $result = $this->sendRequest('pages.isAdmin', array(
-                                     'session_key' => $this->sessionKey,
-                                     'page_id' => $pageId
-                  ));
-        return (intval((string)$result) == 1);
+        $args = array(
+            'session_key' => $this->sessionKey,
+            'page_id'     => $pageId
+        );
+
+        return $this->callMethod('pages.isAdmin', $args, 'Bool');
     }
     
     /**
@@ -61,13 +62,14 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
      **/
-    public function isAppAdded($pageId = null)
+    public function & isAppAdded($pageId = null)
     {
-        $result = $this->sendRequest('pages.isAppAdded', array(
-                                     'session_key' => $this->sessionKey,
-                                     'page_id' => $pageId
-                  ));
-        return (intval((string)$result) == 1);
+        $args = array(
+            'session_key' => $this->sessionKey,
+            'page_id'     => $pageId
+        );
+
+        return $this->callMethod('pages.isAppAdded', $args, 'Bool');
     }
     
     /**
@@ -82,14 +84,15 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isFan
      **/
-    public function isFan($pageId = null, $uid = null)
+    public function & isFan($pageId = null, $uid = null)
     {
-        $result = $this->sendRequest('pages.isFan', array(
-                                     'session_key' => $this->sessionKey,
-                                     'page_id'  => $pageId,
-                                     'uid'      => $uid
-                  ));
-        return (intval((string)$result) == 1);
+        $args = array(
+            'session_key' => $this->sessionKey,
+            'page_id'     => $pageId,
+            'uid'         => $uid
+        );
+
+        return $this->callMethod('pages.isFan', $args, 'Bool');
     }
 }
 

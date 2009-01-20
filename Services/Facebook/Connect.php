@@ -71,13 +71,13 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      * @access public
      * @return int Amount of users
      */
-    public function getUnconnectedFriendsCount()
+    public function & getUnconnectedFriendsCount()
     {
-        $result = $this->sendRequest('connect.getUnconnectedFriendsCount', array(
+        $args = array(
             'session_key' => $this->sessionKey
-        ));
+        );
 
-        return (int) $result;
+        return $this->callMethod('connect.getUnconnectedFriendsCount', $args, 'Int');
     }
 
     /**
@@ -115,7 +115,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      *         another field was passed in that is not supported. 
      * @return object SimpleXML object from sendRequest()
      */
-    public function registerUsers(array $accounts)
+    public function & registerUsers(array $accounts)
     {
         $fields = array(
             'email_hash',
@@ -139,9 +139,11 @@ class Services_Facebook_Connect extends Services_Facebook_Common
             }
         }
 
-        return $this->sendRequest('connect.registerUsers', array(
+        $args = array(
             'accounts' => json_encode($accounts)
-        ));
+        );
+
+        return $this->callMethod('connect.registerUsers', $args, 'ArrayString');
     }
 
     /**
@@ -166,11 +168,13 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      * @throws Services_Facebook_Exception if json_decode() is not available
      * @return object SimpleXML object from sendRequest()
      */
-    public function unregisterUsers(array $emailHashes)
+    public function & unregisterUsers(array $emailHashes)
     {
-        return $this->sendRequest('connect.unregisterUsers', array(
+        $args = array(
             'email_hashes' => json_encode($emailHashes)
-        ));
+        );
+
+        return $this->callMethod('connect.unregisterUsers', $args, 'Bool');
     }
 
     /**

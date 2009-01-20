@@ -14,13 +14,12 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
  * @link      http://pear.php.net/package/Services_Facebook
  */
-
-require_once 'Validate.php';
 
 /**
  * Facebook Notifications Interface
@@ -28,6 +27,7 @@ require_once 'Validate.php';
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -58,13 +58,13 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @return      object      Instance of SimpleXmlElement 
      * @link        http://wiki.developers.facebook.com/index.php/Notifications.get
      */
-    public function get()
+    public function & get()
     {
         $args = array(
             'session_key' => $this->sessionKey
         );
 
-        return $this->sendRequest('notifications.get', $args);
+        return $this->callMethod('notifications.get', $args);
     }
 
     /**
@@ -88,7 +88,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @see self::TYPE_GENERAL, self::TYPE_ANNOUNCEMENT
      * @link http://wiki.developers.facebook.com/index.php/Notifications.send
      */
-    public function send(array $to, $notification, $type = self::TYPE_USER_TO_USER)
+    public function & send(array $to, $notification, $type = self::TYPE_USER_TO_USER)
     {
         $args = array(
             'to_ids' => implode(',', $to),
@@ -111,13 +111,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
             $args['email'] = $type;
         }
 
-        $result = $this->sendRequest('notifications.send', $args);
-        $check  = (string)$result;
-        if (strlen($check) && Validate::uri($check)) {
-            return $check;
-        }
-
-        return true;
+        return $this->callMethod('notifications.send', $args, 'String');
     }
 
     /**
@@ -131,7 +125,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Notifications.sendEmail
      */     
-    public function sendEmail(array $recipients, $subject, $text = null)
+    public function & sendEmail(array $recipients, $subject, $text = null)
     {
         $args = array(
             'recipients' => implode(',', $recipients),
@@ -143,9 +137,8 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
         } else {
             $args['text'] = $text;
         }
-        
-        $result = $this->sendRequest('notifications.sendEmail', $args);
-        return explode(',', (string)$result);
+
+        return $this->callMethod('notifications.sendEmail', $args, 'CommaInt');
     }
 }
 

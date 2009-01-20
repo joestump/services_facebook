@@ -50,45 +50,49 @@ class Services_Facebook_Application extends Services_Facebook_Common
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function getPublicInfoById($id)
+    public function & getPublicInfoById($id)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
-                           'application_id' => $id
-                ));
-        
+        $args = array(
+            'application_id' => $id
+        );
+            
+        return $this->callMethod('application.getPublicInfo', $args);
     }
     
     /**
      * Get the public information of an application by it's API key
      *
-     * @param string $api_key Application API key to get the info of
+     * @param string $apiKey Application API key to get the info of
      * 
      * @return object SimpleXMLObject of the public info
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function getPublicInfoByAPIKey($api_key)
+    public function & getPublicInfoByAPIKey($apiKey)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
-                           'application_api_key' => $api_key
-                ));
+        $args = array(
+            'application_api_key' => $apiKey
+        );
+
+        return $this->callMethod('application.getPublicInfo', $args);
     }
     
     /**
      * Get the public information of an application by it's canvas name
      *
-     * @param string $canvas_name Application's canvas name
+     * @param string $canvasName Application's canvas name
      * 
      * @return object SimpleXMLObject of the public info
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function getPublicInfoByCanvasName($canvas_name)
+    public function & getPublicInfoByCanvasName($canvasName)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
-                           'application_canvas_name' => $canvas_name
-                ));
-        
+        $args = array(
+            'application_canvas_name' => $canvasName
+        );
+
+        return $this->callMethod('application.getPublicInfo', $args);
     }
     
 }

@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -26,6 +27,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -42,9 +44,9 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @see         Services_Facebook_Photos::upload()
      */
     protected $imageTypes = array(
-        IMAGETYPE_GIF => 'image/gif',
+        IMAGETYPE_GIF  => 'image/gif',
         IMAGETYPE_JPEG => 'image/jpeg',
-        IMAGETYPE_PNG => 'image/png'
+        IMAGETYPE_PNG  => 'image/png'
     );
 
     /**
@@ -62,7 +64,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return boolean True on success, false on failure
      * @link http://wiki.developers.facebook.com/index.php/Photos.addTag
      */
-    public function addTag($pid, $x, $y, $tag)
+    public function & addTag($pid, $x, $y, $tag)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -77,8 +79,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
             $args['tag_text'] = $tag;
         }
 
-        $res = $this->sendRequest('photos.addTag', $args);
-        return (intval((string)$result) == 1);
+        return $this->callMethod('photos.addTag', $args, 'Bool');
     }
 
     /**
@@ -89,14 +90,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * 
      * @return boolean True if success, false on failure
      */
-    public function addTags($pid, array $tags)
+    public function & addTags($pid, array $tags)
     {
-        $res = $this->sendRequest('photos.addTag', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'tags' => json_encode($tags)
-        ));
+            'tags'        => json_encode($tags)
+        );
 
-        return (intval((string)$result) == 1);
+        return $this->callMethod('photos.addTag', $args, 'Bool');
     }
 
     /**
@@ -109,7 +110,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object An instance of SimpleXMLElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.createAlbums
      */
-    public function createAlbum($name, $location = '', $description = '')
+    public function & createAlbum($name, $location = '', $description = '')
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -124,7 +125,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
             $args['description'] = $description;
         }
 
-        return $this->sendRequest('photos.createAlbum', $args);
+        return $this->callMethod('photos.createAlbum', $args);
     }
 
     /**
@@ -135,16 +136,18 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function getPhotos($pids)
+    public function & getPhotos($pids)
     {
         if (is_array($pids)) {
             $pids = implode(',', $pids);
         }
 
-        return $this->sendRequest('photos.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'pids' => $pids
-        ));
+        );
+
+        return $this->callMethod('photos.get', $args);
     }
 
     /**
@@ -155,12 +158,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function getPhotosByAlbum($aid)
+    public function & getPhotosByAlbum($aid)
     {
-        return $this->sendRequest('photos.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'aid' => $aid
-        ));
+        );
+
+        return $this->callMethod('photos.get', $args);
     }
 
     /**
@@ -171,12 +176,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function getPhotosByUser($uid)
+    public function & getPhotosByUser($uid)
     {
-        return $this->sendRequest('photos.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'subj_id' => $uid
-        ));
+        );
+
+        return $this->callMethod('photos.get', $args);
     }
 
     /**
@@ -187,12 +194,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getAlbums
      */
-    public function getAlbumsByPhotos(array $pids)
+    public function & getAlbumsByPhotos(array $pids)
     {
-        return $this->sendRequest('photos.getAlbums', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'pids' => implode(',', $pids)
-        ));
+        );
+
+        return $this->callMethod('photos.getAlbums', $args);
     }
 
     /**
@@ -203,12 +212,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getAlbums
      */
-    public function getAlbumsByUser($uid)
+    public function & getAlbumsByUser($uid)
     {
-        return $this->sendRequest('photos.getAlbums', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'uid' => $uid
-        ));
+        );
+
+        return $this->callMethod('photos.getAlbums', $args);
     }
 
     /**
@@ -219,12 +230,14 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getTags
      */
-    public function getTags(array $pids)
+    public function & getTags(array $pids)
     {
-        return $this->sendRequest('photos.getTags', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'pids' => implode(',', $pids)
-        ));
+        );
+
+        return $this->callMethod('photos.getTags', $args);
     }
 
     /**

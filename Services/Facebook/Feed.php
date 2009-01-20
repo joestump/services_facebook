@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -26,6 +27,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -61,7 +63,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishStoryToUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
-    public function publishStoryToUser($title,
+    public function & publishStoryToUser($title,
                                        $body = '',
                                        array $images = array())
     {
@@ -92,9 +94,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         } 
 
-        $result = $this->sendRequest('feed.publishStoryToUser', $args);
-        $check  = intval((string)$result->feed_publishStoryToUser_response_elt);
-        return ($check == 1);
+        return $this->callMethod('feed.publishStoryToUser', $args, 'Bool');
     }
 
     /**
@@ -129,9 +129,9 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishActionOfUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
-    public function publishActionOfUser($title, 
-                                        $body = '', 
-                                        array $images = array())
+    public function & publishActionOfUser($title, 
+                                          $body = '', 
+                                          array $images = array())
     {
         $args = array(
             'title' => $title,
@@ -160,9 +160,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         } 
 
-        $result = $this->sendRequest('feed.publishActionOfUser', $args);
-        $check  = intval((string)$result->feed_publishActionOfUser_response_elt);
-        return ($check == 1);
+        return $this->callMethod('feed.publishActionOfUser', $args, 'Bool');
     }
     
     /**
@@ -204,9 +202,9 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link   http://wiki.developers.facebook.com/index.php/Feed.publishTemplatizedAction
      */
-    public function publishTemplatizedAction($titleTemplate,
-                                             array $feedData = array(),
-                                             array $images = array())
+    public function & publishTemplatizedAction($titleTemplate,
+                                               array $feedData = array(),
+                                               array $images = array())
     {
         $args = array(
             'title_template' => $titleTemplate,
@@ -240,9 +238,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         }
 
-        $result = $this->sendRequest('feed.publishTemplatizedAction', $args);
-        $check  = intval((string)$result->feed_publishTemplatizedAction_response);
-        return ($check == 1);
+        return $this->callMethod('feed.publishTemplatizedAction', $args, 'Bool');
     }
 
     /**
@@ -283,17 +279,17 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * Full story templates should be passed as an array containing keys
      * 'template_title' and 'template_body'
      * 
-     * @access  public
-     * @param   array   $oneLineStoryTpls   array of one-line story templates
-     * @param   array   $shortStoryTpls     optional array of short story templates
-     * @param   array   $fullStoryTemplate  optional full story template
-     * @return  string  template bundle ID of newly registered bundle
-     * @link    http://wiki.developers.facebook.com/index.php/Feed.registerTemplateBundle
-     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     * @param array $oneLineStoryTpls array of one-line story templates
+     * @param array $shortStoryTpls   optional array of short story templates
+     * @param array $fullStoryTpl     optional full story template
+     *
+     * @return float Template bundle ID of newly registered bundle
+     * @link   http://wiki.developers.facebook.com/index.php/Feed.registerTemplateBundle
+     * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function registerTemplateBundle(array $oneLineStoryTpls,
-                                           array $shortStoryTpls = array(),
-                                           array $fullStoryTpl = array())
+    public function & registerTemplateBundle(array $oneLineStoryTpls,
+                                             array $shortStoryTpls = array(),
+                                             array $fullStoryTpl = array())
     {
         $args = array();
         if (count($oneLineStoryTpls)) {
@@ -311,9 +307,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         if (isset($fullStoryTpl['template_title'], $fullStoryTpl['template_body'])) {
             $args['full_story_template'] = json_encode($fullStoryTpl);
         }
-        
-        $result = $this->sendRequest('feed.registerTemplateBundle', $args);
-        return (string)$result;
+
+        return $this->callMethod('feed.registerTemplateBundle', $args, 'Float');
     }
 
     /**
@@ -326,9 +321,9 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link    http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundles
      * @author  Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function getRegisteredTemplateBundles()
+    public function & getRegisteredTemplateBundles()
     {
-        return $this->sendRequest('feed.getRegisteredTemplateBundles');
+        return $this->callMethod('feed.getRegisteredTemplateBundles');
     }
 
     /**
@@ -336,16 +331,16 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * registered by the requesting application. The result is returned
      * as a SimpleXMLElement.
      * 
-     * @access  public
-     * @param   int                 $id     ID of template bundle
-     * @return  SimpleXMLElement    SimpleXMLElement representing the bundle
-     * @link    http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundleByID
-     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     * @param float $id ID of template bundle
+     *
+     * @return SimpleXMLElement SimpleXMLElement representing the bundle
+     * @link   http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundleByID
+     * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function getRegisteredTemplateBundleByID($id)
+    public function & getRegisteredTemplateBundleByID($id)
     {
         $args = array('template_bundle_id' => $id);
-        return $this->sendRequest('feed.getRegisteredTemplateBundleByID', $args);
+        return $this->callMethod('feed.getRegisteredTemplateBundleByID', $args);
     }
 
     /**
@@ -357,17 +352,19 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * bundle, identified by $id, is an active template bundle owned by the
      * requesting application, and is false otherwise.
      * 
-     * @access  public
-     * @param   int     $id     ID of template bundle to deactivate
-     * @return  boolean
-     * @link    http://wiki.developers.facebook.com/index.php/Feed.deactivateTemplateBundleByID
-     * @author  Matthew Fonda <matthewfonda@gmail.com>
+     * @param float $id ID of template bundle to deactivate
+     *
+     * @return boolean
+     * @link   http://wiki.developers.facebook.com/index.php/Feed.deactivateTemplateBundleByID
+     * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function deactivateTemplateBundleByID($id)
+    public function & deactivateTemplateBundleByID($id)
     {
-        $args = array('template_bundle_id' => $id);
-        $result = $this->sendRequest('feed.deactivateTemplateBundleByID', $args);
-        return (intval($result) == 1);
+        $args = array(
+            'template_bundle_id' => $id
+        );
+
+        return $this->callMethod('feed.deactivateTemplateBundleByID', $args, 'Bool');
     }
 
     /**
@@ -405,21 +402,20 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * If the template in questions contains a 'target' token, the userIDs
      * of the target should be passed as an array, $targetIDs.
      * 
-     * @access  public
-     * @param   int     $templateBundleID   ID of template bundle to use
-     * @param   array   $templateData       array of template data
-     * @param   array   $targetIDs          array of target IDs
-     * @param   string  $bodyGeneral        additional markup that extends the
-     *                                      body of a short story
+     * @param float  $templateBundleID ID of template bundle to use
+     * @param array  $templateData     array of template data
+     * @param array  $targetIDs        array of target IDs
+     * @param string $bodyGeneral      additional markup that extends the
+     *                                 body of a short story
+     *
      * @return  boolean
      * @link    http://wiki.developers.facebook.com/index.php/Feed.publishUserAction
      * @author  Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function publishUserAction($templateBundleID, 
-                                      array $templateData = array(),
-                                      array $targetIDs = array(),
-                                      $bodyGeneral = ''
-                                     )
+    public function & publishUserAction($templateBundleID, 
+                                        array $templateData = array(),
+                                        array $targetIDs = array(),
+                                        $bodyGeneral = '')
     {
         $args = array('session_key'        => $this->sessionKey,
                       'template_bundle_id' => $templateBundleID
@@ -435,9 +431,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
         if (strlen($bodyGeneral)) {
             $args['body_general'] = $bodyGeneral;
         }
-        
-        $result = $this->sendRequest('feed.publishUserAction', $args);
-        return (intval($result->feed_publishUserAction_response_elt) == 1);
+
+        return $this->callMethod('feed.publishUserAction', $args, 'Bool');
     }
 
 }

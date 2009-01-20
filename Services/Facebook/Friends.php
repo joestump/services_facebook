@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -26,6 +27,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -45,7 +47,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return mixed Instance of SimpleXML response or boolean
      * @link http://wiki.developers.facebook.com/index.php/Friends.areFriends
      */
-    public function areFriends($uid1, $uid2)
+    public function & areFriends($uid1, $uid2)
     {
         if (is_array($uid1)) {
             $uids1 = implode(',', $uid1);
@@ -59,17 +61,13 @@ class Services_Facebook_Friends extends Services_Facebook_Common
             $uids2 = $uid2;
         }
 
-        $res = $this->sendRequest('friends.areFriends', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'uids1' => $uids1,
             'uids2' => $uids2
-        )); 
+        );
 
-        if (!is_array($uid1) && !is_array($uid2)) {
-            return (intval((string)$res->friend_info->are_friends) == 1);
-        }
-
-        return $res;
+        return $this->callMethod('friends.areFriends', $args, 'Friends_AreFriends');
     }
 
     /**
@@ -80,7 +78,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return array A list of uid's of current user's friends
      * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
-    public function get($uid = null)
+    public function & get($uid = null)
     {
         $args = array();
         if ($uid !== null) {
@@ -89,14 +87,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
             $args['session_key'] = $this->sessionKey;
         }
 
-        $result = $this->sendRequest('friends.get', $args);
-
-        $ret = array();
-        foreach ($result->uid as $uid) {
-            $ret[] = intval((string)$uid);
-        }
-
-        return $ret;
+        return $this->callMethod('friends.get', $args, 'ArrayInt');
     }
 
     /**
@@ -108,19 +99,14 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
-    public function getByList($flid)
+    public function & getByList($flid)
     {
-        $result = $this->sendRequest('friends.get', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'flid' => $flid
-        ));
-        
-        $ret = array();
-        foreach ($result->uid as $uid) {
-            $ret[] = intval((string)$uid);
-        }
-        
-        return $ret;
+            'flid'        => $flid
+        );
+
+        return $this->callMethod('friends.get', $args, 'ArrayInt');
     }
 
     /**
@@ -129,18 +115,13 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return array A list of Facebook uid's
      * @link http://wiki.developers.facebook.com/index.php/Friends.getAppUsers
      */
-    public function getAppUsers()
+    public function & getAppUsers()
     {
-        $result = $this->sendRequest('friends.getAppUsers', array(
+        $args = array(
             'session_key' => $this->sessionKey
-        ));
+        );
 
-        $ret = array();
-        foreach ($result->uid as $uid) {
-            $ret[] = intval((string)$uid);
-        }
-
-        return $ret;
+        return $this->callMethod('friends.getAppUsers', $args, 'ArrayInt');
     }
 
     /**
@@ -150,13 +131,13 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Friends.getLists
      */
-    public function getLists()
+    public function & getLists()
     {
-        $result = $this->sendRequest('friends.getLists', array(
+        $args = array(
             'session_key' => $this->sessionKey
-        ));
-        
-        return $result;
+        );
+
+        return $this->callMethod('friends.getLists', $args);
     }
 }
 

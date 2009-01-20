@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -30,6 +31,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -60,12 +62,14 @@ class Services_Facebook_FQL extends Services_Facebook_Common
      *
      * @return object Instance of SimpleXMLElement
      */
-    public function query($query)
+    public function & query($query)
     {
-        return $this->sendRequest('fql.query', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'query' => $query
-        ));
+        );
+
+        return $this->callMethod('fql.query', $args);
     }
 }
 

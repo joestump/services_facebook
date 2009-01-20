@@ -39,7 +39,7 @@ class Services_Facebook_Share
      * 
      * @return array Meta information on videos, etc.
      */
-    public function parse($body)
+    static public function parse($body)
     {
         $metas = $links = array();
         preg_match_all('/<meta ([^>]+)>/i', $body, $metas);

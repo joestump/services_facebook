@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -28,6 +29,7 @@ require_once 'Services/Facebook/Common.php';
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -61,15 +63,33 @@ class Services_Facebook_Users extends Services_Facebook_Common
     /**
      * Has the current user added this application?
      *
+     * @deprecated
+     *
      * @return boolean
      */
-    public function isAppAdded()
+    public function & isAppAdded()
     {
-        $result = $this->sendRequest('users.isAppAdded', array(
-            'session_key' => $this->sessionKey
-        )); 
+        return $this->isAppUser();
+    }
 
-        return (intval((string)$result) == 1);
+    /**
+     * Is this user a user of this application
+     *
+     * @param int $uid FB Uid of user to check
+     *
+     * @return bool Is or is not
+     * @link http://wiki.developers.facebook.com/index.php/Users.isAppUser
+     */
+    public function & isAppUser($uid = null)
+    {
+        $args = array();
+        if ($uid !== null) {
+            $args['uid'] = (int) $uid;
+        } elseif (!empty($this->sessionKey)) {
+            $args['session_key'] = $this->sessionKey;
+        }
+
+        return $this->callMethod('users.isAppUser', $args, 'Bool');
     }
 
     /**
@@ -84,20 +104,19 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Users.setStatus
      * @link http://wiki.developers.facebook.com/index.php/Extended_permission
      */
-    public function setStatus($status)
+    public function & setStatus($status)
     {
         $args = array(
             'session_key' => $this->sessionKey,
         );
 
-        if (is_bool($status) && $status === true) {
+        if ($status === true) {
             $args['clear'] = 'true';
         } else {
             $args['status'] = $status;
         }
 
-        $res = $this->sendRequest('users.setStatus', $args); 
-        return (intval((string)$res) == 1);
+        return $this->callMethod('users.setStatus', $args, 'Bool'); 
     }
 
     /**
@@ -109,7 +128,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @return object SimpleXmlElement of result
      * @link http://wiki.developers.facebook.com/index.php/Users.getInfo
      */
-    public function getInfo($uids, array $fields = array())
+    public function & getInfo($uids, array $fields = array())
     {
         if (is_array($uids)) {
             $uids = implode(',', $uids);
@@ -119,7 +138,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
             $fields = $this->userFields;
         }
 
-        return $this->sendRequest('users.getInfo', array(
+        return $this->callMethod('users.getInfo', array(
             'session_key' => $this->sessionKey,
             'uids' => $uids,
             'fields' => implode(',', $fields)
@@ -136,13 +155,13 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @see         Services_Digg::$sessionKey
      * @link        http://wiki.developers.facebook.com/index.php/Users.getLoggedInUser
      */
-    public function getLoggedInUser()
+    public function & getLoggedInUser()
     {
-        $result = $this->sendRequest('users.getLoggedInUser', array(
+        $args = array(
             'session_key' => $this->sessionKey
-        ));
+        );
 
-        return intval((string)$result);
+        return $this->callMethod('facebook.users.getLoggedInUser', $args, 'Int');
     }
 
     /**
@@ -154,7 +173,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @return boolean True if user has enabled extended permission
      * @link http://wiki.developers.facebook.com/index.php/Users.hasAppPermission
      */
-    public function hasAppPermission($perm, $uid = null)
+    public function & hasAppPermission($perm, $uid = null)
     {
         $valid = array(
             'email', 'offline_access', 'status_update', 'photo_upload',
@@ -167,22 +186,20 @@ class Services_Facebook_Users extends Services_Facebook_Common
             );
         }
 
-        $params = array(
+        $args = array(
             'ext_perm' => $perm
         );
 
         if ($uid !== null) {
-            $params['uid'] = (int) $uid;
+            $args['uid'] = (int) $uid;
         } elseif (!empty($this->sessionKey)) {
-            $params['session_key'] = $this->sessionKey;
+            $args['session_key'] = $this->sessionKey;
         } else {
             throw new Services_Facebook_Exception('A UID or session key must be ' .
                 'given for hadAppPermission.');
         }
 
-        $result = $this->sendRequest('users.hasAppPermission', $params);
-
-        return (intval((string)$result) == 1);
+        return $this->callMethod('users.hasAppPermission', $args, 'Bool');
     }
 
     /**

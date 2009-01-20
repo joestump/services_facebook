@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -28,6 +29,7 @@ require_once 'MarketPlace/Listing.php';
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -42,19 +44,17 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object Instance of listing object (with ID)
      * @throws Services_Facebook_Exception
      */
-    public function createListing(Services_Facebook_MarketPlace_Listing $l)
+    public function & createListing(Services_Facebook_MarketPlace_Listing $l)
     {
         $l->validate();
-        $result = $this->sendRequest('marketplace.createListing', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'listing_id' => $l->id,
             'show_on_profile' => (($l->showInProfile) ? '1' : '0'),
             'listing_attrs' => json_encode($l->data)
-        ));
+        );
 
-        $id    = intval((string)$result);
-        $l->id = $id;
-        return $l;
+        return $this->callMethod('marketplace.createListing', $args, 'Float');
     }
 
     /**
@@ -63,11 +63,9 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return      object
      * @throws      Services_Facebook_Exception
      */
-    public function getCategories()
+    public function & getCategories()
     {
-        return $this->sendRequest('marketplace.getCategories', array(
-            'session_key' => $this->sessionKey
-        ));
+        return $this->callMethod('marketplace.getCategories', array(), 'ArrayString');
     }
 
     /**
@@ -78,12 +76,13 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object
      * @throws Services_Facebook_Exception
      */
-    public function getSubCategories($category)
+    public function & getSubCategories($category)
     {
-        return $this->sendRequest('marketplace.getSubCategories', array(
-            'session_key' => $this->sessionKey,
+        $args = array(
             'category' => $category
-        ));
+        );
+
+        return $this->callMethod('marketplace.getSubCategories', $args, 'ArrayString');
     }
 
     /**
@@ -95,9 +94,9 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return mixed SimpleXML object of the listings 
      * @link http://wiki.developers.facebook.com/index.php/Marketplace.getListings
      */
-    public function getListings($listingIds = null, $uids = null)
+    public function & getListings($listingIds = null, $uids = null)
     {
-        if ((!$listingIds) || (!$uids)) {
+        if ((!$listingIds) && (!$uids)) {
             throw new Services_Facebook_Exception(
                 'Must specifiy at least 1 user or listing id'
             );
@@ -111,11 +110,13 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
             $uids = implode(',', $listingIds);
         }
 
-        return $this->sendRequest('marketplace.getListings', array(
+        $args = array(
             'session_key' => $this->sessionKey,
             'listing_ids' => $listingIds,
             'uids' => $uids
-        ));
+        );
+
+        return $this->callMethod('marketplace.getListings', $args);
     }
 
     /**
@@ -131,14 +132,15 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Marketplace.removeListing
      */
-    public function removeListing($listingId, $status = 'DEFAULT')
+    public function & removeListing($listingId, $status = 'DEFAULT')
     {
-        $result = $this->sendRequest('marketplace.removeListing', array(
+        $args = array(
             'session_key' => $this->sessionKey,
-            'listing_id' => $listingId,
-            'status' => $status
-        ));
-        return ((string)$result == 1);
+            'listing_id'  => $listingId,
+            'status'      => $status
+        );
+
+        return $this->callMethod('marketplace.removeListing', $args, 'Bool');
     }
 
     /**
@@ -151,7 +153,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object
      * @throws Services_Facebook_Exception
      */
-    public function search($query, $category = '', $subCategory = '')
+    public function & search($query, $category = '', $subCategory = '')
     {
         if (strlen($subCategory) && !strlen($category)) {
             throw new Services_Facebook_Exception(
@@ -168,7 +170,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
             $args['subcategory'] = $subCategory;
         }
 
-        return $this->sendRequest('marketplace.search', $args);
+        return $this->callMethod('marketplace.search', $args);
     }
 }
 

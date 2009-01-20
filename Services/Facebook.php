@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -29,6 +30,7 @@ require_once 'Services/Facebook/Exception.php';
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com> 
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -87,12 +89,21 @@ class Services_Facebook
     static protected $instance;
 
     /**
+     * Batching
+     *
+     * @var mixed $batching
+     * @see self::beingBatch(), self::endBatch()
+     */
+    static public $batches = false;
+
+    /**
      * Available drivers
      *
      * @var array $drivers
      */
     static protected $drivers = array(
         'admin'         => 'Admin',
+        'batch'         => 'Batch',
         'application'   => 'Application',
         'auth'          => 'Auth',
         'connect'       => 'Connect',
@@ -102,7 +113,7 @@ class Services_Facebook
         'fql'           => 'FQL',
         'feed'          => 'Feed',
         'friends'       => 'Friends',
-        'groups'        => 'Friends',
+        'groups'        => 'Groups',
         'marketplace'   => 'MarketPlace',
         'notifications' => 'Notifications',
         'pages'         => 'Pages',
@@ -120,7 +131,7 @@ class Services_Facebook
      * @return object Instance of Facebook endpoint
      * @throws Services_Facebook_Exception
      */
-    static protected function factory($endPoint)
+    static public function factory($endPoint)
     {
         $file = 'Services/Facebook/' . $endPoint . '.php';
         include_once $file;
@@ -130,6 +141,7 @@ class Services_Facebook
         } 
 
         $instance = new $class();
+
         return $instance;
     }
 
@@ -144,10 +156,9 @@ class Services_Facebook
             return self::$instance;
         }
 
-        $instance = new Services_Facebook();
-        self::$instance = $instance;
+        self::$instance = new Services_Facebook;
 
-        return $instance;
+        return self::$instance;
     }
 
     /**
@@ -217,6 +228,43 @@ class Services_Facebook
 
         return (md5($sig . Services_Facebook::$secret) == $args['fb_sig']); 
     }
+
+    /**
+     * Begin batch 
+     * 
+     * Begin a batch.  This will enable batching and all calls will be
+     * stored until self::endBatch() is called to batch the calls.
+     *
+     * @return void
+     * @see    Services_Facebook_Batch::run()
+     */
+    static public function beginBatch()
+    {
+        self::$batches = array();
+    }
+
+    /**
+     * End batch 
+     * 
+     * Process and end a batch.  This should be called after self::beginBatch()
+     * This will call Services_Facebook_Batch::run() to process the batch
+     * and then stop batching for subsequent api calls.
+     *
+     * @return void
+     * @see    Services_Facebook_Batch::run()
+     */
+    static public function endBatch()
+    {
+        $data = self::$batches;
+        self::$batches = false;
+
+        if (!count($data) || $data === false) {
+            throw new Services_Facebook_Exception('Nothing to batch!');
+        }
+
+        self::singleton()->batch->run($data);
+    }
+
 }
 
 ?>

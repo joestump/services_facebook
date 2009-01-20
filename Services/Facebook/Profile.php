@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -26,6 +27,7 @@
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -44,7 +46,7 @@ class Services_Facebook_Profile extends Services_Facebook_Common
      * @return boolean True on success, false on unknown error
      * @link http://wiki.developers.facebook.com/index.php/Profile.setFBML
      */
-    public function setFBML($markup, $uid = 0)
+    public function & setFBML($markup, $uid = 0)
     {
         $args = array();
 
@@ -65,11 +67,11 @@ class Services_Facebook_Profile extends Services_Facebook_Common
 
         if ($uid > 0) {
             $args['uid'] = $uid;
+        } else {
+            $args['session_key'] = $this->sessionKey;
         }
 
-        $result = $this->sendRequest('profile.setFBML', $args);
-        $check  = intval((string)$result);
-        return ($check == 1);
+        return $this->callMethod('profile.setFBML', $args, 'Bool');
     }
 
     /**
@@ -80,14 +82,14 @@ class Services_Facebook_Profile extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Profile.getFBML
      */
-    public function getFBML($uid = 0)
+    public function & getFBML($uid = 0)
     {
         $args = array('session_key' => $this->sessionKey);
         if ($uid > 0) {
             $args['uid'] = $uid;
         }
 
-        return $this->sendRequest('profile.getFBML', $args);
+        return $this->callMethod('profile.getFBML', $args, 'Profile_GetFBML');
     }
 }
 
