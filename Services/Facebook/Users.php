@@ -67,7 +67,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      *
      * @return boolean
      */
-    public function & isAppAdded()
+    public function isAppAdded()
     {
         return $this->isAppUser();
     }
@@ -80,7 +80,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @return bool Is or is not
      * @link http://wiki.developers.facebook.com/index.php/Users.isAppUser
      */
-    public function & isAppUser($uid = null)
+    public function isAppUser($uid = null)
     {
         $args = array();
         if ($uid !== null) {
@@ -104,7 +104,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Users.setStatus
      * @link http://wiki.developers.facebook.com/index.php/Extended_permission
      */
-    public function & setStatus($status)
+    public function setStatus($status)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -128,7 +128,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @return object SimpleXmlElement of result
      * @link http://wiki.developers.facebook.com/index.php/Users.getInfo
      */
-    public function & getInfo($uids, array $fields = array())
+    public function getInfo($uids, array $fields = array())
     {
         if (is_array($uids)) {
             $uids = implode(',', $uids);
@@ -155,7 +155,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @see         Services_Digg::$sessionKey
      * @link        http://wiki.developers.facebook.com/index.php/Users.getLoggedInUser
      */
-    public function & getLoggedInUser()
+    public function getLoggedInUser()
     {
         $args = array(
             'session_key' => $this->sessionKey
@@ -173,7 +173,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      * @return boolean True if user has enabled extended permission
      * @link http://wiki.developers.facebook.com/index.php/Users.hasAppPermission
      */
-    public function & hasAppPermission($perm, $uid = null)
+    public function hasAppPermission($perm, $uid = null)
     {
         $valid = array(
             'email', 'offline_access', 'status_update', 'photo_upload',

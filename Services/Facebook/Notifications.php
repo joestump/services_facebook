@@ -58,7 +58,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @return      object      Instance of SimpleXmlElement 
      * @link        http://wiki.developers.facebook.com/index.php/Notifications.get
      */
-    public function & get()
+    public function get()
     {
         $args = array(
             'session_key' => $this->sessionKey
@@ -88,7 +88,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @see self::TYPE_GENERAL, self::TYPE_ANNOUNCEMENT
      * @link http://wiki.developers.facebook.com/index.php/Notifications.send
      */
-    public function & send(array $to, $notification, $type = self::TYPE_USER_TO_USER)
+    public function send(array $to, $notification, $type = self::TYPE_USER_TO_USER)
     {
         $args = array(
             'to_ids' => implode(',', $to),
@@ -125,7 +125,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Notifications.sendEmail
      */     
-    public function & sendEmail(array $recipients, $subject, $text = null)
+    public function sendEmail(array $recipients, $subject, $text = null)
     {
         $args = array(
             'recipients' => implode(',', $recipients),

@@ -43,7 +43,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isAdmin
      **/
-    public function & isAdmin($pageId = null)
+    public function isAdmin($pageId = null)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -62,7 +62,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Pages.isAppAdded
      **/
-    public function & isAppAdded($pageId = null)
+    public function isAppAdded($pageId = null)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -84,7 +84,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      *
      * @link        http://wiki.developers.facebook.com/index.php/Pages.isFan
      **/
-    public function & isFan($pageId = null, $uid = null)
+    public function isFan($pageId = null, $uid = null)
     {
         $args = array(
             'session_key' => $this->sessionKey,

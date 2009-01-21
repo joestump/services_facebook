@@ -75,7 +75,7 @@ XML;
 
         $this->mockSendRequest($response);
         $result = $this->instance->getRestrictionInfo();
-        $this->assertType('SimpleXMLElement', $result);
+        $this->assertEquals('', $result);
     }
 }
 

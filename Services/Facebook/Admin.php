@@ -68,7 +68,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAppProperties
      */
-    public function & getAppProperties($properties = array())
+    public function getAppProperties($properties = array())
     {
         if (!count($properties)) {
             $properties = $this->applicationFields;
@@ -91,7 +91,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.setAppProperties
      */
-    public function & setAppProperties($properties = array())
+    public function setAppProperties($properties = array())
     {
         $jsonArray = array();
         foreach ($properties as $property => $value) {
@@ -116,7 +116,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      */
-    public function & getNotificationsPerDay()
+    public function getNotificationsPerDay()
     {
         $args = array(
             'integration_point_name' => 'notifications_per_day'
@@ -133,7 +133,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getAllocation
      **/
-    public function & getRequestsPerDay()
+    public function getRequestsPerDay()
     {
         $args = array(
             'integration_point_name' => 'requests_per_day'
@@ -150,7 +150,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      *
      * @link http://wiki.developers.facebook.com/index.php/Admin.getRestrictionInfo
      */
-    public function & getRestrictionInfo()
+    public function getRestrictionInfo()
     {
         return $this->callMethod('admin.getRestrictionInfo', array(), 'String');
     }

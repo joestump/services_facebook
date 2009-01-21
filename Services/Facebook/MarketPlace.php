@@ -44,7 +44,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object Instance of listing object (with ID)
      * @throws Services_Facebook_Exception
      */
-    public function & createListing(Services_Facebook_MarketPlace_Listing $l)
+    public function createListing(Services_Facebook_MarketPlace_Listing $l)
     {
         $l->validate();
         $args = array(
@@ -63,7 +63,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return      object
      * @throws      Services_Facebook_Exception
      */
-    public function & getCategories()
+    public function getCategories()
     {
         return $this->callMethod('marketplace.getCategories', array(), 'ArrayString');
     }
@@ -76,7 +76,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object
      * @throws Services_Facebook_Exception
      */
-    public function & getSubCategories($category)
+    public function getSubCategories($category)
     {
         $args = array(
             'category' => $category
@@ -94,7 +94,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return mixed SimpleXML object of the listings 
      * @link http://wiki.developers.facebook.com/index.php/Marketplace.getListings
      */
-    public function & getListings($listingIds = null, $uids = null)
+    public function getListings($listingIds = null, $uids = null)
     {
         if ((!$listingIds) && (!$uids)) {
             throw new Services_Facebook_Exception(
@@ -132,7 +132,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Marketplace.removeListing
      */
-    public function & removeListing($listingId, $status = 'DEFAULT')
+    public function removeListing($listingId, $status = 'DEFAULT')
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -153,7 +153,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      * @return object
      * @throws Services_Facebook_Exception
      */
-    public function & search($query, $category = '', $subCategory = '')
+    public function search($query, $category = '', $subCategory = '')
     {
         if (strlen($subCategory) && !strlen($category)) {
             throw new Services_Facebook_Exception(

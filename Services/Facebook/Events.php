@@ -41,7 +41,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function & get(array $params)
+    public function get(array $params)
     {
         static $rsvp = array(
             'attending', 'unsure', 'declined', 'not_replied'
@@ -76,7 +76,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
             $args['end_time'] = intval($params['end_time']);
         }
 
-        if (isset($params['rsvp_status']) && 
+        if (isset($params['rsvp_status']) &&
             in_array($params['rsvp_status'], $rsvp)) {
             $args['rsvp_status'] = $params['rsvp_status'];
         }
@@ -91,7 +91,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function & getEvents($eid)
+    public function getEvents($eid)
     {
         if (is_array($eid)) {
             $eid = implode(',', $eid);
@@ -112,7 +112,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return SimpleXmlElement
      */
-    public function & getEventsByUser($uid)
+    public function getEventsByUser($uid)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -133,7 +133,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * 
      * @return object SimpleXmlElement
      */
-    public function & getEventsByDate($start, $end)
+    public function getEventsByDate($start, $end)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -152,7 +152,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      * @return object SimpleXmlElement of users attending, etc.
      * @link http://wiki.developers.facebook.com/index.php/Events.getMembers
      */
-    public function & getMembers($eid)
+    public function getMembers($eid)
     {
         $args = array(
             'session_key' => $this->sessionKey,

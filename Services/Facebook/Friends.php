@@ -47,7 +47,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return mixed Instance of SimpleXML response or boolean
      * @link http://wiki.developers.facebook.com/index.php/Friends.areFriends
      */
-    public function & areFriends($uid1, $uid2)
+    public function areFriends($uid1, $uid2)
     {
         if (is_array($uid1)) {
             $uids1 = implode(',', $uid1);
@@ -78,7 +78,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return array A list of uid's of current user's friends
      * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
-    public function & get($uid = null)
+    public function get($uid = null)
     {
         $args = array();
         if ($uid !== null) {
@@ -99,7 +99,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Friends.get
      */
-    public function & getByList($flid)
+    public function getByList($flid)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -115,7 +115,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @return array A list of Facebook uid's
      * @link http://wiki.developers.facebook.com/index.php/Friends.getAppUsers
      */
-    public function & getAppUsers()
+    public function getAppUsers()
     {
         $args = array(
             'session_key' => $this->sessionKey
@@ -131,7 +131,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link http://wiki.developers.facebook.com/index.php/Friends.getLists
      */
-    public function & getLists()
+    public function getLists()
     {
         $args = array(
             'session_key' => $this->sessionKey

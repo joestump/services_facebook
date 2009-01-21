@@ -33,7 +33,6 @@ abstract class Services_Facebook_UnitTestCommon extends PHPUnit_Framework_TestCa
     protected function tearDown()
     {
         $this->instance = null;
-        Services_Facebook::$batches = false;
         Services_Facebook::$apiKey  = null;
         Services_Facebook::$secret  = null;
     }

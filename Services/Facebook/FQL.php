@@ -62,7 +62,7 @@ class Services_Facebook_FQL extends Services_Facebook_Common
      *
      * @return object Instance of SimpleXMLElement
      */
-    public function & query($query)
+    public function query($query)
     {
         $args = array(
             'session_key' => $this->sessionKey,

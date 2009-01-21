@@ -63,7 +63,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishStoryToUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
-    public function & publishStoryToUser($title,
+    public function publishStoryToUser($title,
                                        $body = '',
                                        array $images = array())
     {
@@ -129,7 +129,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link http://wiki.developers.facebook.com/index.php/Feed.publishActionOfUser
      * @link http://wiki.developers.facebook.com/index.php/PublishActionOfUser_vs._PublishStoryToUser
      */
-    public function & publishActionOfUser($title, 
+    public function publishActionOfUser($title, 
                                           $body = '', 
                                           array $images = array())
     {
@@ -202,7 +202,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @author Jeff Hodsdon <jeffhodsdon@gmail.com>
      * @link   http://wiki.developers.facebook.com/index.php/Feed.publishTemplatizedAction
      */
-    public function & publishTemplatizedAction($titleTemplate,
+    public function publishTemplatizedAction($titleTemplate,
                                                array $feedData = array(),
                                                array $images = array())
     {
@@ -287,7 +287,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link   http://wiki.developers.facebook.com/index.php/Feed.registerTemplateBundle
      * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function & registerTemplateBundle(array $oneLineStoryTpls,
+    public function registerTemplateBundle(array $oneLineStoryTpls,
                                              array $shortStoryTpls = array(),
                                              array $fullStoryTpl = array())
     {
@@ -321,7 +321,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link    http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundles
      * @author  Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function & getRegisteredTemplateBundles()
+    public function getRegisteredTemplateBundles()
     {
         return $this->callMethod('feed.getRegisteredTemplateBundles');
     }
@@ -337,7 +337,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link   http://wiki.developers.facebook.com/index.php/Feed.getRegisteredTemplateBundleByID
      * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function & getRegisteredTemplateBundleByID($id)
+    public function getRegisteredTemplateBundleByID($id)
     {
         $args = array('template_bundle_id' => $id);
         return $this->callMethod('feed.getRegisteredTemplateBundleByID', $args);
@@ -358,7 +358,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link   http://wiki.developers.facebook.com/index.php/Feed.deactivateTemplateBundleByID
      * @author Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function & deactivateTemplateBundleByID($id)
+    public function deactivateTemplateBundleByID($id)
     {
         $args = array(
             'template_bundle_id' => $id
@@ -412,7 +412,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * @link    http://wiki.developers.facebook.com/index.php/Feed.publishUserAction
      * @author  Matthew Fonda <matthewfonda@gmail.com>
      */
-    public function & publishUserAction($templateBundleID, 
+    public function publishUserAction($templateBundleID, 
                                         array $templateData = array(),
                                         array $targetIDs = array(),
                                         $bodyGeneral = '')

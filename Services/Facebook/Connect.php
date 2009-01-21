@@ -71,7 +71,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      * @access public
      * @return int Amount of users
      */
-    public function & getUnconnectedFriendsCount()
+    public function getUnconnectedFriendsCount()
     {
         $args = array(
             'session_key' => $this->sessionKey
@@ -115,7 +115,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      *         another field was passed in that is not supported. 
      * @return object SimpleXML object from sendRequest()
      */
-    public function & registerUsers(array $accounts)
+    public function registerUsers(array $accounts)
     {
         $fields = array(
             'email_hash',
@@ -168,7 +168,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      * @throws Services_Facebook_Exception if json_decode() is not available
      * @return object SimpleXML object from sendRequest()
      */
-    public function & unregisterUsers(array $emailHashes)
+    public function unregisterUsers(array $emailHashes)
     {
         $args = array(
             'email_hashes' => json_encode($emailHashes)

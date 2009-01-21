@@ -39,7 +39,7 @@ class Services_Facebook_Groups extends Services_Facebook_Common
      * 
      * @return object A SimpleXmlElement with group information
      */
-    public function & get($uid_or_gids = null)
+    public function get($uid_or_gids = null)
     {
         $args = array('session_key' => $this->sessionKey);
         if (!is_null($uid_or_gids)) {
@@ -60,7 +60,7 @@ class Services_Facebook_Groups extends Services_Facebook_Common
      * 
      * @return object An instance of SimleXmlElement
      */
-    public function & getMembers($gid)
+    public function getMembers($gid)
     {
         $args = array(
             'session_key' => $this->sessionKey,

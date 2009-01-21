@@ -76,23 +76,11 @@ abstract class Services_Facebook_Common
      *
      * @return mixed Result
      */
-    public function & callMethod($method, array $args = array(), $format = 'Generic')
+    public function callMethod($method, array $args = array(), $format = 'Generic')
     {
         $this->updateArgs($args, $method);
 
-        $format = Services_Facebook_Format::factory($format);
-        if (is_array(Services_Facebook::$batches)) {
-            $result = null;
-            Services_Facebook::$batches[] = array(
-                'method'   => $method,
-                'args'     => $args,
-                'format'   => $format,
-                'result'   => &$result
-            );
-
-            return $result;
-        }
-
+        $format   = Services_Facebook_Format::factory($format);
         $response = $this->sendRequest($args);
         $result   = $this->parseResponse($response, $format);
 

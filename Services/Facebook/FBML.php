@@ -47,7 +47,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * 
      * @return boolean
      */
-    public function & refreshImgSrc($url)
+    public function refreshImgSrc($url)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -64,7 +64,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * 
      * @return      boolean
      */
-    public function & refreshRefUrl($url)
+    public function refreshRefUrl($url)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -83,7 +83,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      * @return boolean
      * @link http://wiki.developers.facebook.com/index.php/Fbml.setRefHandle
      */
-    public function & setRefHandle($handle, $fbml)
+    public function setRefHandle($handle, $fbml)
     {
         $args = array(
             'session_key' => $this->sessionKey,

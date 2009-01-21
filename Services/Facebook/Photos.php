@@ -64,7 +64,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return boolean True on success, false on failure
      * @link http://wiki.developers.facebook.com/index.php/Photos.addTag
      */
-    public function & addTag($pid, $x, $y, $tag)
+    public function addTag($pid, $x, $y, $tag)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -90,7 +90,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * 
      * @return boolean True if success, false on failure
      */
-    public function & addTags($pid, array $tags)
+    public function addTags($pid, array $tags)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -110,7 +110,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object An instance of SimpleXMLElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.createAlbums
      */
-    public function & createAlbum($name, $location = '', $description = '')
+    public function createAlbum($name, $location = '', $description = '')
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -136,7 +136,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function & getPhotos($pids)
+    public function getPhotos($pids)
     {
         if (is_array($pids)) {
             $pids = implode(',', $pids);
@@ -158,7 +158,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function & getPhotosByAlbum($aid)
+    public function getPhotosByAlbum($aid)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -176,7 +176,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.get
      */
-    public function & getPhotosByUser($uid)
+    public function getPhotosByUser($uid)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -194,7 +194,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getAlbums
      */
-    public function & getAlbumsByPhotos(array $pids)
+    public function getAlbumsByPhotos(array $pids)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -212,7 +212,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getAlbums
      */
-    public function & getAlbumsByUser($uid)
+    public function getAlbumsByUser($uid)
     {
         $args = array(
             'session_key' => $this->sessionKey,
@@ -230,7 +230,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Photos.getTags
      */
-    public function & getTags(array $pids)
+    public function getTags(array $pids)
     {
         $args = array(
             'session_key' => $this->sessionKey,

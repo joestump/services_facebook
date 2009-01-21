@@ -19,17 +19,7 @@ XML;
         $result = $this->instance->callMethod('test.unit', $args);
         $this->assertType('SimpleXMLElement', $result);
 
-        Services_Facebook::$batches = array();
         $result = $this->instance->callMethod('test.unit', $args);
-
-        $batches = Services_Facebook::$batches;
-        $args = parse_str($batches[0]['args']);
-        $this->assertEquals('test.unit', $batches[0]['method']);
-        $this->assertEquals('test.unit', $method);
-        $this->assertEquals('foo', $api_key);
-        $this->assertEquals('XML', $format);
-        $this->assertEquals('sekrtsessionkey', $session_key);
-        $this->assertType('Services_Facebook_Format_Interface', $batches[0]['format']);
     }
 
     /**
@@ -98,7 +88,7 @@ XML;
             'foo' => 'bar'
         );
 
-        $result = $this->instance->callMethod('test.unit', $args);
+        $result = $this->instance->callMethod('unit.test1', $args);
     }
 
 }

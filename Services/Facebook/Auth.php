@@ -51,7 +51,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return string
      */
-    public function & createToken()
+    public function createToken()
     {
         return $this->callMethod('auth.createToken', array(), 'String');
     }
@@ -63,7 +63,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return object SimpleXmlElement of response 
      */
-    public function & getSession($authToken)
+    public function getSession($authToken)
     {
         $args = array(
             'auth_token' => $authToken
@@ -83,7 +83,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return void
      */
-    public function & promoteSession()
+    public function promoteSession()
     {
         return $this->callMethod('auth.promoteSession', array(), 'String');
     }
@@ -98,7 +98,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return void
      */
-    public function & expireSession()
+    public function expireSession()
     {
         return $this->callMethod('auth.expireSession', array(), 'Bool');
     }
@@ -114,7 +114,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      *
      * @return void
      */
-    public function & revokeAuthorization($uid = null)
+    public function revokeAuthorization($uid = null)
     {
         $args = array();
         if (isset($this->sessionKey)) {

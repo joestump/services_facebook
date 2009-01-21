@@ -46,7 +46,7 @@ class Services_Facebook_Profile extends Services_Facebook_Common
      * @return boolean True on success, false on unknown error
      * @link http://wiki.developers.facebook.com/index.php/Profile.setFBML
      */
-    public function & setFBML($markup, $uid = 0)
+    public function setFBML($markup, $uid = 0)
     {
         $args = array();
 
@@ -82,7 +82,7 @@ class Services_Facebook_Profile extends Services_Facebook_Common
      * @return object Instance of SimpleXmlElement
      * @link http://wiki.developers.facebook.com/index.php/Profile.getFBML
      */
-    public function & getFBML($uid = 0)
+    public function getFBML($uid = 0)
     {
         $args = array('session_key' => $this->sessionKey);
         if ($uid > 0) {

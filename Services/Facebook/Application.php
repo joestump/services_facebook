@@ -50,7 +50,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function & getPublicInfoById($id)
+    public function getPublicInfoById($id)
     {
         $args = array(
             'application_id' => $id
@@ -68,7 +68,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function & getPublicInfoByAPIKey($apiKey)
+    public function getPublicInfoByAPIKey($apiKey)
     {
         $args = array(
             'application_api_key' => $apiKey
@@ -86,7 +86,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      * 
      * @link http://wiki.developers.facebook.com/index.php/Application.getPublicInfo
      **/
-    public function & getPublicInfoByCanvasName($canvasName)
+    public function getPublicInfoByCanvasName($canvasName)
     {
         $args = array(
             'application_canvas_name' => $canvasName

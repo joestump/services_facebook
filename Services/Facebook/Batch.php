@@ -25,11 +25,14 @@ require_once 'Services/Facebook/Common.php';
  * Facebook Batch Interface
  *
  * <code>
- * $api = new Services_Facebook();
- * Services_Facebook::beginBatch();
- * $friends    = & $api->friends->get();
- * $areFriends = & $api->friends->areFriends(617370918, 683226814);
- * Services_Facebook::endBatch();
+ * $batch = new Services_Facebook_Batch;
+ * $batch->sessionKey = 'fooo';
+ * $batch->addCall('restriction', 'admin.getRestrictionInfo');
+ * $batch->addCall('friends', 'friends.get', array('uid' => 683226814));
+ * $batch->addCall('areFriends', 'friends.areFriends', array('uid1' => 617370918, 'uid2' => 683226814));
+ * $batch->run();
+ *
+ * var_dump($batch['friends']);
  * ?>
  * </code>
  *
@@ -40,71 +43,149 @@ require_once 'Services/Facebook/Common.php';
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
  */
-class Services_Facebook_Batch extends Services_Facebook_Common
+class Services_Facebook_Batch
+extends Services_Facebook_Common
+implements ArrayAccess
 {
 
     /**
-     * Run batch
-     *
-     * Take batch data and run it.
+     * Calls 
      * 
-     * <code>
-     * $data = array(
-     *     array(
-     *         'method' => 'users.getInfo',
-     *         'args'   => array(),
-     *         'result' => null
-     *     ),
-     *     array(
-     *         'method' => 'friends.get',
-     *         'args'   => array(),
-     *         'result' => null
-     *     )
-     * );
-     * $data = $facebook->batch->run($data);
-     * $userInfo = $data[0]['result'];
-     * </code>
-     *
-     * @param array $data   Formated data, including args and method
-     * @param bool  $serial True executes api calls in order
-     *
-     * @return array All data. Args, method, and result
+     * @var array $calls Calls that will be batched
      */
-    public function run(array $data, $serial = false)
+    protected $calls = array();
+
+    /**
+     * Results 
+     * 
+     * @var array $results Name value pair of results
+     */
+    protected $results = array();
+
+    /**
+     * Add call 
+     * 
+     * Adds a call to be batched.
+     *
+     * @param mixed $name     Name of the result
+     * @param mixed $endpoint Facebook API endpoint. e.g. friends.get
+     * @param array $args     Arguments for the API call
+     *
+     * @return void
+     * @see    Services_Facebook_Batch::run()
+     */
+    public function addCall($name, $endpoint, $args = array())
     {
-        $batch      = array();
-        $sessionKey = '';
-        foreach ($data as $item) {
-            $args    = $item['args'];
-            $batch[] = http_build_query($args);
-            if (!empty($args['session_key'])) {
-                $sessionKey = $args['session_key'];
-            }
+        $this->calls[] = array(
+            'name'     => $name,
+            'endpoint' => $endpoint,
+            'args'     => $args
+        );
+    }
+
+    /**
+     * Run 
+     * 
+     * Run the calls that were added via Services_Facebook_Batch::addCall()
+     * in a batch.  If successful the results are stored.
+     *
+     * @param mixed $serial If true, calls will be ran in order on
+     *                      on Facebook's side.
+     *
+     * @return void
+     * @see    Services_Facebook_Batch::addCall()
+     * @link   http://wiki.developers.facebook.com/index.php/Batch.run
+     */
+    public function run($serial = false)
+    {
+        if (empty($this->calls)) {
+            return;
+        }
+
+        $methodFeed = array();
+        foreach ($this->calls as $call) {
+            $this->updateArgs($call['args'], $call['endpoint']);
+            $methodFeed[] = http_build_query($call['args']);
         }
 
         $args = array(
-            'method_feed' => json_encode($batch),
+            'method_feed' => json_encode($methodFeed),
             'serial_only' => ($serial) ? 'true' : 'false',
-            'session_key' => $sessionKey
+            'session_key' => $this->sessionKey
         );
 
-        $result    = $this->callMethod('batch.run', $args);
+        $result = $this->callMethod('batch.run', $args);
+
         $exception = false;
-        for ($i = 0; $i < count($data); $i++) {
-            try {
-                $response           = urldecode($result->batch_run_response_elt[$i]);
-                $data[$i]['result'] = $this->parseResponse($response,
-                    $data[$i]['format']);
-            } catch (Services_Facebook_Exception $e) {
-                $exception = $e;
-            }
+        for ($i = 0; $i < count($this->calls); $i++) {
+            $name     = $this->calls[$i]['name'];
+            $response = $result->batch_run_response_elt[$i];
+            $response = simplexml_load_string((string) $response);
+            $this->results[$name] = $response;
         }
+    }
 
-        if ($exception instanceof Services_Facebook_Exception) {
-            throw $exception;
-        }
+    /**
+     * Get results 
+     * 
+     * @return array Results from the batch
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
 
-        return $data;
+    /**
+     * Offset exists 
+     * 
+     * @param string $offset Offset to check
+     *
+     * @return bool If element exists
+     */
+    public function offsetExists($offset)
+    {
+        return isset($this->results[$offset]);
+    }
+
+    /**
+     * Offset get 
+     * 
+     * @param mixed $offset Offset to get
+     *
+     * @return SimpleXMLElement Result
+     */
+    public function offsetGet($offset)
+    {
+        return $this->results[$offset];
+    }
+
+    /**
+     * Offset set 
+     * 
+     * We do not allow the batch results to be modified.
+     *
+     * @param mixed $offset Offset to set
+     * @param mixed $value  Value to set
+     *
+     * @return void
+     * @throws Services_Facebook_Exception
+     */
+    public function offsetSet($offset, $value)
+    {
+        throw new Services_Facebook_Exception('You can not change the ' .
+            'batch results!');
+    }
+
+    /**
+     * Offset unset 
+     * 
+     * @param mixed $offset Offset to unset
+     *
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->results[$offset]);
     }
 
 }
