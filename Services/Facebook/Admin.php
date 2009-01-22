@@ -76,7 +76,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
         //FB accepts the app properties as a json array
         $jsonProperties = json_encode($properties);
         
-        $result = $this->sendRequest('admin.getAppProperties', array(
+        $result = $this->callMethod('admin.getAppProperties', array(
                                      'properties' => $jsonProperties
                         ));
         
@@ -103,9 +103,11 @@ class Services_Facebook_Admin extends Services_Facebook_Common
         }
         $jsonProperties = json_encode($jsonArray);
         
-        return $this->sendRequest('admin.setAppProperties', array(
+        $result = $this->callMethod('admin.setAppProperties', array(
                                    'properties' => $jsonProperties
                     ));
+
+        return (intval((string) $result) == 1);
     }
     
     
@@ -119,7 +121,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      */
     public function getNotificationsPerDay()
     {
-        return (int)$this->sendRequest('admin.getAllocation', array(
+        return (int)$this->callMethod('admin.getAllocation', array(
                                   'session_key' => $this->sessionKey,
                                   'integration_point_name' => 'notifications_per_day'
                 ));
@@ -135,7 +137,7 @@ class Services_Facebook_Admin extends Services_Facebook_Common
      **/
     public function getRequestsPerDay()
     {
-        return (int)$this->sendRequest('admin.getAllocation', array(
+        return (int)$this->callMethod('admin.getAllocation', array(
                                   'session_key' => $this->sessionKey,
                                   'integration_point_name' => 'requests_per_day'
                 ));

@@ -45,7 +45,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      */
     public function refreshImgSrc($url)
     {
-        $result = $this->sendRequest('fbml.refreshImgSrc', array(
+        $result = $this->callMethod('fbml.refreshImgSrc', array(
             'session_key' => $this->sessionKey,
             'url' => $url
         ));
@@ -63,7 +63,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      */
     public function refreshRefUrl($url)
     {
-        $result = $this->sendRequest('fbml.refreshRefUrl', array(
+        $result = $this->callMethod('fbml.refreshRefUrl', array(
             'session_key' => $this->sessionKey,
             'url' => $url
         ));
@@ -83,7 +83,7 @@ class Services_Facebook_FBML extends Services_Facebook_Common
      */
     public function setRefHandle($handle, $fbml)
     {
-        $result = $this->sendRequest('fbml.setRefHandle', array(
+        $result = $this->callMethod('fbml.setRefHandle', array(
             'session_key' => $this->sessionKey,
             'handle' => $handle,
             'fbml' => $fbml

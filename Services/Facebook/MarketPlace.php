@@ -45,14 +45,14 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
     public function createListing(Services_Facebook_MarketPlace_Listing $l)
     {
         $l->validate();
-        $result = $this->sendRequest('marketplace.createListing', array(
+        $result = $this->callMethod('marketplace.createListing', array(
             'session_key' => $this->sessionKey,
             'listing_id' => $l->id,
             'show_on_profile' => (($l->showInProfile) ? '1' : '0'),
             'listing_attrs' => json_encode($l->data)
         ));
 
-        $id    = intval((string)$result);
+        $id    = (float) (string) $result;
         $l->id = $id;
         return $l;
     }
@@ -65,9 +65,16 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      */
     public function getCategories()
     {
-        return $this->sendRequest('marketplace.getCategories', array(
+        $result = $this->callMethod('marketplace.getCategories', array(
             'session_key' => $this->sessionKey
         ));
+
+        $categories = array();
+        foreach ($result as $category) {
+            $categories[] = (string) $category;
+        }
+
+        return $categories;
     }
 
     /**
@@ -80,7 +87,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      */
     public function getSubCategories($category)
     {
-        return $this->sendRequest('marketplace.getSubCategories', array(
+        return $this->callMethod('marketplace.getSubCategories', array(
             'session_key' => $this->sessionKey,
             'category' => $category
         ));
@@ -97,7 +104,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      */
     public function getListings($listingIds = null, $uids = null)
     {
-        if ((!$listingIds) || (!$uids)) {
+        if ((!$listingIds) && (!$uids)) {
             throw new Services_Facebook_Exception(
                 'Must specifiy at least 1 user or listing id'
             );
@@ -111,7 +118,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
             $uids = implode(',', $listingIds);
         }
 
-        return $this->sendRequest('marketplace.getListings', array(
+        return $this->callMethod('marketplace.getListings', array(
             'session_key' => $this->sessionKey,
             'listing_ids' => $listingIds,
             'uids' => $uids
@@ -133,7 +140,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
      */
     public function removeListing($listingId, $status = 'DEFAULT')
     {
-        $result = $this->sendRequest('marketplace.removeListing', array(
+        $result = $this->callMethod('marketplace.removeListing', array(
             'session_key' => $this->sessionKey,
             'listing_id' => $listingId,
             'status' => $status
@@ -168,7 +175,7 @@ class Services_Facebook_MarketPlace extends Services_Facebook_Common
             $args['subcategory'] = $subCategory;
         }
 
-        return $this->sendRequest('marketplace.search', $args);
+        return $this->callMethod('marketplace.search', $args);
     }
 }
 

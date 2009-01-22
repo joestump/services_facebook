@@ -50,7 +50,7 @@ class Services_Facebook_Groups extends Services_Facebook_Common
             }
         } 
         
-        return $this->sendRequest('groups.get', $args);
+        return $this->callMethod('groups.get', $args);
     }
 
     /**
@@ -62,10 +62,16 @@ class Services_Facebook_Groups extends Services_Facebook_Common
      */
     public function getMembers($gid)
     {
-        return $this->sendRequest('groups.getMembers', array(
+        $result = $this->callMethod('groups.getMembers', array(
             'session_key' => $this->sessionKey,
             'guid' => intval($gid)
         ));
+
+        $members = array();
+        foreach ($result->members->uid as $member) {
+            $members[] = (float) $member;
+        }
+        return $members;
     } 
 }
 

@@ -62,7 +62,7 @@ class Services_Facebook_FQL extends Services_Facebook_Common
      */
     public function query($query)
     {
-        return $this->sendRequest('fql.query', array(
+        return $this->callMethod('fql.query', array(
             'session_key' => $this->sessionKey,
             'query' => $query
         ));

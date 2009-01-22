@@ -45,7 +45,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      **/
     public function isAdmin($pageId = null)
     {
-        $result = $this->sendRequest('pages.isAdmin', array(
+        $result = $this->callMethod('pages.isAdmin', array(
                                      'session_key' => $this->sessionKey,
                                      'page_id' => $pageId
                   ));
@@ -63,7 +63,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      **/
     public function isAppAdded($pageId = null)
     {
-        $result = $this->sendRequest('pages.isAppAdded', array(
+        $result = $this->callMethod('pages.isAppAdded', array(
                                      'session_key' => $this->sessionKey,
                                      'page_id' => $pageId
                   ));
@@ -84,7 +84,7 @@ class Services_Facebook_Pages extends Services_Facebook_Common
      **/
     public function isFan($pageId = null, $uid = null)
     {
-        $result = $this->sendRequest('pages.isFan', array(
+        $result = $this->callMethod('pages.isFan', array(
                                      'session_key' => $this->sessionKey,
                                      'page_id'  => $pageId,
                                      'uid'      => $uid

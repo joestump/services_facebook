@@ -77,7 +77,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
             $args['tag_text'] = $tag;
         }
 
-        $res = $this->sendRequest('photos.addTag', $args);
+        $result = $this->callMethod('photos.addTag', $args);
         return (intval((string)$result) == 1);
     }
 
@@ -91,7 +91,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function addTags($pid, array $tags)
     {
-        $res = $this->sendRequest('photos.addTag', array(
+        $result = $this->callMethod('photos.addTag', array(
             'session_key' => $this->sessionKey,
             'tags' => json_encode($tags)
         ));
@@ -124,7 +124,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
             $args['description'] = $description;
         }
 
-        return $this->sendRequest('photos.createAlbum', $args);
+        return $this->callMethod('photos.createAlbum', $args);
     }
 
     /**
@@ -141,7 +141,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
             $pids = implode(',', $pids);
         }
 
-        return $this->sendRequest('photos.get', array(
+        return $this->callMethod('photos.get', array(
             'session_key' => $this->sessionKey,
             'pids' => $pids
         ));
@@ -157,7 +157,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function getPhotosByAlbum($aid)
     {
-        return $this->sendRequest('photos.get', array(
+        return $this->callMethod('photos.get', array(
             'session_key' => $this->sessionKey,
             'aid' => $aid
         ));
@@ -173,7 +173,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function getPhotosByUser($uid)
     {
-        return $this->sendRequest('photos.get', array(
+        return $this->callMethod('photos.get', array(
             'session_key' => $this->sessionKey,
             'subj_id' => $uid
         ));
@@ -189,7 +189,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function getAlbumsByPhotos(array $pids)
     {
-        return $this->sendRequest('photos.getAlbums', array(
+        return $this->callMethod('photos.getAlbums', array(
             'session_key' => $this->sessionKey,
             'pids' => implode(',', $pids)
         ));
@@ -205,7 +205,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function getAlbumsByUser($uid)
     {
-        return $this->sendRequest('photos.getAlbums', array(
+        return $this->callMethod('photos.getAlbums', array(
             'session_key' => $this->sessionKey,
             'uid' => $uid
         ));
@@ -221,7 +221,7 @@ class Services_Facebook_Photos extends Services_Facebook_Common
      */
     public function getTags(array $pids)
     {
-        return $this->sendRequest('photos.getTags', array(
+        return $this->callMethod('photos.getTags', array(
             'session_key' => $this->sessionKey,
             'pids' => implode(',', $pids)
         ));

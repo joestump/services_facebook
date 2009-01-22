@@ -59,7 +59,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
             $uids2 = $uid2;
         }
 
-        $res = $this->sendRequest('friends.areFriends', array(
+        $res = $this->callMethod('friends.areFriends', array(
             'session_key' => $this->sessionKey,
             'uids1' => $uids1,
             'uids2' => $uids2
@@ -89,7 +89,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
             $args['session_key'] = $this->sessionKey;
         }
 
-        $result = $this->sendRequest('friends.get', $args);
+        $result = $this->callMethod('friends.get', $args);
 
         $ret = array();
         foreach ($result->uid as $uid) {
@@ -110,7 +110,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      */
     public function getByList($flid)
     {
-        $result = $this->sendRequest('friends.get', array(
+        $result = $this->callMethod('friends.get', array(
             'session_key' => $this->sessionKey,
             'flid' => $flid
         ));
@@ -131,7 +131,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      */
     public function getAppUsers()
     {
-        $result = $this->sendRequest('friends.getAppUsers', array(
+        $result = $this->callMethod('friends.getAppUsers', array(
             'session_key' => $this->sessionKey
         ));
 
@@ -152,7 +152,7 @@ class Services_Facebook_Friends extends Services_Facebook_Common
      */
     public function getLists()
     {
-        $result = $this->sendRequest('friends.getLists', array(
+        $result = $this->callMethod('friends.getLists', array(
             'session_key' => $this->sessionKey
         ));
         

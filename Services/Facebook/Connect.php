@@ -73,7 +73,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      */
     public function getUnconnectedFriendsCount()
     {
-        $result = $this->sendRequest('connect.getUnconnectedFriendsCount', array(
+        $result = $this->callMethod('connect.getUnconnectedFriendsCount', array(
             'session_key' => $this->sessionKey
         ));
 
@@ -113,7 +113,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      * @access public
      * @throws Services_Facebook_Exception If emash_hash is missing or
      *         another field was passed in that is not supported. 
-     * @return object SimpleXML object from sendRequest()
+     * @return object SimpleXML object from callMethod()
      */
     public function registerUsers(array $accounts)
     {
@@ -139,9 +139,16 @@ class Services_Facebook_Connect extends Services_Facebook_Common
             }
         }
 
-        return $this->sendRequest('connect.registerUsers', array(
+        $result = $this->callMethod('connect.registerUsers', array(
             'accounts' => json_encode($accounts)
         ));
+
+        $hashes = array();
+        foreach ($result->connect_registerUsers_response_elt as $hash) {
+            $hashes[] = (string) $hash;
+        }
+
+        return $hashes;
     }
 
     /**
@@ -164,13 +171,15 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      *
      * @access public
      * @throws Services_Facebook_Exception if json_decode() is not available
-     * @return object SimpleXML object from sendRequest()
+     * @return object SimpleXML object from callMethod()
      */
     public function unregisterUsers(array $emailHashes)
     {
-        return $this->sendRequest('connect.unregisterUsers', array(
+        $result = $this->callMethod('connect.unregisterUsers', array(
             'email_hashes' => json_encode($emailHashes)
         ));
+
+        return (intval((string) $result) == 1);
     }
 
     /**

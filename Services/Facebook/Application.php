@@ -52,7 +52,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      **/
     public function getPublicInfoById($id)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
+        return $this->callMethod('application.getPublicInfo', array(
                            'application_id' => $id
                 ));
         
@@ -69,7 +69,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      **/
     public function getPublicInfoByAPIKey($api_key)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
+        return $this->callMethod('application.getPublicInfo', array(
                            'application_api_key' => $api_key
                 ));
     }
@@ -85,7 +85,7 @@ class Services_Facebook_Application extends Services_Facebook_Common
      **/
     public function getPublicInfoByCanvasName($canvas_name)
     {
-        return $this->sendRequest('application.getPublicInfo', array(
+        return $this->callMethod('application.getPublicInfo', array(
                            'application_canvas_name' => $canvas_name
                 ));
         

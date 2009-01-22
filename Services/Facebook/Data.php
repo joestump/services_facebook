@@ -11,26 +11,26 @@ class Services_Facebook_Data extends Services_Facebook_Common
 
     protected $_prefix = 'data.';
 
-    protected function sendRequest($method, array $args = array())
+    protected function callMethod($method, array $args = array())
     {
-        return parent::sendRequest($this->_prefix . $method, $args);
+        return parent::callMethod($this->_prefix . $method, $args);
     }
 
     public function getUserPreference($pref_id) 
     {
-        return $this->sendRequest('getUserPreference', array(
+        return $this->callMethod('getUserPreference', array(
             'pref_id' => (int)$pref_id,
         ));
     }
 
     public function getUserPreferences()
     {
-        return $this->sendRequest('getUserPreferences');
+        return $this->callMethod('getUserPreferences');
     }
 
     public function setUserPreference($pref_id, $value)
     {
-        return $this->sendRequest(
+        return $this->callMethod(
             'setUserPreference',
             array(
                 'pref_id' => $pref_id,
@@ -45,7 +45,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function createObjectType($name) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'createObjectType',
             array(
                 'name' => $name,
@@ -54,7 +54,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function dropObjectType($obj_type) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'dropObjectType',
             array(
                 'obj_type' => $obj_type,
@@ -63,7 +63,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function renameObjectType($obj_type, $new_name) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'renameObjectType',
             array(
                 'obj_type' => $obj_type,
@@ -87,7 +87,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
             $prop_type = constant($const_name);
         }
 
-        return $this->sendRequest(
+        return $this->callMethod(
             'defineObjectProperty',
             array(
                 'obj_type' => $obj_type,
@@ -98,7 +98,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function undefineObjectProperty($obj_type, $prop_name) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'undefineObjectProperty',
             array(
                 'obj_type' => $obj_type,
@@ -108,7 +108,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function renameObjectProperty($obj_type, $prop_name, $new_name) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'renameObjectProperty',
             array(
                 'obj_type' => $obj_type,
@@ -119,11 +119,11 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function getObjectTypes() {
-        return $this->sendRequest('getObjectTypes');
+        return $this->callMethod('getObjectTypes');
     }
 
     public function getObjectType($obj_type) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'getObjectType',
             array(
                 'obj_type' => $obj_type,
@@ -139,11 +139,11 @@ class Services_Facebook_Data extends Services_Facebook_Common
             $args['properties'] = json_encode($properties);
         }
 
-        return $this->sendRequest('createObject', $args);
+        return $this->callMethod('createObject', $args);
     }
 
     public function updateObject($obj_id, array $properties, $replace) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'updateObject',
             array(
                 'obj_id' => $obj_id,
@@ -154,7 +154,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function deleteObject($obj_id) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'deleteObject',
             array(
                 'obj_id' => $obj_id,
@@ -163,7 +163,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function deleteObjects(array $obj_ids) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'deleteObjects',
             array(
                 'obj_ids' => json_encode($obj_ids),
@@ -181,7 +181,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
         if (count($properties) > 0) {
             $args['properties'] = json_encode($properties);
         }
-        return $this->sendRequest('getObject', $args);
+        return $this->callMethod('getObject', $args);
     }
 
     public function getObjects(array $obj_ids, array $properties = array()) {
@@ -192,11 +192,11 @@ class Services_Facebook_Data extends Services_Facebook_Common
             $args['properties'] = json_encode($properties);
         }
 
-        return $this->sendRequest('getObjects', $args);
+        return $this->callMethod('getObjects', $args);
     }
 
     public function getObjectProperty($obj_id, $prop_name) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'getObjectProperty',
             array(
                 'obj_id' => $obj_id,
@@ -206,7 +206,7 @@ class Services_Facebook_Data extends Services_Facebook_Common
     }
 
     public function setObjectProperty($obj_id, $prop_name, $prop_value) {
-        return $this->sendRequest(
+        return $this->callMethod(
             'setObjectProperty',
             array(
                 'obj_id' => $obj_id,

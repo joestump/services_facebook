@@ -79,9 +79,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
             $args['rsvp_status'] = $params['rsvp_status'];
         }
 
-        return $this->sendRequest('events.get', array(
-            'eid' => $eid
-        ));
+        return $this->callMethod('events.get', $args);
     }
 
     /**
@@ -97,7 +95,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
             $eid = implode(',', $eid);
         } 
 
-        return $this->sendRequest('events.get', array(
+        return $this->callMethod('events.get', array(
             'session_key' => $this->sessionKey,
             'eid' => $eid
         ));
@@ -112,7 +110,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      */
     public function getEventsByUser($uid)
     {
-        return $this->sendRequest('events.get', array(
+        return $this->callMethod('events.get', array(
             'session_key' => $this->sessionKey,
             'uid' => $uid
         ));
@@ -131,7 +129,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      */
     public function getEventsByDate($start, $end)
     {
-        return $this->sendRequest('events.get', array(
+        return $this->callMethod('events.get', array(
             'session_key' => $this->sessionKey,
             'start' => $start,
             'end' => $end
@@ -148,7 +146,7 @@ class Services_Facebook_Events extends Services_Facebook_Common
      */
     public function getMembers($eid)
     {
-        return $this->sendRequest('events.getMembers', array(
+        return $this->callMethod('events.getMembers', array(
             'session_key' => $this->sessionKey,
             'eid' => $eid
         ));

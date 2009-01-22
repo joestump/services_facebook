@@ -65,7 +65,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      */
     public function isAppAdded()
     {
-        $result = $this->sendRequest('users.isAppAdded', array(
+        $result = $this->callMethod('users.isAppAdded', array(
             'session_key' => $this->sessionKey
         )); 
 
@@ -96,7 +96,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
             $args['status'] = $status;
         }
 
-        $res = $this->sendRequest('users.setStatus', $args); 
+        $res = $this->callMethod('users.setStatus', $args); 
         return (intval((string)$res) == 1);
     }
 
@@ -119,7 +119,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
             $fields = $this->userFields;
         }
 
-        return $this->sendRequest('users.getInfo', array(
+        return $this->callMethod('users.getInfo', array(
             'session_key' => $this->sessionKey,
             'uids' => $uids,
             'fields' => implode(',', $fields)
@@ -138,7 +138,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
      */
     public function getLoggedInUser()
     {
-        $result = $this->sendRequest('users.getLoggedInUser', array(
+        $result = $this->callMethod('users.getLoggedInUser', array(
             'session_key' => $this->sessionKey
         ));
 
@@ -180,7 +180,7 @@ class Services_Facebook_Users extends Services_Facebook_Common
                 'given for hadAppPermission.');
         }
 
-        $result = $this->sendRequest('users.hasAppPermission', $params);
+        $result = $this->callMethod('users.hasAppPermission', $params);
 
         return (intval((string)$result) == 1);
     }

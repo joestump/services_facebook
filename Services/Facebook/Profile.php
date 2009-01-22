@@ -67,7 +67,7 @@ class Services_Facebook_Profile extends Services_Facebook_Common
             $args['uid'] = $uid;
         }
 
-        $result = $this->sendRequest('profile.setFBML', $args);
+        $result = $this->callMethod('profile.setFBML', $args);
         $check  = intval((string)$result);
         return ($check == 1);
     }
@@ -87,7 +87,8 @@ class Services_Facebook_Profile extends Services_Facebook_Common
             $args['uid'] = $uid;
         }
 
-        return $this->sendRequest('profile.getFBML', $args);
+        $result = $this->callMethod('profile.getFBML', $args);
+        return (string) $result;
     }
 }
 

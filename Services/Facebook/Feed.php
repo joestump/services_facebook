@@ -92,7 +92,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         } 
 
-        $result = $this->sendRequest('feed.publishStoryToUser', $args);
+        $result = $this->callMethod('feed.publishStoryToUser', $args);
         $check  = intval((string)$result->feed_publishStoryToUser_response_elt);
         return ($check == 1);
     }
@@ -160,7 +160,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         } 
 
-        $result = $this->sendRequest('feed.publishActionOfUser', $args);
+        $result = $this->callMethod('feed.publishActionOfUser', $args);
         $check  = intval((string)$result->feed_publishActionOfUser_response_elt);
         return ($check == 1);
     }
@@ -240,9 +240,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             }
         }
 
-        $result = $this->sendRequest('feed.publishTemplatizedAction', $args);
-        $check  = intval((string)$result->feed_publishTemplatizedAction_response);
-        return ($check == 1);
+        $result = $this->callMethod('feed.publishTemplatizedAction', $args);
+        return (intval((string)$result) == 1);
     }
 
     /**
@@ -312,8 +311,8 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             $args['full_story_template'] = json_encode($fullStoryTpl);
         }
         
-        $result = $this->sendRequest('feed.registerTemplateBundle', $args);
-        return (string)$result;
+        $result = $this->callMethod('feed.registerTemplateBundle', $args);
+        return (float) (string)$result;
     }
 
     /**
@@ -328,7 +327,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      */
     public function getRegisteredTemplateBundles()
     {
-        return $this->sendRequest('feed.getRegisteredTemplateBundles');
+        return $this->callMethod('feed.getRegisteredTemplateBundles');
     }
 
     /**
@@ -345,7 +344,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
     public function getRegisteredTemplateBundleByID($id)
     {
         $args = array('template_bundle_id' => $id);
-        return $this->sendRequest('feed.getRegisteredTemplateBundleByID', $args);
+        return $this->callMethod('feed.getRegisteredTemplateBundleByID', $args);
     }
 
     /**
@@ -366,7 +365,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
     public function deactivateTemplateBundleByID($id)
     {
         $args = array('template_bundle_id' => $id);
-        $result = $this->sendRequest('feed.deactivateTemplateBundleByID', $args);
+        $result = $this->callMethod('feed.deactivateTemplateBundleByID', $args);
         return (intval($result) == 1);
     }
 
@@ -436,7 +435,7 @@ class Services_Facebook_Feed extends Services_Facebook_Common
             $args['body_general'] = $bodyGeneral;
         }
         
-        $result = $this->sendRequest('feed.publishUserAction', $args);
+        $result = $this->callMethod('feed.publishUserAction', $args);
         return (intval($result->feed_publishUserAction_response_elt) == 1);
     }
 

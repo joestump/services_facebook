@@ -52,7 +52,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      */
     public function createToken()
     {
-        $result = $this->sendRequest('auth.createToken');
+        $result = $this->callMethod('auth.createToken');
         return (string)$result;
     }
 
@@ -65,7 +65,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      */
     public function getSession($authToken)
     {
-        return $this->sendRequest('auth.getSession', array(
+        return $this->callMethod('auth.getSession', array(
             'auth_token' => $authToken
         ));
     }
@@ -84,7 +84,8 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      */
     public function promoteSession()
     {
-        return $this->sendRequest('auth.promoteSession');
+        $result = (string) $this->callMethod('auth.promoteSession');
+        return $result;
     }
 
     /**
@@ -100,7 +101,8 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      */
     public function expireSession()
     {
-        return $this->sendRequest('auth.expireSession');
+        $result = $this->callMethod('auth.expireSession');
+        return (intval((string) $result) == 1);
     }
 
     /**
@@ -124,7 +126,7 @@ class Services_Facebook_Auth extends Services_Facebook_Common
             $args['uid'] = $uid;
         }
 
-        $result = $this->sendRequest('auth.revokeAuthorization', $args);
+        $result = $this->callMethod('auth.revokeAuthorization', $args);
         return (intval($result) == 1);
     }
 }
