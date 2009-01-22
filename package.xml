@@ -23,9 +23,9 @@
   <active>yes</active>
  </developer>
  <date>2009-01-22</date>
- <time>01:40:08</time>
+ <time>19:56:27</time>
  <version>
-  <release>0.2.0</release>
+  <release>0.2.1</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,8 +33,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Batching support
-* PHPUnit tests</notes>
+ <notes>* Fixed bug with Notifications</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="04cd99b281f8162227481d02a7d7b8ff" name="Services/Facebook.php" role="php">
@@ -85,7 +84,7 @@
    <file baseinstalldir="/" md5sum="33e3059714adf13f9c664ecdb1c6eb1f" name="Services/Facebook/MarketPlace.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="4a160f3bc3e573750b461bfd8aed4363" name="Services/Facebook/Notifications.php" role="php">
+   <file baseinstalldir="/" md5sum="2012bb8d5273d3ec8d367c2bf79e2a04" name="Services/Facebook/Notifications.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="6033491f62ae903f6a352b78c69e1254" name="Services/Facebook/Pages.php" role="php">
@@ -157,6 +156,19 @@
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Batching support
 * PHPUnit tests</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.1</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-01-22</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Fixed bug with Notifications</notes>
   </release>
  </changelog>
 </package>
