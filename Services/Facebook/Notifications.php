@@ -64,7 +64,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
             'session_key' => $this->sessionKey
         );
 
-        return $this->sendRequest('notifications.get', $args);
+        return $this->callMethod('notifications.get', $args);
     }
 
     /**
@@ -111,7 +111,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
             $args['email'] = $type;
         }
 
-        $result = $this->sendRequest('notifications.send', $args);
+        $result = $this->callMethod('notifications.send', $args);
         $check  = (string)$result;
         if (strlen($check) && Validate::uri($check)) {
             return $check;
@@ -144,7 +144,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
             $args['text'] = $text;
         }
         
-        $result = $this->sendRequest('notifications.sendEmail', $args);
+        $result = $this->callMethod('notifications.sendEmail', $args);
         return explode(',', (string)$result);
     }
 }
