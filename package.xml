@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-01-22</date>
- <time>19:56:27</time>
+ <date>2009-01-27</date>
+ <time>18:03:24</time>
  <version>
-  <release>0.2.1</release>
+  <release>0.2.2</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Fixed bug with Notifications</notes>
+ <notes>* Fixed curl timeout. Switched from Connection timeout to global request timeout.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="04cd99b281f8162227481d02a7d7b8ff" name="Services/Facebook.php" role="php">
@@ -51,7 +51,7 @@
    <file baseinstalldir="/" md5sum="7dd96a24bebad392080951d11154c0ac" name="Services/Facebook/Batch.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="9ba6019638faab0a4d94ddd8f83e08eb" name="Services/Facebook/Common.php" role="php">
+   <file baseinstalldir="/" md5sum="56eded2e027ee3d58bf9848ff48c8ecb" name="Services/Facebook/Common.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="d4484a5aa16096cfb908b477541f7f91" name="Services/Facebook/Connect.php" role="php">
@@ -169,6 +169,19 @@
    <date>2009-01-22</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Fixed bug with Notifications</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.2</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-01-27</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Fixed curl timeout. Switched from Connection timeout to global request timeout.</notes>
   </release>
  </changelog>
 </package>

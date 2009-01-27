@@ -14,6 +14,7 @@
  * @category  Services
  * @package   Services_Facebook
  * @author    Joe Stump <joe@joestump.net> 
+ * @author    Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @copyright 2007-2008 Joe Stump <joe@joestump.net>  
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   Release: @package_version@
@@ -28,6 +29,7 @@ require_once 'Validate.php';
  * @category Services
  * @package  Services_Facebook
  * @author   Joe Stump <joe@joestump.net>
+ * @author   Jeff Hodsdon <jeffhodsdon@gmail.com>
  * @license  http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @version  Release: @package_version@
  * @link     http://wiki.developers.facebook.com
@@ -100,7 +102,7 @@ abstract class Services_Facebook_Common
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, Services_Facebook::$timeout);
+        curl_setopt($ch, CURLOPT_TIMEOUT, Services_Facebook::$timeout);
         $response = curl_exec($ch);
 
         if (curl_errno($ch)) {
