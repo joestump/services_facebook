@@ -36,6 +36,14 @@ require_once 'Services/Facebook/Exception.php';
 class Services_Facebook
 {
     /**
+     * Facebook API URL
+     *
+     * @var string $apiURL URL that that API calls will be sent to
+     * @static
+     */
+    static public $apiURL = 'http://api.new.facebook.com/restserver.php';
+
+    /**
      * Facebok application API key 
      *
      * @var string $apiKey 32 character api_key from Facebook

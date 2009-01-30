@@ -54,6 +54,8 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      */
     public function __construct()
     {
+        parent::__construct();
+
         if (!function_exists('json_encode')) {
             throw new Services_Facebook_Exception('PHP Function ' .
                 'json_encode() is required for Services_Facebook_Connect ' .

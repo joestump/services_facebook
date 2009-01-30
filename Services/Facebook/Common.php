@@ -41,7 +41,7 @@ abstract class Services_Facebook_Common
      *
      * @var         string      $api
      */
-    protected $api = 'http://api.new.facebook.com/restserver.php';
+    protected $api = '';
 
     /**
      * Version of the API to use
@@ -56,6 +56,18 @@ abstract class Services_Facebook_Common
      * @var         string      $sessionKey
      */
     public $sessionKey = '';
+
+    /**
+     * Construct 
+     * 
+     * Construct.  Set API URL, something that may change per driver.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->setAPI(Services_Facebook::$apiURL);
+    }
 
     /**
      * Call method 

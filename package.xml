@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-01-27</date>
- <time>18:03:24</time>
+ <date>2009-01-30</date>
+ <time>22:33:17</time>
  <version>
-  <release>0.2.2</release>
+  <release>0.2.3</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,10 +33,10 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Fixed curl timeout. Switched from Connection timeout to global request timeout.</notes>
+ <notes>* Created static property, Services_Facebook::$apiURL, that will be applied to every constructed driver.  Services_Facebook_Common::setAPI() will still function the same.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="04cd99b281f8162227481d02a7d7b8ff" name="Services/Facebook.php" role="php">
+   <file baseinstalldir="/" md5sum="07b6c722fb6b36a117f06e7a6c00bed2" name="Services/Facebook.php" role="php">
     <tasks:replace from="@package-version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="9b1498927bd1698a2986dd281fbcaa80" name="Services/Facebook/Admin.php" role="php">
@@ -51,10 +51,10 @@
    <file baseinstalldir="/" md5sum="7dd96a24bebad392080951d11154c0ac" name="Services/Facebook/Batch.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="56eded2e027ee3d58bf9848ff48c8ecb" name="Services/Facebook/Common.php" role="php">
+   <file baseinstalldir="/" md5sum="ae02b6802d1d862b1e08bb494454d3c4" name="Services/Facebook/Common.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="d4484a5aa16096cfb908b477541f7f91" name="Services/Facebook/Connect.php" role="php">
+   <file baseinstalldir="/" md5sum="faa401e3aed8cd826c79553771772847" name="Services/Facebook/Connect.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="a90514bbe06be2fb96c18a89f20d646a" name="Services/Facebook/Data.php" role="php">
@@ -182,6 +182,19 @@
    <date>2009-01-27</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Fixed curl timeout. Switched from Connection timeout to global request timeout.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.3</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-01-30</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Created static property, Services_Facebook::$apiURL, that will be applied to every constructed driver.  Services_Facebook_Common::setAPI() will still function the same.</notes>
   </release>
  </changelog>
 </package>
