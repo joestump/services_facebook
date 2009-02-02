@@ -73,6 +73,32 @@ class Services_Facebook_Users extends Services_Facebook_Common
     }
 
     /**
+     * Is app user
+     *
+     * Uses the passed in user ID or session key to determine
+     * if the user is a user of the application.
+     * 
+     * @param float $uid Facebook user ID
+     *
+     * @return bool
+     */
+    public function isAppUser($uid = null)
+    {
+        $args = array();
+        if ($uid !== null) {
+            $args['uid'] = $uid;
+        } elseif (!empty($this->sessionKey)) {
+            $args['session_key'] = $this->sessionKey;
+        } else {
+            throw new Services_Facebook_Exception('Users.isAppUser ' .
+                'requires a session key or uid, none provided');
+        }
+
+        $result = $this->callMethod('users.isAppUser', $args);
+        return (intval((string)$result) == 1);
+    }
+
+    /**
      * Set a user's status message
      *
      * Set $status to true to clear the status or a string to change the 

@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-01-30</date>
- <time>22:33:17</time>
+ <date>2009-02-02</date>
+ <time>21:45:18</time>
  <version>
-  <release>0.2.3</release>
+  <release>0.2.4</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Created static property, Services_Facebook::$apiURL, that will be applied to every constructed driver.  Services_Facebook_Common::setAPI() will still function the same.</notes>
+ <notes>* Added users.isAppUser</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="07b6c722fb6b36a117f06e7a6c00bed2" name="Services/Facebook.php" role="php">
@@ -99,7 +99,7 @@
    <file baseinstalldir="/" md5sum="c2bfc77b124c7ffacccab8fca0e3e4e2" name="Services/Facebook/Share.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="626dd1d073b4cb6061e8e89234d6cba6" name="Services/Facebook/Users.php" role="php">
+   <file baseinstalldir="/" md5sum="e5835fdf6c02fe4f2d863ac5e49af514" name="Services/Facebook/Users.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="c328b6dea969aa4e7197f4c6af9bcd00" name="Services/Facebook/MarketPlace/Listing.php" role="php">
@@ -195,6 +195,19 @@
    <date>2009-01-30</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Created static property, Services_Facebook::$apiURL, that will be applied to every constructed driver.  Services_Facebook_Common::setAPI() will still function the same.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.4</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-02-02</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Added users.isAppUser</notes>
   </release>
  </changelog>
 </package>
