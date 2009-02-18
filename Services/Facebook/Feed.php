@@ -281,18 +281,22 @@ class Services_Facebook_Feed extends Services_Facebook_Common
      * 
      * Full story templates should be passed as an array containing keys
      * 'template_title' and 'template_body'
+     *
+     * Action links @see http://wiki.developers.facebook.com/index.php/Action_Links
      * 
      * @access  public
      * @param   array   $oneLineStoryTpls   array of one-line story templates
      * @param   array   $shortStoryTpls     optional array of short story templates
      * @param   array   $fullStoryTemplate  optional full story template
+     * @param   array   $actionLinks        optional array of actoin link records
      * @return  string  template bundle ID of newly registered bundle
      * @link    http://wiki.developers.facebook.com/index.php/Feed.registerTemplateBundle
      * @author  Matthew Fonda <matthewfonda@gmail.com>
      */
     public function registerTemplateBundle(array $oneLineStoryTpls,
                                            array $shortStoryTpls = array(),
-                                           array $fullStoryTpl = array())
+                                           array $fullStoryTpl = array(),
+                                           array $actionLinks = array())
     {
         $args = array();
         if (count($oneLineStoryTpls)) {
@@ -309,6 +313,10 @@ class Services_Facebook_Feed extends Services_Facebook_Common
 
         if (isset($fullStoryTpl['template_title'], $fullStoryTpl['template_body'])) {
             $args['full_story_template'] = json_encode($fullStoryTpl);
+        }
+
+        if (count($actionLinks)) {
+            $args['action_links'] = json_encode($actionLinks);
         }
         
         $result = $this->callMethod('feed.registerTemplateBundle', $args);

@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-02-02</date>
- <time>21:45:18</time>
+ <date>2009-02-18</date>
+ <time>00:07:58</time>
  <version>
-  <release>0.2.4</release>
+  <release>0.2.5</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Added users.isAppUser</notes>
+ <notes>* Added action link support for feeds.registerTemplateBundle</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="07b6c722fb6b36a117f06e7a6c00bed2" name="Services/Facebook.php" role="php">
@@ -69,7 +69,7 @@
    <file baseinstalldir="/" md5sum="fdf764cd959859e54135e2eeea865dbf" name="Services/Facebook/FBML.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="ee841dc324374f70d3378b479d8df347" name="Services/Facebook/Feed.php" role="php">
+   <file baseinstalldir="/" md5sum="0bf199e06f3e77427e950cc4e0235b4e" name="Services/Facebook/Feed.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="19705ff5b19cf26e6645a2c529175307" name="Services/Facebook/FQL.php" role="php">
@@ -208,6 +208,19 @@
    <date>2009-02-02</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Added users.isAppUser</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.5</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-02-18</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Added action link support for feeds.registerTemplateBundle</notes>
   </release>
  </changelog>
 </package>
