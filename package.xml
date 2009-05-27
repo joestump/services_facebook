@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-05-16</date>
- <time>01:03:04</time>
+ <date>2009-05-27</date>
+ <time>20:15:50</time>
  <version>
-  <release>0.2.6</release>
+  <release>0.2.7</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,76 +33,76 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Added missing require_once in Services_Facebook_Connect for Services_Facebook_Common.</notes>
+ <notes>* Added more missing require_once includes</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="07b6c722fb6b36a117f06e7a6c00bed2" name="Services/Facebook.php" role="php">
     <tasks:replace from="@package-version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="9b1498927bd1698a2986dd281fbcaa80" name="Services/Facebook/Admin.php" role="php">
+   <file baseinstalldir="/" md5sum="e944909217d44cbfc2e8e2d75ce70629" name="Services/Facebook/Admin.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="9c3d1aa3b8bd3aff55eefc34bdccc4a3" name="Services/Facebook/Application.php" role="php">
+   <file baseinstalldir="/" md5sum="823d9ec67738ce34aad8d17554417c5f" name="Services/Facebook/Application.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="c89d9ebf9b51544b5a426dc82008878c" name="Services/Facebook/Auth.php" role="php">
+   <file baseinstalldir="/" md5sum="3f5e9b315c00151d9662125cfef0b87b" name="Services/Facebook/Auth.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="7dd96a24bebad392080951d11154c0ac" name="Services/Facebook/Batch.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="ae02b6802d1d862b1e08bb494454d3c4" name="Services/Facebook/Common.php" role="php">
+   <file baseinstalldir="/" md5sum="383845f1330bdb3e2d60a2dde2eeb0d9" name="Services/Facebook/Common.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="e719a761f9cddf2923cec0cc0d196b44" name="Services/Facebook/Connect.php" role="php">
+   <file baseinstalldir="/" md5sum="7cfad9ef4f40c637823cc29af7f62d76" name="Services/Facebook/Connect.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="a90514bbe06be2fb96c18a89f20d646a" name="Services/Facebook/Data.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="4bb2cc0e2d2dbdf0cec8476486806633" name="Services/Facebook/Events.php" role="php">
+   <file baseinstalldir="/" md5sum="79af29941d6dfcbb5ac76e2a3df94cfd" name="Services/Facebook/Events.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="a6204a032314b3b8ed593305a15b77dc" name="Services/Facebook/Exception.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="fdf764cd959859e54135e2eeea865dbf" name="Services/Facebook/FBML.php" role="php">
+   <file baseinstalldir="/" md5sum="1fd4ff3f15e56fc01707c1b66231114f" name="Services/Facebook/FBML.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="0bf199e06f3e77427e950cc4e0235b4e" name="Services/Facebook/Feed.php" role="php">
+   <file baseinstalldir="/" md5sum="8e36f7a92d4fef160c84e519cce57549" name="Services/Facebook/Feed.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="19705ff5b19cf26e6645a2c529175307" name="Services/Facebook/FQL.php" role="php">
+   <file baseinstalldir="/" md5sum="6bfa6f4670dfcedb12d9647337ca5b76" name="Services/Facebook/FQL.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="e6d4f232c60f265d4b8a69fa81af30c7" name="Services/Facebook/Friends.php" role="php">
+   <file baseinstalldir="/" md5sum="34f208d58dccbfec1a777b13279fa511" name="Services/Facebook/Friends.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="6eb3a4530f415bd60ed42158f07fd03c" name="Services/Facebook/Groups.php" role="php">
+   <file baseinstalldir="/" md5sum="0983e7eb0b122dcdd8f912e2518cfc0c" name="Services/Facebook/Groups.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="33e3059714adf13f9c664ecdb1c6eb1f" name="Services/Facebook/MarketPlace.php" role="php">
+   <file baseinstalldir="/" md5sum="aa192dd9c74c8cc18b777dbcb61db34a" name="Services/Facebook/MarketPlace.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="2012bb8d5273d3ec8d367c2bf79e2a04" name="Services/Facebook/Notifications.php" role="php">
+   <file baseinstalldir="/" md5sum="9972e2ff7b739dde616c3f15a02c7855" name="Services/Facebook/Notifications.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="6033491f62ae903f6a352b78c69e1254" name="Services/Facebook/Pages.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="3d56bace9ff73e354d772ea6c3fd84cd" name="Services/Facebook/Photos.php" role="php">
+   <file baseinstalldir="/" md5sum="b930dc1998fdb1891da5ad116343b8f0" name="Services/Facebook/Photos.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="d21a8903e72843be1cadfb88aae635be" name="Services/Facebook/Profile.php" role="php">
+   <file baseinstalldir="/" md5sum="ea9c054033893303d9096cc55d8876d4" name="Services/Facebook/Profile.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="c2bfc77b124c7ffacccab8fca0e3e4e2" name="Services/Facebook/Share.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="e5835fdf6c02fe4f2d863ac5e49af514" name="Services/Facebook/Users.php" role="php">
+   <file baseinstalldir="/" md5sum="f2531350399607f642959b09ea9e9ea8" name="Services/Facebook/Users.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="c328b6dea969aa4e7197f4c6af9bcd00" name="Services/Facebook/MarketPlace/Listing.php" role="php">
+   <file baseinstalldir="/" md5sum="482a363d64e5c67da0fa38d96d8cb844" name="Services/Facebook/MarketPlace/Listing.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="b16cec82a3bd0158f5f4c459d363143d" name="tests/AllTests.php" role="test" />
@@ -235,6 +235,19 @@
    <date>2009-05-16</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Added missing require_once in Services_Facebook_Connect for Services_Facebook_Common.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.7</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-05-27</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Added more missing require_once includes</notes>
   </release>
  </changelog>
 </package>
