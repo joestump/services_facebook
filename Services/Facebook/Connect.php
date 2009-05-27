@@ -22,6 +22,7 @@
  */
 
 require_once 'Services/Facebook/Common.php';
+require_once 'Services/Facebook/Exception.php';
 require_once 'Validate.php';
 
 /**
