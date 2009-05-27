@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-02-18</date>
- <time>00:07:58</time>
+ <date>2009-05-16</date>
+ <time>01:03:04</time>
  <version>
-  <release>0.2.5</release>
+  <release>0.2.6</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -33,7 +33,7 @@
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>* Added action link support for feeds.registerTemplateBundle</notes>
+ <notes>* Added missing require_once in Services_Facebook_Connect for Services_Facebook_Common.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="07b6c722fb6b36a117f06e7a6c00bed2" name="Services/Facebook.php" role="php">
@@ -54,7 +54,7 @@
    <file baseinstalldir="/" md5sum="ae02b6802d1d862b1e08bb494454d3c4" name="Services/Facebook/Common.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="faa401e3aed8cd826c79553771772847" name="Services/Facebook/Connect.php" role="php">
+   <file baseinstalldir="/" md5sum="e719a761f9cddf2923cec0cc0d196b44" name="Services/Facebook/Connect.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="a90514bbe06be2fb96c18a89f20d646a" name="Services/Facebook/Data.php" role="php">
@@ -129,6 +129,7 @@
    <file baseinstalldir="/" md5sum="0bb3e929a25f0073e4e796c4c1a692f7" name="tests/Services/Facebook/skel.php" role="test" />
    <file baseinstalldir="/" md5sum="d3196b2d79a70dff755be6d31ad750dc" name="tests/Services/Facebook/UnitTestCommon.php" role="test" />
    <file baseinstalldir="/" md5sum="22a87616d257c2c0363622813a3d6c4f" name="tests/Services/Facebook/UsersTest.php" role="test" />
+   <file baseinstalldir="/" md5sum="385b44050326b2a8da92d6745c561d8b" name="README" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -221,6 +222,19 @@
    <date>2009-02-18</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>* Added action link support for feeds.registerTemplateBundle</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.6</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-05-16</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>* Added missing require_once in Services_Facebook_Connect for Services_Facebook_Common.</notes>
   </release>
  </changelog>
 </package>
