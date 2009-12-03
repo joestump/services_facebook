@@ -274,7 +274,7 @@ abstract class Services_Facebook_Common
     public function setAPI($api)
     {
         if (!Validate::uri($api)) {
-            throw new Services_Facebook('Invalid API: ' . $api);
+            throw new Services_Facebook_Exception('Invalid API: ' . $api);
         }
 
         $this->api = $api;
