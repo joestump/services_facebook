@@ -60,6 +60,13 @@ abstract class Services_Facebook_Common
     public $sessionKey = '';
 
     /**
+     * Use secret as session secret or not
+     *
+     * @var bool $useSessionSecret
+     */
+    public $useSessionSecret = false;
+
+    /**
      * Construct 
      * 
      * Construct.  Set API URL, something that may change per driver.
@@ -190,6 +197,10 @@ abstract class Services_Facebook_Common
     {
         if (isset($args['sig'])) {
             unset($args['sig']);
+        }
+
+        if ($this->useSessionSecret) {
+            $args['ss'] = 1;
         }
 
         ksort($args);

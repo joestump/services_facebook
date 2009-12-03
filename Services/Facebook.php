@@ -63,6 +63,13 @@ class Services_Facebook
     static public $secret = '';
 
     /**
+     * Use secret as session secret
+     *
+     * @var bool $useSessionSecret Use session secret or not
+     */
+    protected $useSessionSecret = false;
+
+    /**
      * Timeout  
      * 
      * The amount in seconds for the curl http request timeout
@@ -183,6 +190,10 @@ class Services_Facebook
 
         self::$instances[$driver] = self::factory($driver);
         self::$instances[$driver]->sessionKey = $this->sessionKey;
+        if ($this->useSessionSecret) {
+            self::$instances[$driver]->useSessionSecret = true;
+        }
+
         return self::$instances[$driver];
     }
 
@@ -224,6 +235,22 @@ class Services_Facebook
         }        
 
         return (md5($sig . Services_Facebook::$secret) == $args['fb_sig']); 
+    }
+
+    /**
+     * Turn on using secret for session secret
+     *
+     * @param bool $use Use secret for session secret or not
+     *
+     * @return bool Using or not using
+     */
+    public function useSessionSecret($use = true)
+    {
+        foreach (self::$instances as $instance) {
+            $instance->useSessionSecret = $use;
+        }
+
+        return $this->useSessionSecret = $use;
     }
 }
 
