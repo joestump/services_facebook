@@ -1432,7 +1432,8 @@ XML;
         $this->instance->sessionKey = '123123sfsdf-123123';
         $result = $this->instance->getTags(array('28834529265634446'));
         $this->assertType('SimpleXMLElement', $result);
-        $this->assertObjectHasAttribute('text', $result);
+        $this->assertObjectHasAttribute('photo_tag', $result);
+        $this->assertObjectHasAttribute('text', $result->photo_tag);
     }
 
 }
