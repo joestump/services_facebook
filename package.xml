@@ -142,6 +142,11 @@
    <pearinstaller>
     <min>1.4.0</min>
    </pearinstaller>
+   <package>
+    <name>Validator</name>
+    <channel>pear.php.net</channel>
+    <min>0.8.3</min>
+   </package>
   </required>
  </dependencies>
  <phprelease />
