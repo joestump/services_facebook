@@ -114,6 +114,8 @@ class Services_Facebook_Auth extends Services_Facebook_Common
      * calls can be made on that user's behalf until the user decides to
      * authorize the application again.
      *
+     * @param string $uid User's id
+     *
      * @access public
      * @return void
      */

@@ -48,7 +48,7 @@ class Services_Facebook_Groups extends Services_Facebook_Common
             if (is_array($uid_or_gids)) {
                 $args['gids'] = implode(',', $uid_or_gids);
             } else {
-                $args['uid'] = intval($uid_or_gids); 
+                $args['uid'] = (string) $uid_or_gids;
             }
         } 
         
@@ -66,12 +66,12 @@ class Services_Facebook_Groups extends Services_Facebook_Common
     {
         $result = $this->callMethod('groups.getMembers', array(
             'session_key' => $this->sessionKey,
-            'guid' => intval($gid)
+            'guid' => (string)$gid
         ));
 
         $members = array();
         foreach ($result->members->uid as $member) {
-            $members[] = (float) $member;
+            $members[] = (string) $member;
         }
         return $members;
     } 
