@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Services_Facebook</name>
  <channel>pear.php.net</channel>
  <summary>PHP interface to Facebook&apos;s API</summary>
@@ -22,10 +22,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2009-12-04</date>
- <time>00:00:13</time>
+ <date>2010-03-05</date>
+ <time>03:19:00</time>
  <version>
-  <release>0.2.9</release>
+  <release>0.2.10</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -34,7 +34,7 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-* Added support for using session secrects
+* Fixed the casting of IDs to integers. Fixes #17186
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -47,7 +47,7 @@
    <file baseinstalldir="/" md5sum="823d9ec67738ce34aad8d17554417c5f" name="Services/Facebook/Application.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="3f5e9b315c00151d9662125cfef0b87b" name="Services/Facebook/Auth.php" role="php">
+   <file baseinstalldir="/" md5sum="9be5f287d43efa31b1000b9f8e5cf431" name="Services/Facebook/Auth.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="7dd96a24bebad392080951d11154c0ac" name="Services/Facebook/Batch.php" role="php">
@@ -77,10 +77,10 @@
    <file baseinstalldir="/" md5sum="6bfa6f4670dfcedb12d9647337ca5b76" name="Services/Facebook/FQL.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="34f208d58dccbfec1a777b13279fa511" name="Services/Facebook/Friends.php" role="php">
+   <file baseinstalldir="/" md5sum="10c680638e8e176bba28624f759aa6c4" name="Services/Facebook/Friends.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="0983e7eb0b122dcdd8f912e2518cfc0c" name="Services/Facebook/Groups.php" role="php">
+   <file baseinstalldir="/" md5sum="6ce296c899af8ea5e32fd04e852b74bc" name="Services/Facebook/Groups.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="aa192dd9c74c8cc18b777dbcb61db34a" name="Services/Facebook/MarketPlace.php" role="php">
@@ -101,7 +101,7 @@
    <file baseinstalldir="/" md5sum="d3afe94cc3c2cb3960239af3ea624474" name="Services/Facebook/Share.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="f2531350399607f642959b09ea9e9ea8" name="Services/Facebook/Users.php" role="php">
+   <file baseinstalldir="/" md5sum="c74304db9f9b06b496371f2df366b434" name="Services/Facebook/Users.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="482a363d64e5c67da0fa38d96d8cb844" name="Services/Facebook/MarketPlace/Listing.php" role="php">
@@ -280,6 +280,21 @@
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
 * Added support for using session secrects
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.10</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-05</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+* Fixed the casting of IDs to integers. Fixes #17186
    </notes>
   </release>
  </changelog>
