@@ -3,8 +3,7 @@
  <name>Services_Facebook</name>
  <channel>pear.php.net</channel>
  <summary>PHP interface to Facebook&apos;s API</summary>
- <description>* Added Validate to the package.xml Fixes #16426
-* Added simple implemenation of Stream api from janmatousek</description>
+ <description>An interface for accessing Facebook&amp;apos;s web services API at http://api.facebook.com</description>
  <lead>
   <name>Jeff Hodsdon</name>
   <user>jeffhodsdon</user>
@@ -24,7 +23,7 @@
   <active>yes</active>
  </developer>
  <date>2010-03-10</date>
- <time>00:09:36</time>
+ <time>00:12:01</time>
  <version>
   <release>0.2.11</release>
   <api>0.2.0</api>
@@ -35,7 +34,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-* Fixed the casting of IDs to integers. Fixes #17186
+* Added Validate to the package.xml Fixes #16426
+* Added simple implemenation of Stream api from janmatousek
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -135,6 +135,7 @@
    <file baseinstalldir="/" md5sum="d3196b2d79a70dff755be6d31ad750dc" name="tests/Services/Facebook/UnitTestCommon.php" role="test" />
    <file baseinstalldir="/" md5sum="caa9c3c161767c303c6f62d65d5ed7be" name="tests/Services/Facebook/UsersTest.php" role="test" />
    <file baseinstalldir="/" md5sum="385b44050326b2a8da92d6745c561d8b" name="README" role="data" />
+   <file baseinstalldir="/" md5sum="218044023f0b7dbd812d81cebf0522eb" name="Services_Facebook-0.2.11.tgz" role="data" />
   </dir>
  </contents>
  <dependencies>
@@ -317,7 +318,8 @@
    <date>2010-03-10</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
-* Fixed the casting of IDs to integers. Fixes #17186
+* Added Validate to the package.xml Fixes #16426
+* Added simple implemenation of Stream api from janmatousek
    </notes>
   </release>
  </changelog>
