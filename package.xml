@@ -23,7 +23,7 @@
   <active>yes</active>
  </developer>
  <date>2010-03-10</date>
- <time>00:12:01</time>
+ <time>00:14:02</time>
  <version>
   <release>0.2.11</release>
   <api>0.2.0</api>
@@ -135,7 +135,6 @@
    <file baseinstalldir="/" md5sum="d3196b2d79a70dff755be6d31ad750dc" name="tests/Services/Facebook/UnitTestCommon.php" role="test" />
    <file baseinstalldir="/" md5sum="caa9c3c161767c303c6f62d65d5ed7be" name="tests/Services/Facebook/UsersTest.php" role="test" />
    <file baseinstalldir="/" md5sum="385b44050326b2a8da92d6745c561d8b" name="README" role="data" />
-   <file baseinstalldir="/" md5sum="218044023f0b7dbd812d81cebf0522eb" name="Services_Facebook-0.2.11.tgz" role="data" />
   </dir>
  </contents>
  <dependencies>
