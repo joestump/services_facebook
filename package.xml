@@ -3,7 +3,8 @@
  <name>Services_Facebook</name>
  <channel>pear.php.net</channel>
  <summary>PHP interface to Facebook&apos;s API</summary>
- <description>An interface for accessing Facebook&apos;s web services API at http://api.facebook.com</description>
+ <description>* Added Validate to the package.xml Fixes #16426
+* Added simple implemenation of Stream api from janmatousek</description>
  <lead>
   <name>Jeff Hodsdon</name>
   <user>jeffhodsdon</user>
@@ -22,10 +23,10 @@
   <email>development@domain51.com</email>
   <active>yes</active>
  </developer>
- <date>2010-03-05</date>
- <time>03:19:00</time>
+ <date>2010-03-10</date>
+ <time>00:09:36</time>
  <version>
-  <release>0.2.10</release>
+  <release>0.2.11</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -38,7 +39,7 @@
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="08f31d9291a129cf3f9a7d627dc977cf" name="Services/Facebook.php" role="php">
+   <file baseinstalldir="/" md5sum="5c6bac98d26575444459cd88d7247bec" name="Services/Facebook.php" role="php">
     <tasks:replace from="@package-version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="e944909217d44cbfc2e8e2d75ce70629" name="Services/Facebook/Admin.php" role="php">
@@ -101,6 +102,7 @@
    <file baseinstalldir="/" md5sum="d3afe94cc3c2cb3960239af3ea624474" name="Services/Facebook/Share.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
+   <file baseinstalldir="/" md5sum="fbd3684be9ea7fdda0a1ecaaaa747d7f" name="Services/Facebook/Stream.php" role="php" />
    <file baseinstalldir="/" md5sum="c74304db9f9b06b496371f2df366b434" name="Services/Facebook/Users.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
@@ -110,7 +112,7 @@
    <file baseinstalldir="/" md5sum="b16cec82a3bd0158f5f4c459d363143d" name="tests/AllTests.php" role="test" />
    <file baseinstalldir="/" md5sum="47c031385084d5f13abca5281b475c50" name="tests/Services/AllTests.php" role="test" />
    <file baseinstalldir="/" md5sum="ceea493ae9a86378b68a7152076bc3c6" name="tests/Services/Facebook/AdminTest.php" role="test" />
-   <file baseinstalldir="/" md5sum="d845ea238396fb671fc30131059e1120" name="tests/Services/Facebook/AllTests.php" role="test" />
+   <file baseinstalldir="/" md5sum="ed5f9f7da37ecdebfa39381fabe67f92" name="tests/Services/Facebook/AllTests.php" role="test" />
    <file baseinstalldir="/" md5sum="033d0856fc12c879b5274909410f6845" name="tests/Services/Facebook/ApplicationTest.php" role="test" />
    <file baseinstalldir="/" md5sum="7f737d33f8d619b7cde065045acf11fe" name="tests/Services/Facebook/AuthTest.php" role="test" />
    <file baseinstalldir="/" md5sum="cb1c8cd1333368d5a78cadb1ce3d7dc9" name="tests/Services/Facebook/BatchTest.php" role="test" />
@@ -129,6 +131,7 @@
    <file baseinstalldir="/" md5sum="e6c8d2ef3a265c3d79fc46088d0d8bed" name="tests/Services/Facebook/ProfileTest.php" role="test" />
    <file baseinstalldir="/" md5sum="d529c76c54b33ddc3e15cbf7d3cc7c15" name="tests/Services/Facebook/ShareTest.php" role="test" />
    <file baseinstalldir="/" md5sum="0bb3e929a25f0073e4e796c4c1a692f7" name="tests/Services/Facebook/skel.php" role="test" />
+   <file baseinstalldir="/" md5sum="26b88dfd1517597b136e8218bba80f38" name="tests/Services/Facebook/StreamTest.php" role="test" />
    <file baseinstalldir="/" md5sum="d3196b2d79a70dff755be6d31ad750dc" name="tests/Services/Facebook/UnitTestCommon.php" role="test" />
    <file baseinstalldir="/" md5sum="caa9c3c161767c303c6f62d65d5ed7be" name="tests/Services/Facebook/UsersTest.php" role="test" />
    <file baseinstalldir="/" md5sum="385b44050326b2a8da92d6745c561d8b" name="README" role="data" />
@@ -297,6 +300,21 @@
     <api>alpha</api>
    </stability>
    <date>2010-03-05</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+* Fixed the casting of IDs to integers. Fixes #17186
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.11</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-10</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
 * Fixed the casting of IDs to integers. Fixes #17186
