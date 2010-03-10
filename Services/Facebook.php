@@ -124,6 +124,7 @@ class Services_Facebook
         'photos'        => 'Photos',
         'profile'       => 'Profile',
         'share'         => 'Share',
+        'stream'        => 'Stream',
         'users'         => 'Users'
     );
 

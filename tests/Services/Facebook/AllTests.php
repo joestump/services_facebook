@@ -18,6 +18,7 @@ require_once 'tests/Services/Facebook/PagesTest.php';
 require_once 'tests/Services/Facebook/PhotosTest.php';
 require_once 'tests/Services/Facebook/ProfileTest.php';
 require_once 'tests/Services/Facebook/ShareTest.php';
+require_once 'tests/Services/Facebook/StreamTest.php';
 require_once 'tests/Services/Facebook/UsersTest.php';
 
 class Services_Facebook_AllTests
@@ -43,6 +44,7 @@ class Services_Facebook_AllTests
         $suite->addTestSuite('Services_Facebook_PhotosTest');
         $suite->addTestSuite('Services_Facebook_ProfileTest');
         $suite->addTestSuite('Services_Facebook_ShareTest');
+        $suite->addTestSuite('Services_Facebook_StreamTest');
         $suite->addTestSuite('Services_Facebook_UsersTest');
 
         return $suite;
