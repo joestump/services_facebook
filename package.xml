@@ -23,9 +23,9 @@
   <active>yes</active>
  </developer>
  <date>2010-03-31</date>
- <time>18:27:51</time>
+ <time>23:41:01</time>
  <version>
-  <release>0.2.13</release>
+  <release>0.2.14</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -34,11 +34,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-* Added useDnsCache option to curl requests
+* Fixed curl option to be 0 rather than false
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="07dbbad91be53f9ade28988fa5653337" name="Services/Facebook.php" role="php">
+   <file baseinstalldir="/" md5sum="8de45760ae88c77458a58b9b7f901601" name="Services/Facebook.php" role="php">
     <tasks:replace from="@package-version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="e944909217d44cbfc2e8e2d75ce70629" name="Services/Facebook/Admin.php" role="php">
@@ -348,6 +348,21 @@
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
 * Added useDnsCache option to curl requests
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.14</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-31</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+* Fixed curl option to be 0 rather than false
    </notes>
   </release>
  </changelog>

@@ -72,9 +72,9 @@ class Services_Facebook
     /**
      * Use curl CURLOPT_DNS_USE_GLOBAL_CACHE option
      *
-     * @var bool $useDnsCache Bool switch to use the curl dns cache option
+     * @var bool $useDnsCache int switch to use the curl dns cache option
      */
-    static public $useDnsCache = false;
+    static public $useDnsCache = 0;
 
     /**
      * Timeout  
