@@ -124,6 +124,7 @@ abstract class Services_Facebook_Common
         curl_setopt($ch, CURLOPT_POSTFIELDS, $args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, Services_Facebook::$timeout);
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, Services_Facebook::$useDnsCache);
         $response = curl_exec($ch);
 
         if (curl_errno($ch)) {

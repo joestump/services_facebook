@@ -70,6 +70,13 @@ class Services_Facebook
     protected $useSessionSecret = false;
 
     /**
+     * Use curl CURLOPT_DNS_USE_GLOBAL_CACHE option
+     *
+     * @var bool $useDnsCache Bool switch to use the curl dns cache option
+     */
+    static public $useDnsCache = false;
+
+    /**
      * Timeout  
      * 
      * The amount in seconds for the curl http request timeout

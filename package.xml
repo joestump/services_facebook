@@ -23,9 +23,9 @@
   <active>yes</active>
  </developer>
  <date>2010-03-31</date>
- <time>17:00:06</time>
+ <time>18:27:51</time>
  <version>
-  <release>0.2.12</release>
+  <release>0.2.13</release>
   <api>0.2.0</api>
  </version>
  <stability>
@@ -34,11 +34,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
  <notes>
-*Corrected typo with Validate dependency Refs #17212
+* Added useDnsCache option to curl requests
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="5c6bac98d26575444459cd88d7247bec" name="Services/Facebook.php" role="php">
+   <file baseinstalldir="/" md5sum="07dbbad91be53f9ade28988fa5653337" name="Services/Facebook.php" role="php">
     <tasks:replace from="@package-version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="e944909217d44cbfc2e8e2d75ce70629" name="Services/Facebook/Admin.php" role="php">
@@ -53,7 +53,7 @@
    <file baseinstalldir="/" md5sum="7dd96a24bebad392080951d11154c0ac" name="Services/Facebook/Batch.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
-   <file baseinstalldir="/" md5sum="2aa4b01ee27fd7cc5179fbd2079ae3bc" name="Services/Facebook/Common.php" role="php">
+   <file baseinstalldir="/" md5sum="b4b7ae739b876013b61e69342cfe0cf8" name="Services/Facebook/Common.php" role="php">
     <tasks:replace from="@package_version@" to="version" type="package-info" />
    </file>
    <file baseinstalldir="/" md5sum="7cfad9ef4f40c637823cc29af7f62d76" name="Services/Facebook/Connect.php" role="php">
@@ -333,6 +333,21 @@
    <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
    <notes>
 *Corrected typo with Validate dependency Refs #17212
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.13</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-03-31</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+   <notes>
+* Added useDnsCache option to curl requests
    </notes>
   </release>
  </changelog>
