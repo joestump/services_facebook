@@ -21,7 +21,6 @@
  */
 
 require_once 'Services/Facebook/Common.php';
-require_once 'Validate.php';
 
 /**
  * Facebook Notifications Interface
@@ -114,7 +113,7 @@ class Services_Facebook_Notifications extends Services_Facebook_Common
 
         $result = $this->callMethod('notifications.send', $args);
         $check  = (string)$result;
-        if (strlen($check) && Validate::uri($check)) {
+        if (strlen($check) && self::getValidate()->uri($check)) {
             return $check;
         }
 
