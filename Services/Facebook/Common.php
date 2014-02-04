@@ -274,11 +274,22 @@ abstract class Services_Facebook_Common
      */
     public function setAPI($api)
     {
-        if (!Validate::uri($api)) {
+        if (!self::getValidate()->uri($api)) {
             throw new Services_Facebook_Exception('Invalid API: ' . $api);
         }
 
         $this->api = $api;
+    }
+
+    /**
+     * Get a Validate instance, for internal class use
+     *
+     * @return Validate
+     */
+    protected static function getValidate()
+    {
+        $instance = new Validate();
+        return $instance; 
     }
 }
 

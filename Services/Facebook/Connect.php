@@ -23,7 +23,6 @@
 
 require_once 'Services/Facebook/Common.php';
 require_once 'Services/Facebook/Exception.php';
-require_once 'Validate.php';
 
 /**
  * Facebook Application Interface
@@ -200,7 +199,7 @@ class Services_Facebook_Connect extends Services_Facebook_Common
      */
     static public function hashEmail($email)
     {
-        if (!Validate::email($email)) {
+        if (!self::getValidate()->email($email)) {
             throw new Services_Facebook_Exception('Invalid email address passed to'
                 . ' Services_Facebook_Connect::hashEmail()');
         }
